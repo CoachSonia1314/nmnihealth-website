@@ -1,364 +1,1134 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>專業健康教練 - Coach NmNiHealth</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/fonts.css">
-    <style>
-        .coach-hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 6rem 0;
-            text-align: center;
-        }
-        
-        .coach-hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-            font-weight: bold;
-        }
-        
-        .coach-hero p {
-            font-size: 1.4rem;
-            max-width: 800px;
-            margin: 0 auto 2rem;
-            line-height: 1.8;
-        }
-        
-        .services-section {
-            padding: 5rem 0;
-            background: #f8f9fa;
-        }
-        
-        .service-card {
-            background: white;
-            padding: 3rem 2rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            margin-bottom: 2rem;
-            transition: transform 0.3s ease;
-        }
-        
-        .service-card:hover {
-            transform: translateY(-10px);
-        }
-        
-        .service-icon {
-            font-size: 3rem;
-            color: #667eea;
-            margin-bottom: 1.5rem;
-        }
-        
-        .cta-section {
-            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
-            color: white;
-            padding: 4rem 0;
-            text-align: center;
-        }
-        
-        .btn-coach {
-            background: white;
-            color: #667eea;
-            padding: 15px 40px;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-            margin: 10px;
-        }
-        
-        .btn-coach:hover {
-            background: #f8f9fa;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        }
-        
-        .coach-profile {
-            background: white;
-            padding: 4rem 0;
-        }
-        
-        .profile-card {
-            text-align: center;
-            max-width: 400px;
-            margin: 0 auto;
-        }
-        
-        .profile-img {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            margin-bottom: 2rem;
-            border: 5px solid #667eea;
-        }
-        
-        .testimonials {
-            background: #f8f9fa;
-            padding: 4rem 0;
-        }
-        
-        .testimonial-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            margin-bottom: 2rem;
-        }
-        
-        .stars {
-            color: #ffd700;
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>智慧學習 - 專業線上課程平台</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind 配置 -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#3B82F6', // 藍色 - 代表知識和信任
+            secondary: '#10B981', // 綠色 - 代表成長和進步
+            accent: '#F59E0B', // 橙色 - 代表活力和創造力
+            dark: '#1E293B',
+            light: '#F8FAFC'
+          },
+          fontFamily: {
+            inter: ['Inter', 'sans-serif'],
+          },
+        },
+      }
+    }
+  </script>
+  
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .text-shadow {
+        text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+      .transition-custom {
+        transition: all 0.3s ease;
+      }
+      .hover-lift {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .hover-lift:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      }
+    }
+  </style>
 </head>
-<body>
-    <!-- 導航欄 -->
-    <nav class="navbar">
-        <div class="container">
-            <div class="nav-brand">
-                <img src="images/logo.svg" alt="Coach NmNiHealth" height="40">
-                <span>Coach NmNiHealth</span>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="#home">首頁</a></li>
-                <li><a href="#services">服務</a></li>
-                <li><a href="#about">關於</a></li>
-                <li><a href="#testimonials">見證</a></li>
-                <li><a href="#contact">聯絡</a></li>
-            </ul>
-        </div>
-    </nav>
 
-    <!-- 主要英雄區 -->
-    <section id="home" class="coach-hero">
-        <div class="container">
-            <h1>專業健康教練服務</h1>
-            <p>為您提供個人化的健康指導，幫助您達成健康目標，重拾活力與自信</p>
-            <a href="#contact" class="btn-coach">立即預約諮詢</a>
-            <a href="#services" class="btn-coach" style="background: transparent; border: 2px solid white;">了解更多</a>
+<body class="font-inter bg-light text-dark antialiased">
+  <!-- 導航欄 -->
+  <header id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300 bg-white/90 backdrop-blur-sm shadow-sm">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center py-4">
+        <div class="flex items-center">
+          <a href="#" class="flex items-center space-x-2">
+            <span class="text-primary text-2xl"><i class="fa fa-graduation-cap"></i></span>
+            <span class="font-bold text-xl text-dark">幸福商學院</span>
+          </a>
         </div>
+        
+        <!-- 桌面導航 -->
+        <nav class="hidden md:flex space-x-8">
+          <a href="#courses" class="text-dark hover:text-primary font-medium transition-colors">課程介紹</a>
+          <a href="#features" class="text-dark hover:text-primary font-medium transition-colors">聯盟行銷分潤區</a>
+          <a href="#testimonials" class="text-dark hover:text-primary font-medium transition-colors">學員評價</a>
+          <a href="#faq" class="text-dark hover:text-primary font-medium transition-colors">常見問題</a>
+        </nav>
+        
+        <div class="hidden md:flex items-center space-x-4">
+          <a href="#" class="text-dark hover:text-primary transition-colors">登入</a>
+          <a href="#enroll" class="bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-full font-medium transition-colors shadow-md hover:shadow-lg">
+            立即報名
+          </a>
+        </div>
+        
+        <!-- 行動端菜單按鈕 -->
+        <button id="menu-toggle" class="md:hidden text-dark focus:outline-none">
+          <i class="fa fa-bars text-xl"></i>
+        </button>
+      </div>
+    </div>
+    
+    <!-- 行動端導航菜單 -->
+    <div id="mobile-menu" class="md:hidden hidden bg-white border-t">
+      <div class="container mx-auto px-4 py-3 space-y-3">
+        <a href="#courses" class="block text-dark hover:text-primary font-medium py-2 transition-colors">課程</a>
+        <a href="#features" class="block text-dark hover:text-primary font-medium py-2 transition-colors">優勢</a>
+        <a href="#testimonials" class="block text-dark hover:text-primary font-medium py-2 transition-colors">學員評價</a>
+        <a href="#faq" class="block text-dark hover:text-primary font-medium py-2 transition-colors">常見問題</a>
+        <div class="flex flex-col space-y-3 pt-2 border-t">
+          <a href="#" class="text-dark hover:text-primary transition-colors text-center py-2">登入</a>
+          <a href="#enroll" class="bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-full font-medium transition-colors text-center shadow-md">
+            立即報名
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- 英雄區域 -->
+    <section class="pt-32 pb-20 md:pt-40 md:pb-32 bg-gradient-to-br from-blue-50 to-indigo-50">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col lg:flex-row items-center gap-12">
+          <div class="lg:w-1/2 space-y-6">
+            <span class="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium">
+              超過10,000名學員的選擇
+            </span>
+            <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold leading-tight text-dark">
+              提升你的<span class="text-primary">AI技能</span>，開啟新的職業可能
+            </h1>
+            <p class="text-gray-600 text-lg md:text-xl max-w-lg">由行業專家精心打造的線上課程，靈活學習，實戰導向，幫助你快速掌握核心技能，實現職業突破。</p>
+            <div class="flex flex-col sm:flex-row gap-4 pt-4">
+              <a href="#courses" class="bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-full font-semibold text-center transition-all shadow-lg hover:shadow-xl hover:-translate-y-1">
+                瀏覽課程
+              </a>
+              <a href="#demo" class="flex items-center justify-center gap-2 bg-white hover:bg-gray-50 text-dark px-8 py-4 rounded-full font-semibold border border-gray-200 transition-all shadow-md hover:shadow-lg">
+                <i class="fa fa-play-circle text-primary"></i>
+                觀看演示
+              </a>
+            </div>
+            <div class="flex items-center gap-4 pt-6">
+              <div class="flex -space-x-2">
+                <img src="https://picsum.photos/id/1001/40/40" alt="學員頭像" class="w-10 h-10 rounded-full border-2 border-white">
+                <img src="https://picsum.photos/id/1002/40/40" alt="學員頭像" class="w-10 h-10 rounded-full border-2 border-white">
+                <img src="https://picsum.photos/id/1003/40/40" alt="學員頭像" class="w-10 h-10 rounded-full border-2 border-white">
+                <img src="https://picsum.photos/id/1004/40/40" alt="學員頭像" class="w-10 h-10 rounded-full border-2 border-white">
+                <div class="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs font-bold border-2 border-white">
+                  99+
+                </div>
+              </div>
+              <div>
+                <div class="flex items-center text-yellow-500">
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star-half-o"></i>
+                  <span class="ml-2 text-gray-700 font-medium">4.8/5</span>
+                </div>
+                <p class="text-gray-500 text-sm">來自2,500+條評價</p>
+              </div>
+            </div>
+          </div>
+          <div class="lg:w-1/2 relative">
+            <div class="relative z-10 rounded-2xl overflow-hidden shadow-2xl hover-lift">
+              <img src="https://picsum.photos/id/20/800/600" alt="線上學習場景" class="w-full h-auto">
+              <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
+                <div class="flex items-center gap-3">
+                  <div class="bg-white/20 backdrop-blur-sm p-2 rounded-full">
+                    <i class="fa fa-play text-white"></i>
+                  </div>
+                  <div>
+                    <p class="text-white font-medium">觀看課程介紹</p>
+                    <p class="text-white/80 text-sm">12:30 分鐘</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- 裝飾元素 -->
+            <div class="absolute -bottom-6 -left-6 w-32 h-32 bg-accent/20 rounded-full filter blur-2xl"></div>
+            <div class="absolute -top-6 -right-6 w-32 h-32 bg-primary/20 rounded-full filter blur-2xl"></div>
+          </div>
+        </div>
+      </div>
     </section>
-
-    <!-- 服務項目 -->
-    <section id="services" class="services-section">
-        <div class="container">
-            <h2 class="section-title">我們的服務</h2>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="service-card">
-                        <div class="service-icon">🏃‍♀️</div>
-                        <h3>個人健康教練</h3>
-                        <p>一對一指導，量身打造健康計劃，包括飲食、運動和生活習慣調整</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="service-card">
-                        <div class="service-icon">🧘‍♀️</div>
-                        <h3>壓力管理課程</h3>
-                        <p>學習有效的壓力管理技巧，改善睡眠質量，提升生活品質</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="service-card">
-                        <div class="service-icon">🥗</div>
-                        <h3>營養諮詢</h3>
-                        <p>專業營養師指導，制定個人化飲食方案，達成理想體重</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="service-card">
-                        <div class="service-icon">💪</div>
-                        <h3>運動指導</h3>
-                        <p>專業運動教練指導，安全有效的運動計劃，增強體能</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="service-card">
-                        <div class="service-icon">🎯</div>
-                        <h3>目標設定與追蹤</h3>
-                        <p>協助設定實際可行的健康目標，定期追蹤進度，確保成效</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="service-card">
-                        <div class="service-icon">🌟</div>
-                        <h3>團體課程</h3>
-                        <p>小班制團體課程，互相激勵，共同成長，享受健康生活</p>
-                    </div>
-                </div>
-            </div>
+    
+    <!-- 合作夥伴 -->
+    <section class="py-12 bg-white">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <p class="text-center text-gray-500 mb-8">受到行業領先企業的信任</p>
+        <div class="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-70">
+          <div class="h-8 md:h-10 flex items-center">
+            <span class="font-bold text-gray-400 text-xl">公司A</span>
+          </div>
+          <div class="h-8 md:h-10 flex items-center">
+            <span class="font-bold text-gray-400 text-xl">公司B</span>
+          </div>
+          <div class="h-8 md:h-10 flex items-center">
+            <span class="font-bold text-gray-400 text-xl">公司C</span>
+          </div>
+          <div class="h-8 md:h-10 flex items-center">
+            <span class="font-bold text-gray-400 text-xl">公司D</span>
+          </div>
+          <div class="h-8 md:h-10 flex items-center">
+            <span class="font-bold text-gray-400 text-xl">公司E</span>
+          </div>
         </div>
+      </div>
     </section>
-
-    <!-- 教練介紹 -->
-    <section id="about" class="coach-profile">
-        <div class="container">
-            <h2 class="section-title">認識我們的教練</h2>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="profile-card">
-                        <img src="images/default_avatar.svg" alt="專業教練" class="profile-img">
-                        <h3>資深健康教練</h3>
-                        <p>擁有10年以上健康教練經驗，專注於幫助客戶改善生活品質</p>
-                        <ul class="coach-credentials">
-                            <li>🏆 國際認證健康教練</li>
-                            <li>🎓 營養學碩士學位</li>
-                            <li>💼 500+成功案例</li>
-                            <li>📚 健康管理專家</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="coach-philosophy">
-                        <h3>我們的理念</h3>
-                        <p>我們相信每個人都值得擁有健康快樂的生活。透過專業的指導和支持，我們幫助您建立健康的習慣，實現長期的健康目標。</p>
-                        <br>
-                        <h4>服務特色</h4>
-                        <ul>
-                            <li>✅ 個人化定制方案</li>
-                            <li>✅ 科學依據的健康建議</li>
-                            <li>✅ 持續的追蹤與支持</li>
-                            <li>✅ 彈性的服務時間</li>
-                            <li>✅ 線上線下多元服務</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+    
+    <!-- 課程分類 -->
+    <section id="courses" class="py-20 bg-gray-50">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <span class="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
+            精選課程
+          </span>
+          <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold mb-6">探索我們的熱門課程</h2>
+          <p class="text-gray-600 text-lg">
+            從入門到精通，我們提供覆蓋多個領域的高質量課程，滿足不同階段學習者的需求。
+          </p>
         </div>
+        
+        <!-- 課程篩選 -->
+        <div class="flex flex-wrap justify-center gap-4 mb-12">
+          <button class="px-6 py-2 bg-primary text-white rounded-full text-sm font-medium">
+            全部課程
+          </button>
+          <button class="px-6 py-2 bg-white hover:bg-gray-100 text-gray-700 rounded-full text-sm font-medium transition-colors">
+            程式開發
+          </button>
+          <button class="px-6 py-2 bg-white hover:bg-gray-100 text-gray-700 rounded-full text-sm font-medium transition-colors">
+            商業管理
+          </button>
+          <button class="px-6 py-2 bg-white hover:bg-gray-100 text-gray-700 rounded-full text-sm font-medium transition-colors">
+            設計創意
+          </button>
+          <button class="px-6 py-2 bg-white hover:bg-gray-100 text-gray-700 rounded-full text-sm font-medium transition-colors">
+            職業技能
+          </button>
+        </div>
+        
+        <!-- 課程卡片 -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- 課程卡片1 -->
+          <div class="bg-white rounded-xl overflow-hidden shadow-md hover-lift">
+            <div class="relative">
+              <img src="https://picsum.photos/id/0/600/400" alt="Python全棧開發" class="w-full h-52 object-cover">
+              <div class="absolute top-4 left-4 bg-accent text-white text-xs font-bold px-3 py-1 rounded-full">
+                熱門
+              </div>
+              <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm text-dark text-xs font-bold px-3 py-1 rounded-full">
+                42小時課程
+              </div>
+            </div>
+            <div class="p-6">
+              <div class="flex items-center gap-2 mb-3">
+                <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full">程式開發</span>
+                <div class="flex items-center text-yellow-500 text-sm">
+                  <i class="fa fa-star"></i>
+                  <span class="ml-1 text-gray-700">4.9</span>
+                  <span class="ml-1 text-gray-500">(1,245)</span>
+                </div>
+              </div>
+              <h3 class="font-bold text-xl mb-2">Python全棧開發從入門到精通</h3>
+              <p class="text-gray-600 text-sm mb-4 line-clamp-2">
+                掌握Python程式基礎，深入學習Web開發、數據分析和人工智能應用，成為全能型開發人才。
+              </p>
+              <div class="flex items-center gap-3 mb-5">
+                <img src="https://picsum.photos/id/1012/40/40" alt="講師頭像" class="w-10 h-10 rounded-full">
+                <div>
+                  <p class="font-medium text-sm">李明教授</p>
+                  <p class="text-gray-500 text-xs">前谷歌高級工程師</p>
+                </div>
+              </div>
+              <div class="flex justify-between items-center">
+                <div>
+                  <span class="text-primary font-bold text-xl">¥299</span>
+                  <span class="text-gray-400 text-sm line-through ml-2">¥599</span>
+                </div>
+                <a href="#enroll" class="bg-primary/10 hover:bg-primary/20 text-primary px-4 py-2 rounded-lg font-medium text-sm transition-colors">
+                  立即報名
+                </a>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 課程卡片2 -->
+          <div class="bg-white rounded-xl overflow-hidden shadow-md hover-lift">
+            <div class="relative">
+              <img src="https://picsum.photos/id/180/600/400" alt="數字行銷" class="w-full h-52 object-cover">
+              <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm text-dark text-xs font-bold px-3 py-1 rounded-full">
+                36小時課程
+              </div>
+            </div>
+            <div class="p-6">
+              <div class="flex items-center gap-2 mb-3">
+                <span class="bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full">商業管理</span>
+                <div class="flex items-center text-yellow-500 text-sm">
+                  <i class="fa fa-star"></i>
+                  <span class="ml-1 text-gray-700">4.7</span>
+                  <span class="ml-1 text-gray-500">(876)</span>
+                </div>
+              </div>
+              <h3 class="font-bold text-xl mb-2">數字行銷與品牌建設實戰</h3>
+              <p class="text-gray-600 text-sm mb-4 line-clamp-2">
+                學習現代行銷策略，掌握社交媒體運營、內容行銷和數據分析，提升品牌影響力和銷售業績。
+              </p>
+              <div class="flex items-center gap-3 mb-5">
+                <img src="https://picsum.photos/id/1027/40/40" alt="講師頭像" class="w-10 h-10 rounded-full">
+                <div>
+                  <p class="font-medium text-sm">張雨晴</p>
+                  <p class="text-gray-500 text-xs">資深行銷總監</p>
+                </div>
+              </div>
+              <div class="flex justify-between items-center">
+                <div>
+                  <span class="text-primary font-bold text-xl">¥249</span>
+                  <span class="text-gray-400 text-sm line-through ml-2">¥499</span>
+                </div>
+                <a href="#enroll" class="bg-primary/10 hover:bg-primary/20 text-primary px-4 py-2 rounded-lg font-medium text-sm transition-colors">
+                  立即報名
+                </a>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 課程卡片3 -->
+          <div class="bg-white rounded-xl overflow-hidden shadow-md hover-lift">
+            <div class="relative">
+              <img src="https://picsum.photos/id/96/600/400" alt="UI/UX設計" class="w-full h-52 object-cover">
+              <div class="absolute top-4 left-4 bg-secondary text-white text-xs font-bold px-3 py-1 rounded-full">
+                新課
+              </div>
+              <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm text-dark text-xs font-bold px-3 py-1 rounded-full">
+                48小時課程
+              </div>
+            </div>
+            <div class="p-6">
+              <div class="flex items-center gap-2 mb-3">
+                <span class="bg-purple-100 text-purple-800 text-xs px-3 py-1 rounded-full">設計創意</span>
+                <div class="flex items-center text-yellow-500 text-sm">
+                  <i class="fa fa-star"></i>
+                  <span class="ml-1 text-gray-700">4.8</span>
+                  <span class="ml-1 text-gray-500">(532)</span>
+                </div>
+              </div>
+              <h3 class="font-bold text-xl mb-2">UI/UX設計精品課程</h3>
+              <p class="text-gray-600 text-sm mb-4 line-clamp-2">
+                從設計原理到工具應用，掌握用戶體驗設計全流程，打造令人驚豔的產品界面和用戶體驗。
+              </p>
+              <div class="flex items-center gap-3 mb-5">
+                <img src="https://picsum.photos/id/1025/40/40" alt="講師頭像" class="w-10 h-10 rounded-full">
+                <div>
+                  <p class="font-medium text-sm">王建國</p>
+                  <p class="text-gray-500 text-xs">知名設計工作室創始人</p>
+                </div>
+              </div>
+              <div class="flex justify-between items-center">
+                <div>
+                  <span class="text-primary font-bold text-xl">¥349</span>
+                  <span class="text-gray-400 text-sm line-through ml-2">¥699</span>
+                </div>
+                <a href="#enroll" class="bg-primary/10 hover:bg-primary/20 text-primary px-4 py-2 rounded-lg font-medium text-sm transition-colors">
+                  立即報名
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="text-center mt-12">
+          <a href="#" class="inline-flex items-center gap-2 bg-white hover:bg-gray-50 text-primary border border-primary px-8 py-3 rounded-full font-semibold transition-colors shadow-sm">
+            查看全部課程
+            <i class="fa fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
     </section>
-
-    <!-- 客戶見證 -->
-    <section id="testimonials" class="testimonials">
-        <div class="container">
-            <h2 class="section-title">客戶見證</h2>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="testimonial-card">
-                        <div class="stars">⭐⭐⭐⭐⭐</div>
-                        <p>"教練非常專業，幫助我在3個月內成功減重10公斤，精神狀態也改善很多！"</p>
-                        <strong>- 陳小姐</strong>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="testimonial-card">
-                        <div class="stars">⭐⭐⭐⭐⭐</div>
-                        <p>"透過教練的指導，我學會了如何管理壓力，睡眠品質大大改善，工作效率也提升了！"</p>
-                        <strong>- 李先生</strong>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="testimonial-card">
-                        <div class="stars">⭐⭐⭐⭐⭐</div>
-                        <p>"個人化的運動計劃讓我重新找回對運動的熱情，身體變得更健康，心情也更愉快！"</p>
-                        <strong>- 王女士</strong>
-                    </div>
-                </div>
-            </div>
+    
+    <!-- 學習優勢 -->
+    <section id="features" class="py-20 bg-white">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <span class="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
+            為什麼選擇我們
+          </span>
+          <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold mb-6">專業學習體驗，高效提升技能</h2>
+          <p class="text-gray-600 text-lg">
+            我們提供全方位的學習支持和優質的課程內容，幫助你實現學習目標，獲得職業成長。
+          </p>
         </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- 優勢1 -->
+          <div class="bg-gray-50 p-8 rounded-xl hover-lift">
+            <div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center text-primary text-2xl mb-6">
+              <i class="fa fa-laptop"></i>
+            </div>
+            <h3 class="font-bold text-xl mb-3">靈活學習，隨時隨地</h3>
+            <p class="text-gray-600">
+              不受時間和地點限制，通過電腦、平板或手機隨時學習，按照自己的節奏安排學習計劃。
+            </p>
+          </div>
+          
+          <!-- 優勢2 -->
+          <div class="bg-gray-50 p-8 rounded-xl hover-lift">
+            <div class="w-14 h-14 bg-secondary/10 rounded-xl flex items-center justify-center text-secondary text-2xl mb-6">
+              <i class="fa fa-users"></i>
+            </div>
+            <h3 class="font-bold text-xl mb-3">專業講師，實戰經驗</h3>
+            <p class="text-gray-600">
+              由行業資深專家授課，分享實戰經驗和實用技巧，讓你學到真正能應用的知識和技能。
+            </p>
+          </div>
+          
+          <!-- 優勢3 -->
+          <div class="bg-gray-50 p-8 rounded-xl hover-lift">
+            <div class="w-14 h-14 bg-accent/10 rounded-xl flex items-center justify-center text-accent text-2xl mb-6">
+              <i class="fa fa-comments"></i>
+            </div>
+            <h3 class="font-bold text-xl mb-3">社區互動，答疑解惑</h3>
+            <p class="text-gray-600">
+              加入學習社區，與同學和講師交流互動，及時解決學習中遇到的問題，共同進步。
+            </p>
+          </div>
+          
+          <!-- 優勢4 -->
+          <div class="bg-gray-50 p-8 rounded-xl hover-lift">
+            <div class="w-14 h-14 bg-purple-100 rounded-xl flex items-center justify-center text-purple-600 text-2xl mb-6">
+              <i class="fa fa-certificate"></i>
+            </div>
+            <h3 class="font-bold text-xl mb-3">完成課程，獲得證書</h3>
+            <p class="text-gray-600">
+              完成課程學習並通過考核後，將獲得權威證書，提升你的職業競爭力和簡歷含金量。
+            </p>
+          </div>
+          
+          <!-- 優勢5 -->
+          <div class="bg-gray-50 p-8 rounded-xl hover-lift">
+            <div class="w-14 h-14 bg-red-100 rounded-xl flex items-center justify-center text-red-600 text-2xl mb-6">
+              <i class="fa fa-code"></i>
+            </div>
+            <h3 class="font-bold text-xl mb-3">實戰項目，學以致用</h3>
+            <p class="text-gray-600">
+              每個課程都包含實戰項目，讓你將所學知識應用到實際中，積累寶貴的項目經驗。
+            </p>
+          </div>
+          
+          <!-- 優勢6 -->
+          <div class="bg-gray-50 p-8 rounded-xl hover-lift">
+            <div class="w-14 h-14 bg-teal-100 rounded-xl flex items-center justify-center text-teal-600 text-2xl mb-6">
+              <i class="fa fa-life-ring"></i>
+            </div>
+            <h3 class="font-bold text-xl mb-3">終身學習，持續更新</h3>
+            <p class="text-gray-600">
+              一次報名，終身學習，課程內容將持續更新，讓你始終掌握最新的知識和技能。
+            </p>
+          </div>
+        </div>
+      </div>
     </section>
-
-    <!-- 行動呼籲 -->
-    <section class="cta-section">
-        <div class="container">
-            <h2>準備開始您的健康之旅？</h2>
-            <p>立即預約免費健康諮詢，讓我們一起為您的健康努力！</p>
-            <a href="#contact" class="btn-coach">免費諮詢</a>
-            <a href="tel:+886-912345678" class="btn-coach" style="background: transparent; border: 2px solid white;">立即致電</a>
+    
+    <!-- 學習數據 -->
+    <section class="py-20 bg-gradient-to-br from-primary to-blue-700 text-white">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold mb-6">我們的學習成果</h2>
+          <p class="text-blue-100 text-lg">
+            數千名學員通過我們的課程實現了職業突破，取得了顯著的學習成果。
+          </p>
         </div>
+        
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          <div class="p-6">
+            <div class="text-4xl md:text-5xl font-bold mb-2 counter" data-target="10000">0</div>
+            <p class="text-blue-100">活躍學員</p>
+          </div>
+          <div class="p-6">
+            <div class="text-4xl md:text-5xl font-bold mb-2 counter" data-target="200">0</div>
+            <p class="text-blue-100">精品課程</p>
+          </div>
+          <div class="p-6">
+            <div class="text-4xl md:text-5xl font-bold mb-2 counter" data-target="96">0</div>
+            <p class="text-blue-100">就業率提升</p>
+          </div>
+          <div class="p-6">
+            <div class="text-4xl md:text-5xl font-bold mb-2 counter" data-target="50">0</div>
+            <p class="text-blue-100">合作企業</p>
+          </div>
+        </div>
+        
+        <div class="mt-16 bg-white/10 backdrop-blur-sm rounded-xl p-8">
+          <div class="flex flex-col md:flex-row gap-8 items-center">
+            <div class="md:w-1/2">
+              <h3 class="text-2xl font-bold mb-4">學員薪資提升情況</h3>
+              <p class="text-blue-100 mb-6">
+                完成課程學習後，學員平均薪資提升顯著，遠超行業平均水平。
+              </p>
+              <div class="flex items-center gap-4">
+                <div class="flex-1">
+                  <div class="flex justify-between mb-1">
+                    <span class="text-sm">初級職位</span>
+                    <span class="text-sm font-medium">+35%</span>
+                  </div>
+                  <div class="w-full bg-white/20 rounded-full h-2">
+                    <div class="bg-accent h-2 rounded-full" style="width: 35%"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="flex items-center gap-4 mt-4">
+                <div class="flex-1">
+                  <div class="flex justify-between mb-1">
+                    <span class="text-sm">中級職位</span>
+                    <span class="text-sm font-medium">+52%</span>
+                  </div>
+                  <div class="w-full bg-white/20 rounded-full h-2">
+                    <div class="bg-accent h-2 rounded-full" style="width: 52%"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="flex items-center gap-4 mt-4">
+                <div class="flex-1">
+                  <div class="flex justify-between mb-1">
+                    <span class="text-sm">高級職位</span>
+                    <span class="text-sm font-medium">+78%</span>
+                  </div>
+                  <div class="w-full bg-white/20 rounded-full h-2">
+                    <div class="bg-accent h-2 rounded-full" style="width: 78%"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="md:w-1/2 h-64">
+              <canvas id="salaryChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
-
-    <!-- 聯絡資訊 -->
-    <section id="contact" class="contact-section">
-        <div class="container">
-            <h2 class="section-title">聯絡我們</h2>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="contact-info">
-                        <h3>聯絡方式</h3>
-                        <p>📱 電話：+886-912345678</p>
-                        <p>📧 郵箱：coach@nmnihealth.com</p>
-                        <p>📍 地址：台北市健康路123號</p>
-                        <p>🕐 營業時間：週一至週五 9:00-21:00</p>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="contact-form">
-                        <h3>預約諮詢</h3>
-                        <form action="booking.php" method="POST">
-                            <div class="form-group">
-                                <label>姓名</label>
-                                <input type="text" name="name" required>
-                            </div>
-                            <div class="form-group">
-                                <label>電話</label>
-                                <input type="tel" name="phone" required>
-                            </div>
-                            <div class="form-group">
-                                <label>郵箱</label>
-                                <input type="email" name="email" required>
-                            </div>
-                            <div class="form-group">
-                                <label>服務項目</label>
-                                <select name="service" required>
-                                    <option value="">請選擇服務</option>
-                                    <option value="personal">個人健康教練</option>
-                                    <option value="stress">壓力管理</option>
-                                    <option value="nutrition">營養諮詢</option>
-                                    <option value="exercise">運動指導</option>
-                                    <option value="group">團體課程</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>留言</label>
-                                <textarea name="message" rows="4"></textarea>
-                            </div>
-                            <button type="submit" class="btn-coach">提交預約</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
+    
+    <!-- 學員評價 -->
+    <section id="testimonials" class="py-20 bg-gray-50">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <span class="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
+            學員心聲
+          </span>
+          <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold mb-6">聽聽他們怎麼說</h2>
+          <p class="text-gray-600 text-lg">
+            來自真實學員的學習體驗和收穫分享，了解他們如何通過我們的課程實現職業突破。
+          </p>
         </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- 評價1 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover-lift">
+            <div class="flex text-yellow-500 mb-4">
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+            </div>
+            <p class="text-gray-600 mb-6 italic">
+              "通過Python全棧開發課程，我從零基礎成長為一名合格的開發工程師，現在在一家知名互聯網公司工作，薪資比之前翻了一倍。課程內容非常實用，講師講解清晰，社區氛圍也很好。"
+            </p>
+            <div class="flex items-center gap-4">
+              <img src="https://picsum.photos/id/1012/60/60" alt="學員頭像" class="w-12 h-12 rounded-full">
+              <div>
+                <p class="font-medium">陳小明</p>
+                <p class="text-gray-500 text-sm">全棧開發工程師</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 評價2 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover-lift">
+            <div class="flex text-yellow-500 mb-4">
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+            </div>
+            <p class="text-gray-600 mb-6 italic">
+              "數字行銷課程讓我對現代行銷有了全新的認識，學到的方法直接應用到了工作中，我們公司的線上銷售額在三個月內增長了40%。講師的實戰經驗分享非常有價值。"
+            </p>
+            <div class="flex items-center gap-4">
+              <img src="https://picsum.photos/id/1027/60/60" alt="學員頭像" class="w-12 h-12 rounded-full">
+              <div>
+                <p class="font-medium">林小雨</p>
+                <p class="text-gray-500 text-sm">市場部經理</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 評價3 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover-lift">
+            <div class="flex text-yellow-500 mb-4">
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star-half-o"></i>
+            </div>
+            <p class="text-gray-600 mb-6 italic">
+              "作為一名產品經理，UI/UX設計課程幫助我更好地理解設計思維，與設計團隊的溝通更加順暢。課程中的案例分析和實戰項目非常貼近實際工作場景。"
+            </p>
+            <div class="flex items-center gap-4">
+              <img src="https://picsum.photos/id/1074/60/60" alt="學員頭像" class="w-12 h-12 rounded-full">
+              <div>
+                <p class="font-medium">王大偉</p>
+                <p class="text-gray-500 text-sm">高級產品經理</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
-
-    <!-- 頁腳 -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>Coach NmNiHealth</h4>
-                    <p>專業健康教練服務，為您的健康把關</p>
-                </div>
-                <div class="footer-section">
-                    <h4>快速連結</h4>
-                    <ul>
-                        <li><a href="#services">服務項目</a></li>
-                        <li><a href="#about">關於我們</a></li>
-                        <li><a href="#testimonials">客戶見證</a></li>
-                        <li><a href="#contact">聯絡我們</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>聯絡資訊</h4>
-                    <p>📱 +886-912345678</p>
-                    <p>📧 coach@nmnihealth.com</p>
-                    <p>📍 台北市健康路123號</p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 Coach NmNiHealth. All rights reserved.</p>
-            </div>
+    
+    <!-- 常見問題 -->
+    <section id="faq" class="py-20 bg-white">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <span class="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
+            常見問題
+          </span>
+          <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold mb-6">你可能想知道</h2>
+          <p class="text-gray-600 text-lg">
+            我們收集了學員最常問的問題，如果您有其他疑問，歡迎聯繫我們的客服團隊。
+          </p>
         </div>
-    </footer>
+        
+        <div class="max-w-3xl mx-auto">
+          <!-- FAQ項目 -->
+          <div class="border-b border-gray-200 py-5">
+            <button class="faq-toggle flex justify-between items-center w-full text-left focus:outline-none">
+              <span class="font-semibold text-lg">課程有有效期嗎？</span>
+              <i class="fa fa-plus text-primary transition-transform"></i>
+            </button>
+            <div class="faq-content hidden mt-3 text-gray-600">
+              <p>我們的所有課程都是終身有效的，一旦購買，您可以隨時學習，不受時間限制。同時，我們會定期更新課程內容，確保您學到的是最新的知識和技能。</p>
+            </div>
+          </div>
+          
+          <div class="border-b border-gray-200 py-5">
+            <button class="faq-toggle flex justify-between items-center w-full text-left focus:outline-none">
+              <span class="font-semibold text-lg">如果對課程不滿意可以退款嗎？</span>
+              <i class="fa fa-plus text-primary transition-transform"></i>
+            </button>
+            <div class="faq-content hidden mt-3 text-gray-600">
+              <p>是的，我們提供30天無理由退款保證。如果您在購買課程後30天內發現課程不符合您的預期，可以申請全額退款，沒有任何條件限制。</p>
+            </div>
+          </div>
+          
+          <div class="border-b border-gray-200 py-5">
+            <button class="faq-toggle flex justify-between items-center w-full text-left focus:outline-none">
+              <span class="font-semibold text-lg">課程包含證書嗎？如何獲取？</span>
+              <i class="fa fa-plus text-primary transition-transform"></i>
+            </button>
+            <div class="faq-content hidden mt-3 text-gray-600">
+              <p>所有課程都包含結業證書。完成課程的所有學習內容並通過最終考核後，您可以在學習平台上下载電子版證書。部分專業課程還提供可驗證的技能證書，有助於您的職業發展。</p>
+            </div>
+          </div>
+          
+          <div class="border-b border-gray-200 py-5">
+            <button class="faq-toggle flex justify-between items-center w-full text-left focus:outline-none">
+              <span class="font-semibold text-lg">學習過程中遇到問題可以獲得幫助嗎？</span>
+              <i class="fa fa-plus text-primary transition-transform"></i>
+            </button>
+            <div class="faq-content hidden mt-3 text-gray-600">
+              <p>當然可以。我們提供多種支持渠道：您可以在課程討論區提問，講師和助教通常會在24小時內回復；加入學習社區，與其他學員交流；還可以通過客服郵箱獲取一對一的幫助。</p>
+            </div>
+          </div>
+          
+          <div class="border-b border-gray-200 py-5">
+            <button class="faq-toggle flex justify-between items-center w-full text-left focus:outline-none">
+              <span class="font-semibold text-lg">課程適合零基礎學員嗎？</span>
+              <i class="fa fa-plus text-primary transition-transform"></i>
+            </button>
+            <div class="faq-content hidden mt-3 text-gray-600">
+              <p>我們的課程覆蓋了從入門到高級的各個階段。大部分課程都明確標註了適合的技能水平，包括專為零基礎學員設計的入門課程。這些課程會從基礎知識開始，循序漸進地引導您掌握相關技能。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 報名區域 -->
+    <section id="enroll" class="py-20 bg-gradient-to-br from-primary to-blue-700 text-white">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-5xl mx-auto bg-white rounded-2xl shadow-2xl overflow-hidden">
+          <div class="flex flex-col lg:flex-row">
+            <div class="lg:w-1/2 p-8 md:p-12 bg-gray-50">
+              <span class="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-6">
+                立即加入
+              </span>
+              <h2 class="text-[clamp(1.5rem,3vw,2rem)] font-bold text-dark mb-6">
+                開始你的學習之旅
+              </h2>
+              <p class="text-gray-600 mb-8">
+                填寫以下信息，報名參加我們的課程，我們的顧問會儘快與您聯繫，為您提供個性化的學習建議。
+              </p>
+              
+              <form class="space-y-5" action="enroll.php" method="POST">
+                <div>
+                  <label for="name" class="block text-sm font-medium text-gray-700 mb-1">姓名</label>
+                  <input type="text" id="name" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition-colors" placeholder="請輸入您的姓名">
+                </div>
+                
+                <div>
+                  <label for="email" class="block text-sm font-medium text-gray-700 mb-1">郵箱</label>
+                  <input type="email" id="email" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition-colors" placeholder="請輸入您的郵箱">
+                </div>
+                
+                <div>
+                  <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">電話</label>
+                  <input type="tel" id="phone" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition-colors" placeholder="請輸入您的電話">
+                </div>
+                
+                <div>
+                  <label for="course" class="block text-sm font-medium text-gray-700 mb-1">感興趣的課程</label>
+                  <select id="course" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition-colors">
+                    <option value="">請選擇課程</option>
+                    <option value="python">Python全棧開發從入門到精通</option>
+                    <option value="marketing">數字行銷與品牌建設實戰</option>
+                    <option value="design">UI/UX設計精品課程</option>
+                    <option value="other">其他課程</option>
+                  </select>
+                </div>
+                
+                <button type="submit" class="w-full bg-primary hover:bg-primary/90 text-white font-semibold py-3 px-6 rounded-lg transition-colors shadow-md hover:shadow-lg">
+                  提交報名
+                </button>
+              </form>
+              
+              <p class="text-gray-500 text-sm mt-6 text-center">
+                提交即表示您同意我們的<a href="#" class="text-primary hover:underline">服務條款</a>和<a href="#" class="text-primary hover:underline">隱私政策</a>
+              </p>
+            </div>
+            
+            <div class="lg:w-1/2 p-8 md:p-12 bg-primary text-white flex flex-col justify-between">
+              <div>
+                <h3 class="text-2xl font-bold mb-6">為什麼選擇我們的課程？</h3>
+                
+                <div class="space-y-6">
+                  <div class="flex gap-4">
+                    <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
+                      <i class="fa fa-check"></i>
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-lg mb-1">靈活的學習方式</h4>
+                      <p class="text-blue-100">按照自己的節奏學習，隨時隨地訪問課程內容</p>
+                    </div>
+                  </div>
+                  
+                  <div class="flex gap-4">
+                    <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
+                      <i class="fa fa-check"></i>
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-lg mb-1">實戰項目經驗</h4>
+                      <p class="text-blue-100">通過真實項目練習，積累可展示的作品集</p>
+                    </div>
+                  </div>
+                  
+                  <div class="flex gap-4">
+                    <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
+                      <i class="fa fa-check"></i>
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-lg mb-1">專業講師指導</h4>
+                      <p class="text-blue-100">行業專家親授，分享實戰經驗和技巧</p>
+                    </div>
+                  </div>
+                  
+                  <div class="flex gap-4">
+                    <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
+                      <i class="fa fa-check"></i>
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-lg mb-1">就業支持服務</h4>
+                      <p class="text-blue-100">簡歷優化、面試指導和就業推薦服務</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="mt-12 p-6 bg-white/10 rounded-xl backdrop-blur-sm">
+                <div class="flex items-center gap-4 mb-4">
+                  <div class="text-3xl text-accent">
+                    <i class="fa fa-lightbulb-o"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-lg">首月特惠</h4>
+                    <p class="text-blue-100 text-sm">新學員可享8折優惠</p>
+                  </div>
+                </div>
+                <p class="text-sm text-blue-100">
+                  輸入優惠碼 <span class="font-bold bg-white/20 px-2 py-1 rounded">NEW20</span> 即可享受首門課程8折優惠
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 課程演示 -->
+    <section id="demo" class="py-20 bg-gray-50">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <span class="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
+            課程演示
+          </span>
+          <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold mb-6">體驗我們的課程質量</h2>
+          <p class="text-gray-600 text-lg">
+            觀看課程片段，了解我們的教學風格和內容質量，幫助你做出更明智的選擇。
+          </p>
+        </div>
+        
+        <div class="max-w-4xl mx-auto relative rounded-2xl overflow-hidden shadow-2xl">
+          <img src="https://picsum.photos/id/1/1200/675" alt="課程演示視頻封面" class="w-full h-auto">
+          <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+            <button class="w-20 h-20 md:w-24 md:h-24 bg-primary rounded-full flex items-center justify-center text-white hover:bg-primary/90 transition-colors shadow-lg hover:scale-105">
+              <i class="fa fa-play text-3xl md:text-4xl ml-1"></i>
+            </button>
+          </div>
+          <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent">
+            <h3 class="text-white font-bold text-xl mb-2">AI流量變現-聯盟行銷實戰營</h3>
+            <p class="text-white/80 text-sm">免費預覽 · 12:45 分鐘</p>
+          </div>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+          <div class="bg-white p-4 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+            <div class="relative rounded-lg overflow-hidden mb-3">
+              <img src="https://picsum.photos/id/2/400/225" alt="課程視頻縮略圖" class="w-full h-40 object-cover">
+              <div class="absolute bottom-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded">15:30</div>
+            </div>
+            <h4 class="font-medium text-gray-800">不露臉行銷-IG漲粉營銷班</h4>
+          </div>
+          
+          <div class="bg-white p-4 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+            <div class="relative rounded-lg overflow-hidden mb-3">
+              <img src="https://picsum.photos/id/3/400/225" alt="課程視頻縮略圖" class="w-full h-40 object-cover">
+              <div class="absolute bottom-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded">10:15</div>
+            </div>
+            <h4 class="font-medium text-gray-800">行銷策略制定與執行</h4>
+          </div>
+          
+          <div class="bg-white p-4 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+            <div class="relative rounded-lg overflow-hidden mb-3">
+              <img src="https://picsum.photos/id/4/400/225" alt="課程視頻縮略圖" class="w-full h-40 object-cover">
+              <div class="absolute bottom-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded">20:45</div>
+            </div>
+            <h4 class="font-medium text-gray-800">CANVA大師班</h4>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
-    <script src="js/main.js"></script>
+  <!-- 頁腳 -->
+  <footer class="bg-dark text-white pt-16 pb-8">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+        <div>
+          <div class="flex items-center space-x-2 mb-6">
+            <span class="text-primary text-2xl"><i class="fa fa-graduation-cap"></i></span>
+            <span class="font-bold text-xl">幸福商學院</span>
+          </div>
+          <p class="text-gray-400 mb-6">
+            提供高質量的線上課程，幫助學員掌握實用技能，實現職業發展目標。
+          </p>
+          <div class="flex space-x-4">
+            <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition-colors">
+              <i class="fa fa-facebook"></i>
+            </a>
+            <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition-colors">
+              <i class="fa fa-twitter"></i>
+            </a>
+            <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition-colors">
+              <i class="fa fa-instagram"></i>
+            </a>
+            <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition-colors">
+              <i class="fa fa-linkedin"></i>
+            </a>
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="font-bold text-lg mb-6">課程分類</h3>
+          <ul class="space-y-3">
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">AI流量變現</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">IG實戰</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Python開發</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">UI/UX設計</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">數字行銷</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">查看全部</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="font-bold text-lg mb-6">關於我們</h3>
+          <ul class="space-y-3">
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">公司簡介</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">講師團隊</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">合作夥伴</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">招賢納士</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">聯繫我們</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="font-bold text-lg mb-6">聯繫我們</h3>
+          <ul class="space-y-3">
+            <li class="flex items-start gap-3">
+              <i class="fa fa-map-marker text-primary mt-1"></i>
+              <span class="text-gray-400">台北市忠孝東路四段169號9樓</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <i class="fa fa-phone text-primary"></i>
+              <span class="text-gray-400">886-954-014-591</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <i class="fa fa-envelope text-primary"></i>
+              <span class="text-gray-400">coachsonia1314@gmail.com</span>
+            </li>
+          </ul>
+          
+          <div class="mt-6">
+            <h4 class="font-medium mb-3">訂閱我們的 newsletter</h4>
+            <div class="flex">
+              <input type="email" placeholder="您的郵箱地址" class="px-4 py-2 rounded-l-lg bg-gray-800 text-white border-0 focus:outline-none focus:ring-1 focus:ring-primary flex-1">
+              <button class="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-r-lg transition-colors">
+                <i class="fa fa-paper-plane"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-800 pt-8">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <p class="text-gray-500 text-sm mb-4 md:mb-0">© 2025 @幸福創業家. 保留所有權利.</p>
+          <div class="flex space-x-6">
+            <a href="#" class="text-gray-500 hover:text-primary text-sm transition-colors">服務條款</a>
+            <a href="#" class="text-gray-500 hover:text-primary text-sm transition-colors">隱私政策</a>
+            <a href="#" class="text-gray-500 hover:text-primary text-sm transition-colors">Cookie政策</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 返回頂部按鈕 -->
+  <button id="back-to-top" class="fixed bottom-8 right-8 bg-primary hover:bg-primary/90 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-all opacity-0 invisible">
+    <i class="fa fa-arrow-up"></i>
+  </button>
+
+  <!-- JavaScript -->
+  <script>
+    // 導航欄滾動效果
+    const navbar = document.getElementById('navbar');
+    const backToTop = document.getElementById('back-to-top');
+    
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 50) {
+        navbar.classList.add('py-2', 'shadow');
+        navbar.classList.remove('py-4');
+        
+        backToTop.classList.remove('opacity-0', 'invisible');
+        backToTop.classList.add('opacity-100', 'visible');
+      } else {
+        navbar.classList.add('py-4');
+        navbar.classList.remove('py-2', 'shadow');
+        
+        backToTop.classList.add('opacity-0', 'invisible');
+        backToTop.classList.remove('opacity-100', 'visible');
+      }
+    });
+    
+    // 行動端菜單
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    menuToggle.addEventListener('click', function() {
+      mobileMenu.classList.toggle('hidden');
+      const icon = menuToggle.querySelector('i');
+      if (icon.classList.contains('fa-bars')) {
+        icon.classList.replace('fa-bars', 'fa-times');
+      } else {
+        icon.classList.replace('fa-times', 'fa-bars');
+      }
+    });
+    
+    // 平滑滾動
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
+          });
+          
+          // 關閉行動端菜單
+          if (!mobileMenu.classList.contains('hidden')) {
+            mobileMenu.classList.add('hidden');
+            const icon = menuToggle.querySelector('i');
+            icon.classList.replace('fa-times', 'fa-bars');
+          }
+        }
+      });
+    });
+    
+    // 返回頂部
+    backToTop.addEventListener('click', function() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+    
+    // FAQ 折疊效果
+    const faqToggles = document.querySelectorAll('.faq-toggle');
+    
+    faqToggles.forEach(toggle => {
+      toggle.addEventListener('click', function() {
+        const content = this.nextElementSibling;
+        const icon = this.querySelector('i');
+        
+        content.classList.toggle('hidden');
+        icon.classList.toggle('rotate-45');
+        
+        // 關閉其他打開的FAQ
+        faqToggles.forEach(otherToggle => {
+          if (otherToggle !== toggle) {
+            const otherContent = otherToggle.nextElementSibling;
+            const otherIcon = otherToggle.querySelector('i');
+            
+            if (!otherContent.classList.contains('hidden')) {
+              otherContent.classList.add('hidden');
+              otherIcon.classList.remove('rotate-45');
+            }
+          }
+        });
+      });
+    });
+    
+    // 數字計數器動畫
+    const counters = document.querySelectorAll('.counter');
+    const speed = 200;
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const counter = entry.target;
+          const target = +counter.getAttribute('data-target');
+          const count = +counter.innerText;
+          const increment = target / speed;
+          
+          if (count < target) {
+            counter.innerText = Math.ceil(count + increment);
+            setTimeout(() => {
+              counter.innerText = Math.ceil(count + increment);
+            }, 1);
+          } else {
+            counter.innerText = target + (target === 10000 ? '+' : '%');
+            observer.unobserve(counter);
+          }
+        }
+      });
+    }, { threshold: 0.5 });
+    
+    counters.forEach(counter => {
+      observer.observe(counter);
+    });
+    
+    // 薪資圖表
+    const ctx = document.getElementById('salaryChart').getContext('2d');
+    const salaryChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['學習前', '學習後6個月', '學習後1年', '學習後2年'],
+        datasets: [{
+          label: '平均月薪(千元)',
+          data: [8, 12, 15, 18],
+          backgroundColor: [
+            'rgba(255, 255, 255, 0.4)',
+            'rgba(255, 255, 255, 0.6)',
+            'rgba(255, 255, 255, 0.8)',
+            'rgba(255, 255, 255, 1)'
+          ],
+          borderColor: [
+            'rgba(255, 255, 255, 1)',
+            'rgba(255, 255, 255, 1)',
+            'rgba(255, 255, 255, 1)',
+            'rgba(255, 255, 255, 1)'
+          ],
+          borderWidth: 1,
+          borderRadius: 6
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            beginAtZero: true,
+            grid: {
+              color: 'rgba(255, 255, 255, 0.1)'
+            },
+            ticks: {
+              color: 'rgba(255, 255, 255, 0.7)'
+            }
+          },
+          x: {
+            grid: {
+              color: 'rgba(255, 255, 255, 0.1)'
+            },
+            ticks: {
+              color: 'rgba(255, 255, 255, 0.7)'
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            labels: {
+              color: 'rgba(255, 255, 255, 0.9)'
+            }
+          }
+        }
+      }
+    });
+  </script>
+
 </body>
 </html>

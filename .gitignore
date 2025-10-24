@@ -1,0 +1,34 @@
+# 排除敏感配置文件
+*.conf
+*.key
+*.pem
+*.crt
+
+# 排除日志文件
+*.log
+logs/
+
+# 排除临时文件
+*.tmp
+*.temp
+.cache/
+.tmp/
+
+# 排除备份文件
+*.bak
+*.backup
+
+# 排除系统文件
+.DS_Store
+Thumbs.db
+
+# 排除会话文件
+sess_*
+
+# 排除上传目录（如果有）
+uploads/
+files/
+
+# 排除数据库备份文件
+*.sql
+*.dump

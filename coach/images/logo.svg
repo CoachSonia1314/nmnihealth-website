@@ -1,0 +1,38 @@
+<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+  <!-- 花瓣 1 -->
+  <path d="M30 10 C35 5, 45 5, 45 15 C45 25, 35 30, 30 30 C25 30, 15 25, 15 15 C15 5, 25 5, 30 10 Z" fill="url(#petalGradient)" />
+  
+  <!-- 花瓣 2 -->
+  <path d="M45 15 C50 20, 55 30, 45 35 C35 40, 30 30, 30 30 C30 30, 40 25, 45 15 Z" fill="url(#petalGradient)" />
+  
+  <!-- 花瓣 3 -->
+  <path d="M45 35 C40 40, 30 45, 25 35 C20 25, 30 30, 30 30 C30 30, 35 40, 45 35 Z" fill="url(#petalGradient)" />
+  
+  <!-- 花瓣 4 -->
+  <path d="M25 35 C20 30, 15 20, 25 15 C35 10, 30 30, 30 30 C30 30, 20 25, 25 35 Z" fill="url(#petalGradient)" />
+  
+  <!-- 花瓣 5 -->
+  <path d="M25 15 C20 10, 10 5, 15 15 C20 25, 30 30, 30 30 C30 30, 20 20, 25 15 Z" fill="url(#petalGradient)" />
+  
+  <!-- 花瓣 6 -->
+  <path d="M15 15 C10 20, 5 30, 15 35 C25 40, 30 30, 30 30 C30 30, 20 25, 15 15 Z" fill="url(#petalGradient)" />
+  
+  <!-- 花瓣渐变定义 -->
+  <defs>
+    <linearGradient id="petalGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6B21A8" />
+      <stop offset="100%" stop-color="#F472B6" />
+    </linearGradient>
+    
+    <linearGradient id="centerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6B21A8" />
+      <stop offset="100%" stop-color="#F472B6" />
+    </linearGradient>
+  </defs>
+  
+  <!-- 花心 -->
+  <circle cx="30" cy="30" r="8" fill="url(#centerGradient)" />
+  
+  <!-- 女性轮廓 -->
+  <path d="M30 22 C28 24, 28 26, 30 28 C32 26, 32 24, 30 22 Z M28 28 L28 34 L32 34 L32 28 Z M26 34 L26 36 L34 36 L34 34 Z" fill="#6EE7B7" />
+</svg>

@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>專業健康教練 - Coach NmNiHealth</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/fonts.css">
+    <style>
+        .coach-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 6rem 0;
+            text-align: center;
+        }
+        
+        .coach-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .coach-hero p {
+            font-size: 1.4rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            line-height: 1.8;
+        }
+        
+        .services-section {
+            padding: 5rem 0;
+            background: #f8f9fa;
+        }
+        
+        .service-card {
+            background: white;
+            padding: 3rem 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .service-icon {
+            font-size: 3rem;
+            color: #667eea;
+            margin-bottom: 1.5rem;
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .btn-coach {
+            background: white;
+            color: #667eea;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px;
+        }
+        
+        .btn-coach:hover {
+            background: #f8f9fa;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        .coach-profile {
+            background: white;
+            padding: 4rem 0;
+        }
+        
+        .profile-card {
+            text-align: center;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin-bottom: 2rem;
+            border: 5px solid #667eea;
+        }
+        
+        .testimonials {
+            background: #f8f9fa;
+            padding: 4rem 0;
+        }
+        
+        .testimonial-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .stars {
+            color: #ffd700;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- 導航欄 -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <img src="images/logo.svg" alt="Coach NmNiHealth" height="40">
+                <span>Coach NmNiHealth</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home">首頁</a></li>
+                <li><a href="#services">服務</a></li>
+                <li><a href="#about">關於</a></li>
+                <li><a href="#testimonials">見證</a></li>
+                <li><a href="#contact">聯絡</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 主要英雄區 -->
+    <section id="home" class="coach-hero">
+        <div class="container">
+            <h1>專業健康教練服務</h1>
+            <p>為您提供個人化的健康指導，幫助您達成健康目標，重拾活力與自信</p>
+            <a href="#contact" class="btn-coach">立即預約諮詢</a>
+            <a href="#services" class="btn-coach" style="background: transparent; border: 2px solid white;">了解更多</a>
+        </div>
+    </section>
+
+    <!-- 服務項目 -->
+    <section id="services" class="services-section">
+        <div class="container">
+            <h2 class="section-title">我們的服務</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="service-card">
+                        <div class="service-icon">🏃‍♀️</div>
+                        <h3>個人健康教練</h3>
+                        <p>一對一指導，量身打造健康計劃，包括飲食、運動和生活習慣調整</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="service-card">
+                        <div class="service-icon">🧘‍♀️</div>
+                        <h3>壓力管理課程</h3>
+                        <p>學習有效的壓力管理技巧，改善睡眠質量，提升生活品質</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="service-card">
+                        <div class="service-icon">🥗</div>
+                        <h3>營養諮詢</h3>
+                        <p>專業營養師指導，制定個人化飲食方案，達成理想體重</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="service-card">
+                        <div class="service-icon">💪</div>
+                        <h3>運動指導</h3>
+                        <p>專業運動教練指導，安全有效的運動計劃，增強體能</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="service-card">
+                        <div class="service-icon">🎯</div>
+                        <h3>目標設定與追蹤</h3>
+                        <p>協助設定實際可行的健康目標，定期追蹤進度，確保成效</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="service-card">
+                        <div class="service-icon">🌟</div>
+                        <h3>團體課程</h3>
+                        <p>小班制團體課程，互相激勵，共同成長，享受健康生活</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 教練介紹 -->
+    <section id="about" class="coach-profile">
+        <div class="container">
+            <h2 class="section-title">認識我們的教練</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="profile-card">
+                        <img src="images/default_avatar.svg" alt="專業教練" class="profile-img">
+                        <h3>資深健康教練</h3>
+                        <p>擁有10年以上健康教練經驗，專注於幫助客戶改善生活品質</p>
+                        <ul class="coach-credentials">
+                            <li>🏆 國際認證健康教練</li>
+                            <li>🎓 營養學碩士學位</li>
+                            <li>💼 500+成功案例</li>
+                            <li>📚 健康管理專家</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="coach-philosophy">
+                        <h3>我們的理念</h3>
+                        <p>我們相信每個人都值得擁有健康快樂的生活。透過專業的指導和支持，我們幫助您建立健康的習慣，實現長期的健康目標。</p>
+                        <br>
+                        <h4>服務特色</h4>
+                        <ul>
+                            <li>✅ 個人化定制方案</li>
+                            <li>✅ 科學依據的健康建議</li>
+                            <li>✅ 持續的追蹤與支持</li>
+                            <li>✅ 彈性的服務時間</li>
+                            <li>✅ 線上線下多元服務</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 客戶見證 -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <h2 class="section-title">客戶見證</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <p>"教練非常專業，幫助我在3個月內成功減重10公斤，精神狀態也改善很多！"</p>
+                        <strong>- 陳小姐</strong>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <p>"透過教練的指導，我學會了如何管理壓力，睡眠品質大大改善，工作效率也提升了！"</p>
+                        <strong>- 李先生</strong>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <p>"個人化的運動計劃讓我重新找回對運動的熱情，身體變得更健康，心情也更愉快！"</p>
+                        <strong>- 王女士</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 行動呼籲 -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>準備開始您的健康之旅？</h2>
+            <p>立即預約免費健康諮詢，讓我們一起為您的健康努力！</p>
+            <a href="#contact" class="btn-coach">免費諮詢</a>
+            <a href="tel:+886-912345678" class="btn-coach" style="background: transparent; border: 2px solid white;">立即致電</a>
+        </div>
+    </section>
+
+    <!-- 聯絡資訊 -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="section-title">聯絡我們</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="contact-info">
+                        <h3>聯絡方式</h3>
+                        <p>📱 電話：+886-912345678</p>
+                        <p>📧 郵箱：coach@nmnihealth.com</p>
+                        <p>📍 地址：台北市健康路123號</p>
+                        <p>🕐 營業時間：週一至週五 9:00-21:00</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="contact-form">
+                        <h3>預約諮詢</h3>
+                        <form action="booking.php" method="POST">
+                            <div class="form-group">
+                                <label>姓名</label>
+                                <input type="text" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label>電話</label>
+                                <input type="tel" name="phone" required>
+                            </div>
+                            <div class="form-group">
+                                <label>郵箱</label>
+                                <input type="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label>服務項目</label>
+                                <select name="service" required>
+                                    <option value="">請選擇服務</option>
+                                    <option value="personal">個人健康教練</option>
+                                    <option value="stress">壓力管理</option>
+                                    <option value="nutrition">營養諮詢</option>
+                                    <option value="exercise">運動指導</option>
+                                    <option value="group">團體課程</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>留言</label>
+                                <textarea name="message" rows="4"></textarea>
+                            </div>
+                            <button type="submit" class="btn-coach">提交預約</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 頁腳 -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Coach NmNiHealth</h4>
+                    <p>專業健康教練服務，為您的健康把關</p>
+                </div>
+                <div class="footer-section">
+                    <h4>快速連結</h4>
+                    <ul>
+                        <li><a href="#services">服務項目</a></li>
+                        <li><a href="#about">關於我們</a></li>
+                        <li><a href="#testimonials">客戶見證</a></li>
+                        <li><a href="#contact">聯絡我們</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>聯絡資訊</h4>
+                    <p>📱 +886-912345678</p>
+                    <p>📧 coach@nmnihealth.com</p>
+                    <p>📍 台北市健康路123號</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Coach NmNiHealth. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

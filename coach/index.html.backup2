@@ -53,35 +53,35 @@
   </style>
 </head>
 
-<body class="font-inter bg-gray-50 text-gray-900 antialiased">
+<body class="font-inter bg-light text-dark antialiased">
   <!-- 導航欄 -->
   <header id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300 bg-white/90 backdrop-blur-sm shadow-sm">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center py-4">
         <div class="flex items-center">
           <a href="#" class="flex items-center space-x-2">
-            <span class="text-blue-500 text-2xl"><i class="fa fa-graduation-cap"></i></span>
-            <span class="font-bold text-xl text-gray-900">幸福商學院</span>
+            <span class="text-primary text-2xl"><i class="fa fa-graduation-cap"></i></span>
+            <span class="font-bold text-xl text-dark">幸福商學院</span>
           </a>
         </div>
         
         <!-- 桌面導航 -->
         <nav class="hidden md:flex space-x-8">
-          <a href="#courses" class="text-gray-900 hover:text-blue-500 font-medium transition-colors">課程介紹</a>
-          <a href="#features" class="text-gray-900 hover:text-blue-500 font-medium transition-colors">聯盟行銷分潤區</a>
-          <a href="#testimonials" class="text-gray-900 hover:text-blue-500 font-medium transition-colors">學員評價</a>
-          <a href="#faq" class="text-gray-900 hover:text-blue-500 font-medium transition-colors">常見問題</a>
+          <a href="#courses" class="text-dark hover:text-primary font-medium transition-colors">課程介紹</a>
+          <a href="#features" class="text-dark hover:text-primary font-medium transition-colors">聯盟行銷分潤區</a>
+          <a href="#testimonials" class="text-dark hover:text-primary font-medium transition-colors">學員評價</a>
+          <a href="#faq" class="text-dark hover:text-primary font-medium transition-colors">常見問題</a>
         </nav>
         
         <div class="hidden md:flex items-center space-x-4">
-          <a href="#" class="text-gray-900 hover:text-blue-500 transition-colors">登入</a>
-          <a href="#enroll" class="bg-blue-500 hover:bg-blue-500/90 text-white px-5 py-2 rounded-full font-medium transition-colors shadow-md hover:shadow-lg">
+          <a href="#" class="text-dark hover:text-primary transition-colors">登入</a>
+          <a href="#enroll" class="bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-full font-medium transition-colors shadow-md hover:shadow-lg">
             立即報名
           </a>
         </div>
         
         <!-- 行動端菜單按鈕 -->
-        <button id="menu-toggle" class="md:hidden text-gray-900 focus:outline-none">
+        <button id="menu-toggle" class="md:hidden text-dark focus:outline-none">
           <i class="fa fa-bars text-xl"></i>
         </button>
       </div>
@@ -90,13 +90,13 @@
     <!-- 行動端導航菜單 -->
     <div id="mobile-menu" class="md:hidden hidden bg-white border-t">
       <div class="container mx-auto px-4 py-3 space-y-3">
-        <a href="#courses" class="block text-gray-900 hover:text-blue-500 font-medium py-2 transition-colors">課程</a>
-        <a href="#features" class="block text-gray-900 hover:text-blue-500 font-medium py-2 transition-colors">優勢</a>
-        <a href="#testimonials" class="block text-gray-900 hover:text-blue-500 font-medium py-2 transition-colors">學員評價</a>
-        <a href="#faq" class="block text-gray-900 hover:text-blue-500 font-medium py-2 transition-colors">常見問題</a>
+        <a href="#courses" class="block text-dark hover:text-primary font-medium py-2 transition-colors">課程</a>
+        <a href="#features" class="block text-dark hover:text-primary font-medium py-2 transition-colors">優勢</a>
+        <a href="#testimonials" class="block text-dark hover:text-primary font-medium py-2 transition-colors">學員評價</a>
+        <a href="#faq" class="block text-dark hover:text-primary font-medium py-2 transition-colors">常見問題</a>
         <div class="flex flex-col space-y-3 pt-2 border-t">
-          <a href="#" class="text-gray-900 hover:text-blue-500 transition-colors text-center py-2">登入</a>
-          <a href="#enroll" class="bg-blue-500 hover:bg-blue-500/90 text-white px-5 py-2 rounded-full font-medium transition-colors text-center shadow-md">
+          <a href="#" class="text-dark hover:text-primary transition-colors text-center py-2">登入</a>
+          <a href="#enroll" class="bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-full font-medium transition-colors text-center shadow-md">
             立即報名
           </a>
         </div>
@@ -110,19 +110,19 @@
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex flex-col lg:flex-row items-center gap-12">
           <div class="lg:w-1/2 space-y-6">
-            <span class="inline-block px-4 py-2 bg-blue-500/10 text-blue-500 rounded-full text-sm font-medium">
+            <span class="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium">
               超過10,000名學員的選擇
             </span>
-            <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold leading-tight text-gray-900">
-              提升你的<span class="text-blue-500">AI技能</span>，開啟新的職業可能
+            <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold leading-tight text-dark">
+              提升你的<span class="text-primary">AI技能</span>，開啟新的職業可能
             </h1>
             <p class="text-gray-600 text-lg md:text-xl max-w-lg">由行業專家精心打造的線上課程，靈活學習，實戰導向，幫助你快速掌握核心技能，實現職業突破。</p>
             <div class="flex flex-col sm:flex-row gap-4 pt-4">
-              <a href="#courses" class="bg-blue-500 hover:bg-blue-500/90 text-white px-8 py-4 rounded-full font-semibold text-center transition-all shadow-lg hover:shadow-xl hover:-translate-y-1">
+              <a href="#courses" class="bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-full font-semibold text-center transition-all shadow-lg hover:shadow-xl hover:-translate-y-1">
                 瀏覽課程
               </a>
-              <a href="#demo" class="flex items-center justify-center gap-2 bg-white hover:bg-gray-50 text-gray-900 px-8 py-4 rounded-full font-semibold border border-gray-200 transition-all shadow-md hover:shadow-lg">
-                <i class="fa fa-play-circle text-blue-500"></i>
+              <a href="#demo" class="flex items-center justify-center gap-2 bg-white hover:bg-gray-50 text-dark px-8 py-4 rounded-full font-semibold border border-gray-200 transition-all shadow-md hover:shadow-lg">
+                <i class="fa fa-play-circle text-primary"></i>
                 觀看演示
               </a>
             </div>
@@ -132,7 +132,7 @@
                 <img src="https://picsum.photos/id/1002/40/40" alt="學員頭像" class="w-10 h-10 rounded-full border-2 border-white">
                 <img src="https://picsum.photos/id/1003/40/40" alt="學員頭像" class="w-10 h-10 rounded-full border-2 border-white">
                 <img src="https://picsum.photos/id/1004/40/40" alt="學員頭像" class="w-10 h-10 rounded-full border-2 border-white">
-                <div class="w-10 h-10 rounded-full bg-blue-500/10 text-blue-500 flex items-center justify-center text-xs font-bold border-2 border-white">
+                <div class="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs font-bold border-2 border-white">
                   99+
                 </div>
               </div>
@@ -165,8 +165,8 @@
               </div>
             </div>
             <!-- 裝飾元素 -->
-            <div class="absolute -bottom-6 -left-6 w-32 h-32 bg-amber-500/20 rounded-full filter blur-2xl"></div>
-            <div class="absolute -top-6 -right-6 w-32 h-32 bg-blue-500/20 rounded-full filter blur-2xl"></div>
+            <div class="absolute -bottom-6 -left-6 w-32 h-32 bg-accent/20 rounded-full filter blur-2xl"></div>
+            <div class="absolute -top-6 -right-6 w-32 h-32 bg-primary/20 rounded-full filter blur-2xl"></div>
           </div>
         </div>
       </div>
@@ -200,7 +200,7 @@
     <section id="courses" class="py-20 bg-gray-50">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center max-w-3xl mx-auto mb-16">
-          <span class="inline-block px-4 py-2 bg-blue-500/10 text-blue-500 rounded-full text-sm font-medium mb-4">
+          <span class="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
             精選課程
           </span>
           <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold mb-6">探索我們的熱門課程</h2>
@@ -211,7 +211,7 @@
         
         <!-- 課程篩選 -->
         <div class="flex flex-wrap justify-center gap-4 mb-12">
-          <button class="px-6 py-2 bg-blue-500 text-white rounded-full text-sm font-medium">
+          <button class="px-6 py-2 bg-primary text-white rounded-full text-sm font-medium">
             全部課程
           </button>
           <button class="px-6 py-2 bg-white hover:bg-gray-100 text-gray-700 rounded-full text-sm font-medium transition-colors">
@@ -234,10 +234,10 @@
           <div class="bg-white rounded-xl overflow-hidden shadow-md hover-lift">
             <div class="relative">
               <img src="https://picsum.photos/id/0/600/400" alt="Python全棧開發" class="w-full h-52 object-cover">
-              <div class="absolute top-4 left-4 bg-amber-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+              <div class="absolute top-4 left-4 bg-accent text-white text-xs font-bold px-3 py-1 rounded-full">
                 熱門
               </div>
-              <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm text-gray-900 text-xs font-bold px-3 py-1 rounded-full">
+              <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm text-dark text-xs font-bold px-3 py-1 rounded-full">
                 42小時課程
               </div>
             </div>
@@ -263,10 +263,10 @@
               </div>
               <div class="flex justify-between items-center">
                 <div>
-                  <span class="text-blue-500 font-bold text-xl">¥299</span>
+                  <span class="text-primary font-bold text-xl">¥299</span>
                   <span class="text-gray-400 text-sm line-through ml-2">¥599</span>
                 </div>
-                <a href="#enroll" class="bg-blue-500/10 hover:bg-blue-500/20 text-blue-500 px-4 py-2 rounded-lg font-medium text-sm transition-colors">
+                <a href="#enroll" class="bg-primary/10 hover:bg-primary/20 text-primary px-4 py-2 rounded-lg font-medium text-sm transition-colors">
                   立即報名
                 </a>
               </div>
@@ -277,7 +277,7 @@
           <div class="bg-white rounded-xl overflow-hidden shadow-md hover-lift">
             <div class="relative">
               <img src="https://picsum.photos/id/180/600/400" alt="數字行銷" class="w-full h-52 object-cover">
-              <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm text-gray-900 text-xs font-bold px-3 py-1 rounded-full">
+              <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm text-dark text-xs font-bold px-3 py-1 rounded-full">
                 36小時課程
               </div>
             </div>
@@ -303,10 +303,10 @@
               </div>
               <div class="flex justify-between items-center">
                 <div>
-                  <span class="text-blue-500 font-bold text-xl">¥249</span>
+                  <span class="text-primary font-bold text-xl">¥249</span>
                   <span class="text-gray-400 text-sm line-through ml-2">¥499</span>
                 </div>
-                <a href="#enroll" class="bg-blue-500/10 hover:bg-blue-500/20 text-blue-500 px-4 py-2 rounded-lg font-medium text-sm transition-colors">
+                <a href="#enroll" class="bg-primary/10 hover:bg-primary/20 text-primary px-4 py-2 rounded-lg font-medium text-sm transition-colors">
                   立即報名
                 </a>
               </div>
@@ -317,10 +317,10 @@
           <div class="bg-white rounded-xl overflow-hidden shadow-md hover-lift">
             <div class="relative">
               <img src="https://picsum.photos/id/96/600/400" alt="UI/UX設計" class="w-full h-52 object-cover">
-              <div class="absolute top-4 left-4 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+              <div class="absolute top-4 left-4 bg-secondary text-white text-xs font-bold px-3 py-1 rounded-full">
                 新課
               </div>
-              <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm text-gray-900 text-xs font-bold px-3 py-1 rounded-full">
+              <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm text-dark text-xs font-bold px-3 py-1 rounded-full">
                 48小時課程
               </div>
             </div>
@@ -346,10 +346,10 @@
               </div>
               <div class="flex justify-between items-center">
                 <div>
-                  <span class="text-blue-500 font-bold text-xl">¥349</span>
+                  <span class="text-primary font-bold text-xl">¥349</span>
                   <span class="text-gray-400 text-sm line-through ml-2">¥699</span>
                 </div>
-                <a href="#enroll" class="bg-blue-500/10 hover:bg-blue-500/20 text-blue-500 px-4 py-2 rounded-lg font-medium text-sm transition-colors">
+                <a href="#enroll" class="bg-primary/10 hover:bg-primary/20 text-primary px-4 py-2 rounded-lg font-medium text-sm transition-colors">
                   立即報名
                 </a>
               </div>
@@ -358,7 +358,7 @@
         </div>
         
         <div class="text-center mt-12">
-          <a href="#" class="inline-flex items-center gap-2 bg-white hover:bg-gray-50 text-blue-500 border border-blue-500 px-8 py-3 rounded-full font-semibold transition-colors shadow-sm">
+          <a href="#" class="inline-flex items-center gap-2 bg-white hover:bg-gray-50 text-primary border border-primary px-8 py-3 rounded-full font-semibold transition-colors shadow-sm">
             查看全部課程
             <i class="fa fa-arrow-right"></i>
           </a>
@@ -370,7 +370,7 @@
     <section id="features" class="py-20 bg-white">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center max-w-3xl mx-auto mb-16">
-          <span class="inline-block px-4 py-2 bg-blue-500/10 text-blue-500 rounded-full text-sm font-medium mb-4">
+          <span class="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
             為什麼選擇我們
           </span>
           <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold mb-6">專業學習體驗，高效提升技能</h2>
@@ -382,7 +382,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <!-- 優勢1 -->
           <div class="bg-gray-50 p-8 rounded-xl hover-lift">
-            <div class="w-14 h-14 bg-blue-500/10 rounded-xl flex items-center justify-center text-blue-500 text-2xl mb-6">
+            <div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center text-primary text-2xl mb-6">
               <i class="fa fa-laptop"></i>
             </div>
             <h3 class="font-bold text-xl mb-3">靈活學習，隨時隨地</h3>
@@ -393,7 +393,7 @@
           
           <!-- 優勢2 -->
           <div class="bg-gray-50 p-8 rounded-xl hover-lift">
-            <div class="w-14 h-14 bg-green-500/10 rounded-xl flex items-center justify-center text-secondary text-2xl mb-6">
+            <div class="w-14 h-14 bg-secondary/10 rounded-xl flex items-center justify-center text-secondary text-2xl mb-6">
               <i class="fa fa-users"></i>
             </div>
             <h3 class="font-bold text-xl mb-3">專業講師，實戰經驗</h3>
@@ -404,7 +404,7 @@
           
           <!-- 優勢3 -->
           <div class="bg-gray-50 p-8 rounded-xl hover-lift">
-            <div class="w-14 h-14 bg-amber-500/10 rounded-xl flex items-center justify-center text-amber-500 text-2xl mb-6">
+            <div class="w-14 h-14 bg-accent/10 rounded-xl flex items-center justify-center text-accent text-2xl mb-6">
               <i class="fa fa-comments"></i>
             </div>
             <h3 class="font-bold text-xl mb-3">社區互動，答疑解惑</h3>
@@ -450,7 +450,7 @@
     </section>
     
     <!-- 學習數據 -->
-    <section class="py-20 bg-gradient-to-br from-blue-500 to-blue-600 text-white">
+    <section class="py-20 bg-gradient-to-br from-primary to-blue-700 text-white">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center max-w-3xl mx-auto mb-16">
           <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold mb-6">我們的學習成果</h2>
@@ -492,7 +492,7 @@
                     <span class="text-sm font-medium">+35%</span>
                   </div>
                   <div class="w-full bg-white/20 rounded-full h-2">
-                    <div class="bg-amber-500 h-2 rounded-full" style="width: 35%"></div>
+                    <div class="bg-accent h-2 rounded-full" style="width: 35%"></div>
                   </div>
                 </div>
               </div>
@@ -503,7 +503,7 @@
                     <span class="text-sm font-medium">+52%</span>
                   </div>
                   <div class="w-full bg-white/20 rounded-full h-2">
-                    <div class="bg-amber-500 h-2 rounded-full" style="width: 52%"></div>
+                    <div class="bg-accent h-2 rounded-full" style="width: 52%"></div>
                   </div>
                 </div>
               </div>
@@ -514,7 +514,7 @@
                     <span class="text-sm font-medium">+78%</span>
                   </div>
                   <div class="w-full bg-white/20 rounded-full h-2">
-                    <div class="bg-amber-500 h-2 rounded-full" style="width: 78%"></div>
+                    <div class="bg-accent h-2 rounded-full" style="width: 78%"></div>
                   </div>
                 </div>
               </div>
@@ -531,7 +531,7 @@
     <section id="testimonials" class="py-20 bg-gray-50">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center max-w-3xl mx-auto mb-16">
-          <span class="inline-block px-4 py-2 bg-blue-500/10 text-blue-500 rounded-full text-sm font-medium mb-4">
+          <span class="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
             學員心聲
           </span>
           <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold mb-6">聽聽他們怎麼說</h2>
@@ -611,7 +611,7 @@
     <section id="faq" class="py-20 bg-white">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center max-w-3xl mx-auto mb-16">
-          <span class="inline-block px-4 py-2 bg-blue-500/10 text-blue-500 rounded-full text-sm font-medium mb-4">
+          <span class="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
             常見問題
           </span>
           <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold mb-6">你可能想知道</h2>
@@ -625,7 +625,7 @@
           <div class="border-b border-gray-200 py-5">
             <button class="faq-toggle flex justify-between items-center w-full text-left focus:outline-none">
               <span class="font-semibold text-lg">課程有有效期嗎？</span>
-              <i class="fa fa-plus text-blue-500 transition-transform"></i>
+              <i class="fa fa-plus text-primary transition-transform"></i>
             </button>
             <div class="faq-content hidden mt-3 text-gray-600">
               <p>我們的所有課程都是終身有效的，一旦購買，您可以隨時學習，不受時間限制。同時，我們會定期更新課程內容，確保您學到的是最新的知識和技能。</p>
@@ -635,7 +635,7 @@
           <div class="border-b border-gray-200 py-5">
             <button class="faq-toggle flex justify-between items-center w-full text-left focus:outline-none">
               <span class="font-semibold text-lg">如果對課程不滿意可以退款嗎？</span>
-              <i class="fa fa-plus text-blue-500 transition-transform"></i>
+              <i class="fa fa-plus text-primary transition-transform"></i>
             </button>
             <div class="faq-content hidden mt-3 text-gray-600">
               <p>是的，我們提供30天無理由退款保證。如果您在購買課程後30天內發現課程不符合您的預期，可以申請全額退款，沒有任何條件限制。</p>
@@ -645,7 +645,7 @@
           <div class="border-b border-gray-200 py-5">
             <button class="faq-toggle flex justify-between items-center w-full text-left focus:outline-none">
               <span class="font-semibold text-lg">課程包含證書嗎？如何獲取？</span>
-              <i class="fa fa-plus text-blue-500 transition-transform"></i>
+              <i class="fa fa-plus text-primary transition-transform"></i>
             </button>
             <div class="faq-content hidden mt-3 text-gray-600">
               <p>所有課程都包含結業證書。完成課程的所有學習內容並通過最終考核後，您可以在學習平台上下载電子版證書。部分專業課程還提供可驗證的技能證書，有助於您的職業發展。</p>
@@ -655,7 +655,7 @@
           <div class="border-b border-gray-200 py-5">
             <button class="faq-toggle flex justify-between items-center w-full text-left focus:outline-none">
               <span class="font-semibold text-lg">學習過程中遇到問題可以獲得幫助嗎？</span>
-              <i class="fa fa-plus text-blue-500 transition-transform"></i>
+              <i class="fa fa-plus text-primary transition-transform"></i>
             </button>
             <div class="faq-content hidden mt-3 text-gray-600">
               <p>當然可以。我們提供多種支持渠道：您可以在課程討論區提問，講師和助教通常會在24小時內回復；加入學習社區，與其他學員交流；還可以通過客服郵箱獲取一對一的幫助。</p>
@@ -665,7 +665,7 @@
           <div class="border-b border-gray-200 py-5">
             <button class="faq-toggle flex justify-between items-center w-full text-left focus:outline-none">
               <span class="font-semibold text-lg">課程適合零基礎學員嗎？</span>
-              <i class="fa fa-plus text-blue-500 transition-transform"></i>
+              <i class="fa fa-plus text-primary transition-transform"></i>
             </button>
             <div class="faq-content hidden mt-3 text-gray-600">
               <p>我們的課程覆蓋了從入門到高級的各個階段。大部分課程都明確標註了適合的技能水平，包括專為零基礎學員設計的入門課程。這些課程會從基礎知識開始，循序漸進地引導您掌握相關技能。</p>
@@ -676,15 +676,15 @@
     </section>
     
     <!-- 報名區域 -->
-    <section id="enroll" class="py-20 bg-gradient-to-br from-blue-500 to-blue-600 text-white">
+    <section id="enroll" class="py-20 bg-gradient-to-br from-primary to-blue-700 text-white">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="max-w-5xl mx-auto bg-white rounded-2xl shadow-2xl overflow-hidden">
           <div class="flex flex-col lg:flex-row">
             <div class="lg:w-1/2 p-8 md:p-12 bg-gray-50">
-              <span class="inline-block px-4 py-2 bg-blue-500/10 text-blue-500 rounded-full text-sm font-medium mb-6">
+              <span class="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-6">
                 立即加入
               </span>
-              <h2 class="text-[clamp(1.5rem,3vw,2rem)] font-bold text-gray-900 mb-6">
+              <h2 class="text-[clamp(1.5rem,3vw,2rem)] font-bold text-dark mb-6">
                 開始你的學習之旅
               </h2>
               <p class="text-gray-600 mb-8">
@@ -694,22 +694,22 @@
               <form class="space-y-5" action="enroll.php" method="POST">
                 <div>
                   <label for="name" class="block text-sm font-medium text-gray-700 mb-1">姓名</label>
-                  <input type="text" id="name" name="name" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors" placeholder="請輸入您的姓名">
+                  <input type="text" id="name" name="name" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition-colors" placeholder="請輸入您的姓名">
                 </div>
                 
                 <div>
                   <label for="email" class="block text-sm font-medium text-gray-700 mb-1">郵箱</label>
-                  <input type="email" id="email" name="email" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors" placeholder="請輸入您的郵箱">
+                  <input type="email" id="email" name="email" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition-colors" placeholder="請輸入您的郵箱">
                 </div>
                 
                 <div>
                   <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">電話</label>
-                  <input type="tel" id="phone" name="phone" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors" placeholder="請輸入您的電話">
+                  <input type="tel" id="phone" name="phone" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition-colors" placeholder="請輸入您的電話">
                 </div>
                 
                 <div>
                   <label for="course" class="block text-sm font-medium text-gray-700 mb-1">感興趣的課程</label>
-                  <select id="course" name="course" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                  <select id="course" name="course" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition-colors">
                     <option value="">請選擇課程</option>
                     <option value="python">Python全棧開發從入門到精通</option>
                     <option value="marketing">數字行銷與品牌建設實戰</option>
@@ -718,17 +718,17 @@
                   </select>
                 </div>
                 
-                <button type="submit" class="w-full bg-blue-500 hover:bg-blue-500/90 text-white font-semibold py-3 px-6 rounded-lg transition-colors shadow-md hover:shadow-lg">
+                <button type="submit" class="w-full bg-primary hover:bg-primary/90 text-white font-semibold py-3 px-6 rounded-lg transition-colors shadow-md hover:shadow-lg">
                   提交報名
                 </button>
               </form>
               
               <p class="text-gray-500 text-sm mt-6 text-center">
-                提交即表示您同意我們的<a href="#" class="text-blue-500 hover:underline">服務條款</a>和<a href="#" class="text-blue-500 hover:underline">隱私政策</a>
+                提交即表示您同意我們的<a href="#" class="text-primary hover:underline">服務條款</a>和<a href="#" class="text-primary hover:underline">隱私政策</a>
               </p>
             </div>
             
-            <div class="lg:w-1/2 p-8 md:p-12 bg-blue-500 text-white flex flex-col justify-between">
+            <div class="lg:w-1/2 p-8 md:p-12 bg-primary text-white flex flex-col justify-between">
               <div>
                 <h3 class="text-2xl font-bold mb-6">為什麼選擇我們的課程？</h3>
                 
@@ -777,7 +777,7 @@
               
               <div class="mt-12 p-6 bg-white/10 rounded-xl backdrop-blur-sm">
                 <div class="flex items-center gap-4 mb-4">
-                  <div class="text-3xl text-amber-500">
+                  <div class="text-3xl text-accent">
                     <i class="fa fa-lightbulb-o"></i>
                   </div>
                   <div>
@@ -799,7 +799,7 @@
     <section id="demo" class="py-20 bg-gray-50">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center max-w-3xl mx-auto mb-16">
-          <span class="inline-block px-4 py-2 bg-blue-500/10 text-blue-500 rounded-full text-sm font-medium mb-4">
+          <span class="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
             課程演示
           </span>
           <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold mb-6">體驗我們的課程質量</h2>
@@ -811,7 +811,7 @@
         <div class="max-w-4xl mx-auto relative rounded-2xl overflow-hidden shadow-2xl">
           <img src="https://picsum.photos/id/1/1200/675" alt="課程演示視頻封面" class="w-full h-auto">
           <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
-            <button class="w-20 h-20 md:w-24 md:h-24 bg-blue-500 rounded-full flex items-center justify-center text-white hover:bg-blue-500/90 transition-colors shadow-lg hover:scale-105">
+            <button class="w-20 h-20 md:w-24 md:h-24 bg-primary rounded-full flex items-center justify-center text-white hover:bg-primary/90 transition-colors shadow-lg hover:scale-105">
               <i class="fa fa-play text-3xl md:text-4xl ml-1"></i>
             </button>
           </div>
@@ -851,28 +851,28 @@
   </main>
 
   <!-- 頁腳 -->
-  <footer class="bg-gray-900 text-white pt-16 pb-8">
+  <footer class="bg-dark text-white pt-16 pb-8">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
         <div>
           <div class="flex items-center space-x-2 mb-6">
-            <span class="text-blue-500 text-2xl"><i class="fa fa-graduation-cap"></i></span>
+            <span class="text-primary text-2xl"><i class="fa fa-graduation-cap"></i></span>
             <span class="font-bold text-xl">幸福商學院</span>
           </div>
           <p class="text-gray-400 mb-6">
             提供高質量的線上課程，幫助學員掌握實用技能，實現職業發展目標。
           </p>
           <div class="flex space-x-4">
-            <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-blue-500 transition-colors">
+            <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition-colors">
               <i class="fa fa-facebook"></i>
             </a>
-            <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-blue-500 transition-colors">
+            <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition-colors">
               <i class="fa fa-twitter"></i>
             </a>
-            <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-blue-500 transition-colors">
+            <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition-colors">
               <i class="fa fa-instagram"></i>
             </a>
-            <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-blue-500 transition-colors">
+            <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition-colors">
               <i class="fa fa-linkedin"></i>
             </a>
           </div>
@@ -881,23 +881,23 @@
         <div>
           <h3 class="font-bold text-lg mb-6">課程分類</h3>
           <ul class="space-y-3">
-            <li><a href="#" class="text-gray-400 hover:text-blue-500 transition-colors">AI流量變現</a></li>
-            <li><a href="#" class="text-gray-400 hover:text-blue-500 transition-colors">IG實戰</a></li>
-            <li><a href="#" class="text-gray-400 hover:text-blue-500 transition-colors">Python開發</a></li>
-            <li><a href="#" class="text-gray-400 hover:text-blue-500 transition-colors">UI/UX設計</a></li>
-            <li><a href="#" class="text-gray-400 hover:text-blue-500 transition-colors">數字行銷</a></li>
-            <li><a href="#" class="text-gray-400 hover:text-blue-500 transition-colors">查看全部</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">AI流量變現</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">IG實戰</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Python開發</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">UI/UX設計</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">數字行銷</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">查看全部</a></li>
           </ul>
         </div>
         
         <div>
           <h3 class="font-bold text-lg mb-6">關於我們</h3>
           <ul class="space-y-3">
-            <li><a href="#" class="text-gray-400 hover:text-blue-500 transition-colors">公司簡介</a></li>
-            <li><a href="#" class="text-gray-400 hover:text-blue-500 transition-colors">講師團隊</a></li>
-            <li><a href="#" class="text-gray-400 hover:text-blue-500 transition-colors">合作夥伴</a></li>
-            <li><a href="#" class="text-gray-400 hover:text-blue-500 transition-colors">招賢納士</a></li>
-            <li><a href="#" class="text-gray-400 hover:text-blue-500 transition-colors">聯繫我們</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">公司簡介</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">講師團隊</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">合作夥伴</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">招賢納士</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">聯繫我們</a></li>
           </ul>
         </div>
         
@@ -905,15 +905,15 @@
           <h3 class="font-bold text-lg mb-6">聯繫我們</h3>
           <ul class="space-y-3">
             <li class="flex items-start gap-3">
-              <i class="fa fa-map-marker text-blue-500 mt-1"></i>
+              <i class="fa fa-map-marker text-primary mt-1"></i>
               <span class="text-gray-400">台北市忠孝東路四段169號9樓</span>
             </li>
             <li class="flex items-center gap-3">
-              <i class="fa fa-phone text-blue-500"></i>
+              <i class="fa fa-phone text-primary"></i>
               <span class="text-gray-400">886-954-014-591</span>
             </li>
             <li class="flex items-center gap-3">
-              <i class="fa fa-envelope text-blue-500"></i>
+              <i class="fa fa-envelope text-primary"></i>
               <span class="text-gray-400">coachsonia1314@gmail.com</span>
             </li>
           </ul>
@@ -921,8 +921,8 @@
           <div class="mt-6">
             <h4 class="font-medium mb-3">訂閱我們的 newsletter</h4>
             <div class="flex">
-              <input type="email" placeholder="您的郵箱地址" class="px-4 py-2 rounded-l-lg bg-gray-800 text-white border-0 focus:outline-none focus:ring-1 focus:ring-blue-500 flex-1">
-              <button class="bg-blue-500 hover:bg-blue-500/90 text-white px-4 py-2 rounded-r-lg transition-colors">
+              <input type="email" placeholder="您的郵箱地址" class="px-4 py-2 rounded-l-lg bg-gray-800 text-white border-0 focus:outline-none focus:ring-1 focus:ring-primary flex-1">
+              <button class="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-r-lg transition-colors">
                 <i class="fa fa-paper-plane"></i>
               </button>
             </div>
@@ -934,9 +934,9 @@
         <div class="flex flex-col md:flex-row justify-between items-center">
           <p class="text-gray-500 text-sm mb-4 md:mb-0">© 2025 @幸福創業家. 保留所有權利.</p>
           <div class="flex space-x-6">
-            <a href="#" class="text-gray-500 hover:text-blue-500 text-sm transition-colors">服務條款</a>
-            <a href="#" class="text-gray-500 hover:text-blue-500 text-sm transition-colors">隱私政策</a>
-            <a href="#" class="text-gray-500 hover:text-blue-500 text-sm transition-colors">Cookie政策</a>
+            <a href="#" class="text-gray-500 hover:text-primary text-sm transition-colors">服務條款</a>
+            <a href="#" class="text-gray-500 hover:text-primary text-sm transition-colors">隱私政策</a>
+            <a href="#" class="text-gray-500 hover:text-primary text-sm transition-colors">Cookie政策</a>
           </div>
         </div>
       </div>
@@ -944,7 +944,7 @@
   </footer>
 
   <!-- 返回頂部按鈕 -->
-  <button id="back-to-top" class="fixed bottom-8 right-8 bg-blue-500 hover:bg-blue-500/90 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-all opacity-0 invisible">
+  <button id="back-to-top" class="fixed bottom-8 right-8 bg-primary hover:bg-primary/90 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-all opacity-0 invisible">
     <i class="fa fa-arrow-up"></i>
   </button>
 

@@ -32,3 +32,9 @@ files/
 # 排除数据库备份文件
 *.sql
 *.dump
+
+# 排除凭据文件
+.git-credentials
+*credentials*
+configure_github.sh
+create_github_repo.sh

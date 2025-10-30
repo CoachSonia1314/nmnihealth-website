@@ -1,0 +1,3522 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>智慧學習 - 專業線上課程平台</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@4.7.0/css/font-awesome.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind 配置 -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#3B82F6', // 藍色 - 代表知識和信任
+            secondary: '#10B981', // 綠色 - 代表成長和進步
+            accent: '#F59E0B', // 橙色 - 代表活力和創造力
+            dark: '#1E293B',
+            light: '#F8FAFC'
+          },
+          fontFamily: {
+            inter: ['Inter', 'sans-serif'],
+          },
+        },
+      }
+    }
+  </script>
+  
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .text-shadow {
+        text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+      .transition-custom {
+        transition: all 0.3s ease;
+      }
+      .hover-lift {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .hover-lift:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      }
+    }
+  </style>
+</head>
+
+<body class="font-inter bg-light text-dark antialiased">
+  <!-- 導航欄 -->
+  <header id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300 bg-white/90 backdrop-blur-sm shadow-sm">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center py-4">
+        <div class="flex items-center">
+          <a href="#" class="flex items-center space-x-2">
+            <span class="text-primary text-2xl"><i class="fa fa-graduation-cap"></i></span>
+            <span class="font-bold text-xl text-dark">幸福商學院</span>
+          </a>
+        </div>
+        
+        <!-- 桌面導航 -->
+        <nav class="hidden md:flex space-x-8">
+          <a href="#courses" class="text-dark hover:text-primary font-medium transition-colors">課程介紹</a>
+          <a href="#affiliate" class="text-dark hover:text-primary font-medium transition-colors">聯盟行銷</a>
+          <a href="#testimonials" class="text-dark hover:text-primary font-medium transition-colors">學員評價</a>
+          <a href="#faq" class="text-dark hover:text-primary font-medium transition-colors">常見問題</a>
+        </nav>
+        
+        <div class="hidden md:flex items-center space-x-4">
+          <!-- 搜索框 -->
+          <div class="relative">
+            <input type="text" id="search-input" placeholder="搜尋課程..." class="w-64 px-4 py-2 pr-10 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+            <button class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-primary transition-colors">
+              <i class="fa fa-search"></i>
+            </button>
+          </div>
+          
+          <!-- 购物车 -->
+          <button id="cart-btn" class="relative text-dark hover:text-primary transition-colors">
+            <i class="fa fa-shopping-cart text-xl"></i>
+            <span id="cart-count" class="absolute -top-2 -right-2 bg-accent text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">0</span>
+          </button>
+          
+          <!-- 会员菜单 -->
+          <div class="relative">
+            <button id="user-menu-btn" class="flex items-center space-x-2 text-dark hover:text-primary transition-colors">
+              <i class="fa fa-user-circle text-xl"></i>
+              <span id="user-name">登入</span>
+            </button>
+            
+            <!-- 下拉菜单 -->
+            <div id="user-dropdown" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 z-50">
+              <div id="guest-menu" class="py-2">
+                <a href="#" onclick="showLoginModal()" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition-colors">
+                  <i class="fa fa-sign-in mr-2"></i>登入
+                </a>
+                <a href="#" onclick="showRegisterModal()" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition-colors">
+                  <i class="fa fa-user-plus mr-2"></i>註冊
+                </a>
+              </div>
+              <div id="member-menu" class="hidden py-2">
+            <a href="#" onclick="showMemberModal()" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition-colors">
+              <i class="fa fa-user mr-2"></i>個人中心
+            </a>
+            <a href="#" onclick="showMemberModal()" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition-colors">
+              <i class="fa fa-book mr-2"></i>我的課程
+            </a>
+            <a href="#" onclick="showMemberModal()" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition-colors">
+              <i class="fa fa-shopping-cart mr-2"></i>購買記錄
+            </a>
+            <a href="#" onclick="showMemberModal()" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition-colors">
+              <i class="fa fa-share-alt mr-2"></i>聯盟行銷
+            </a>
+            <hr class="my-2">
+            <a href="#" onclick="logout()" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition-colors">
+              <i class="fa fa-sign-out mr-2"></i>登出
+            </a>
+          </div>
+            </div>
+          </div>
+          
+          <a href="#enroll" class="bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-full font-medium transition-colors shadow-md hover:shadow-lg">
+            立即報名
+          </a>
+        </div>
+        
+        <!-- 行動端菜單按鈕 -->
+        <button id="menu-toggle" class="md:hidden text-dark focus:outline-none">
+          <i class="fa fa-bars text-xl"></i>
+        </button>
+      </div>
+    </div>
+    
+    <!-- 行動端導航菜單 -->
+    <div id="mobile-menu" class="md:hidden hidden bg-white border-t">
+      <div class="container mx-auto px-4 py-3 space-y-3">
+        <!-- 移动端搜索框 -->
+        <div class="relative">
+          <input type="text" id="mobile-search-input" placeholder="搜尋課程..." class="w-full px-4 py-2 pr-10 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm">
+          <button class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-primary transition-colors">
+            <i class="fa fa-search"></i>
+          </button>
+        </div>
+        <a href="#courses" class="block text-dark hover:text-primary font-medium py-2 transition-colors">課程介紹</a>
+        <a href="#affiliate" class="block text-dark hover:text-primary font-medium py-2 transition-colors">聯盟行銷</a>
+        <a href="#testimonials" class="block text-dark hover:text-primary font-medium py-2 transition-colors">學員評價</a>
+        <a href="#faq" class="block text-dark hover:text-primary font-medium py-2 transition-colors">常見問題</a>
+        <div class="flex flex-col space-y-3 pt-2 border-t">
+          <a href="#" class="text-dark hover:text-primary transition-colors text-center py-2">登入</a>
+          <a href="#enroll" class="bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-full font-medium transition-colors text-center shadow-md">
+            立即報名
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- 英雄區域 -->
+    <section class="pt-32 pb-20 md:pt-40 md:pb-32 bg-gradient-to-br from-blue-50 to-indigo-50">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col lg:flex-row items-center gap-12">
+          <div class="lg:w-1/2 space-y-6">
+            <span class="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium">
+              超過10,000名學員的選擇
+            </span>
+            <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold leading-tight text-dark">
+              提升你的<span class="text-primary">AI技能</span>，開啟新的職業可能
+            </h1>
+            <p class="text-gray-600 text-lg md:text-xl max-w-lg">由行業專家精心打造的線上課程，靈活學習，實戰導向，幫助你快速掌握核心技能，實現職業突破。</p>
+            <div class="flex flex-col sm:flex-row gap-4 pt-4">
+              <a href="#courses" class="bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-full font-semibold text-center transition-all shadow-lg hover:shadow-xl hover:-translate-y-1">
+                瀏覽課程
+              </a>
+              <a href="#demo" class="flex items-center justify-center gap-2 bg-white hover:bg-gray-50 text-dark px-8 py-4 rounded-full font-semibold border border-gray-200 transition-all shadow-md hover:shadow-lg">
+                <i class="fa fa-play-circle text-primary"></i>
+                觀看演示
+              </a>
+            </div>
+            <div class="flex items-center gap-4 pt-6">
+              <div class="flex -space-x-2">
+                <img src="https://picsum.photos/id/1001/40/40" alt="學員頭像" class="w-10 h-10 rounded-full border-2 border-white">
+                <img src="https://picsum.photos/id/1002/40/40" alt="學員頭像" class="w-10 h-10 rounded-full border-2 border-white">
+                <img src="https://picsum.photos/id/1003/40/40" alt="學員頭像" class="w-10 h-10 rounded-full border-2 border-white">
+                <img src="https://picsum.photos/id/1004/40/40" alt="學員頭像" class="w-10 h-10 rounded-full border-2 border-white">
+                <div class="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs font-bold border-2 border-white">
+                  99+
+                </div>
+              </div>
+              <div>
+                <div class="flex items-center text-yellow-500">
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star-half-o"></i>
+                  <span class="ml-2 text-gray-700 font-medium">4.8/5</span>
+                </div>
+                <p class="text-gray-500 text-sm">來自2,500+條評價</p>
+              </div>
+            </div>
+          </div>
+          <div class="lg:w-1/2 relative">
+            <div class="relative z-10 rounded-2xl overflow-hidden shadow-2xl hover-lift">
+              <img src="https://picsum.photos/id/20/800/600" alt="線上學習場景" class="w-full h-auto">
+              <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
+                <div class="flex items-center gap-3">
+                  <div class="bg-white/20 backdrop-blur-sm p-2 rounded-full">
+                    <i class="fa fa-play text-white"></i>
+                  </div>
+                  <div>
+                    <p class="text-white font-medium">觀看課程介紹</p>
+                    <p class="text-white/80 text-sm">12:30 分鐘</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- 裝飾元素 -->
+            <div class="absolute -bottom-6 -left-6 w-32 h-32 bg-accent/20 rounded-full filter blur-2xl"></div>
+            <div class="absolute -top-6 -right-6 w-32 h-32 bg-primary/20 rounded-full filter blur-2xl"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 熱門課程推薦區 -->
+    <section class="py-16 bg-gradient-to-r from-accent/10 to-secondary/10">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-12">
+          <span class="inline-block px-4 py-2 bg-accent/10 text-accent rounded-full text-sm font-medium mb-4">
+            🔥 熱門推薦
+          </span>
+          <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold mb-6">本週最受歡迎課程</h2>
+          <p class="text-gray-600 text-lg">
+            精選最受學員喜愛的課程，助您快速提升技能，實現職業突破
+          </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- 推薦課程1 -->
+          <div class="bg-white rounded-xl overflow-hidden shadow-md hover-lift relative">
+            <div class="absolute top-4 left-4 z-10">
+              <span class="bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1">
+                <i class="fa fa-fire"></i> 熱銷冠軍
+              </span>
+            </div>
+            <div class="relative">
+              <img src="https://picsum.photos/id/4/400/300" alt="AI流量變現實戰營" class="w-full h-40 object-cover">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+              <div class="absolute bottom-4 left-4 text-white">
+                <h4 class="font-bold text-sm">AI流量變現實戰營</h4>
+                <div class="flex items-center text-xs mt-1">
+                  <i class="fa fa-star text-yellow-400"></i>
+                  <span class="ml-1">4.9</span>
+                  <span class="ml-1">(2,156)</span>
+                </div>
+              </div>
+            </div>
+            <div class="p-4">
+              <div class="flex justify-between items-center mb-3">
+                <div>
+                  <span class="text-primary font-bold">¥399</span>
+                  <span class="text-gray-400 text-sm line-through ml-2">¥799</span>
+                </div>
+                <span class="bg-red-100 text-red-600 text-xs px-2 py-1 rounded-full">-50%</span>
+              </div>
+              <button onclick="addToCart(4)" class="w-full bg-primary hover:bg-primary/90 text-white py-2 rounded-lg font-medium text-sm transition-colors">
+                加入購物車
+              </button>
+            </div>
+          </div>
+          
+          <!-- 推薦課程2 -->
+          <div class="bg-white rounded-xl overflow-hidden shadow-md hover-lift relative">
+            <div class="absolute top-4 left-4 z-10">
+              <span class="bg-secondary text-white text-xs font-bold px-3 py-1 rounded-full">
+                新課上線
+              </span>
+            </div>
+            <div class="relative">
+              <img src="https://picsum.photos/id/5/400/300" alt="聯盟行銷大師班" class="w-full h-40 object-cover">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+              <div class="absolute bottom-4 left-4 text-white">
+                <h4 class="font-bold text-sm">聯盟行銷大師班</h4>
+                <div class="flex items-center text-xs mt-1">
+                  <i class="fa fa-star text-yellow-400"></i>
+                  <span class="ml-1">4.8</span>
+                  <span class="ml-1">(1,892)</span>
+                </div>
+              </div>
+            </div>
+            <div class="p-4">
+              <div class="flex justify-between items-center mb-3">
+                <div>
+                  <span class="text-primary font-bold">¥199</span>
+                  <span class="text-gray-400 text-sm line-through ml-2">¥399</span>
+                </div>
+                <span class="bg-green-100 text-green-600 text-xs px-2 py-1 rounded-full">-50%</span>
+              </div>
+              <button onclick="addToCart(5)" class="w-full bg-primary hover:bg-primary/90 text-white py-2 rounded-lg font-medium text-sm transition-colors">
+                加入購物車
+              </button>
+            </div>
+          </div>
+          
+          <!-- 推薦課程3 -->
+          <div class="bg-white rounded-xl overflow-hidden shadow-md hover-lift relative">
+            <div class="absolute top-4 left-4 z-10">
+              <span class="bg-purple-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+                講師推薦
+              </span>
+            </div>
+            <div class="relative">
+              <img src="https://picsum.photos/id/6/400/300" alt="Python全棧開發從入門到精通" class="w-full h-40 object-cover">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+              <div class="absolute bottom-4 left-4 text-white">
+                <h4 class="font-bold text-sm">Python全棧開發</h4>
+                <div class="flex items-center text-xs mt-1">
+                  <i class="fa fa-star text-yellow-400"></i>
+                  <span class="ml-1">4.9</span>
+                  <span class="ml-1">(3,421)</span>
+                </div>
+              </div>
+            </div>
+            <div class="p-4">
+              <div class="flex justify-between items-center mb-3">
+                <div>
+                  <span class="text-primary font-bold">¥299</span>
+                  <span class="text-gray-400 text-sm line-through ml-2">¥599</span>
+                </div>
+                <span class="bg-orange-100 text-orange-600 text-xs px-2 py-1 rounded-full">-50%</span>
+              </div>
+              <button onclick="addToCart(1)" class="w-full bg-primary hover:bg-primary/90 text-white py-2 rounded-lg font-medium text-sm transition-colors">
+                加入購物車
+              </button>
+            </div>
+          </div>
+          
+          <!-- 推薦課程4 -->
+          <div class="bg-white rounded-xl overflow-hidden shadow-md hover-lift relative">
+            <div class="absolute top-4 left-4 z-10">
+              <span class="bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+                限時優惠
+              </span>
+            </div>
+            <div class="relative">
+              <img src="https://picsum.photos/id/7/400/300" alt="UI/UX設計精品課程" class="w-full h-40 object-cover">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+              <div class="absolute bottom-4 left-4 text-white">
+                <h4 class="font-bold text-sm">UI/UX設計精品課程</h4>
+                <div class="flex items-center text-xs mt-1">
+                  <i class="fa fa-star text-yellow-400"></i>
+                  <span class="ml-1">4.8</span>
+                  <span class="ml-1">(2,103)</span>
+                </div>
+              </div>
+            </div>
+            <div class="p-4">
+              <div class="flex justify-between items-center mb-3">
+                <div>
+                  <span class="text-primary font-bold">¥349</span>
+                  <span class="text-gray-400 text-sm line-through ml-2">¥699</span>
+                </div>
+                <span class="bg-blue-100 text-blue-600 text-xs px-2 py-1 rounded-full">-50%</span>
+              </div>
+              <button onclick="addToCart(3)" class="w-full bg-primary hover:bg-primary/90 text-white py-2 rounded-lg font-medium text-sm transition-colors">
+                加入購物車
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="text-center mt-12">
+          <a href="#courses" class="inline-flex items-center gap-2 bg-white hover:bg-gray-50 text-primary border border-primary px-8 py-3 rounded-full font-semibold transition-colors shadow-sm">
+            查看全部課程
+            <i class="fa fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 合作夥伴 -->
+    <section class="py-12 bg-white">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <p class="text-center text-gray-500 mb-8">受到行業領先企業的信任</p>
+        <div class="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-70">
+          <div class="h-8 md:h-10 flex items-center">
+            <span class="font-bold text-gray-400 text-xl">公司A</span>
+          </div>
+          <div class="h-8 md:h-10 flex items-center">
+            <span class="font-bold text-gray-400 text-xl">公司B</span>
+          </div>
+          <div class="h-8 md:h-10 flex items-center">
+            <span class="font-bold text-gray-400 text-xl">公司C</span>
+          </div>
+          <div class="h-8 md:h-10 flex items-center">
+            <span class="font-bold text-gray-400 text-xl">公司D</span>
+          </div>
+          <div class="h-8 md:h-10 flex items-center">
+            <span class="font-bold text-gray-400 text-xl">公司E</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 課程分類 -->
+    <section id="courses" class="py-20 bg-gray-50">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <span class="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
+            精選課程
+          </span>
+          <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold mb-6">探索我們的熱門課程</h2>
+          <p class="text-gray-600 text-lg">
+            從入門到精通，我們提供覆蓋多個領域的高質量課程，滿足不同階段學習者的需求。
+          </p>
+        </div>
+        
+        <!-- 課程篩選和排序 -->
+        <div class="mb-12">
+          <!-- 筛选标签 -->
+          <div class="flex flex-wrap justify-center gap-4 mb-8">
+            <button class="category-filter px-6 py-2 bg-primary text-white rounded-full text-sm font-medium" data-category="all">
+              全部課程
+            </button>
+            <button class="category-filter px-6 py-2 bg-white hover:bg-gray-100 text-gray-700 rounded-full text-sm font-medium transition-colors" data-category="程式開發">
+              程式開發
+            </button>
+            <button class="category-filter px-6 py-2 bg-white hover:bg-gray-100 text-gray-700 rounded-full text-sm font-medium transition-colors" data-category="商業管理">
+              商業管理
+            </button>
+            <button class="category-filter px-6 py-2 bg-white hover:bg-gray-100 text-gray-700 rounded-full text-sm font-medium transition-colors" data-category="設計創意">
+              設計創意
+            </button>
+            <button class="category-filter px-6 py-2 bg-white hover:bg-gray-100 text-gray-700 rounded-full text-sm font-medium transition-colors" data-category="職業技能">
+              職業技能
+            </button>
+          </div>
+          
+          <!-- 排序和视图选项 -->
+          <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+            <p class="text-gray-600 text-sm">
+              顯示 <span id="course-count">3</span> 門課程
+            </p>
+            <div class="flex items-center gap-4">
+              <!-- 排序选择 -->
+              <select id="sort-select" class="px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                <option value="default">推薦排序</option>
+                <option value="price-low">價格從低到高</option>
+                <option value="price-high">價格從高到低</option>
+                <option value="rating">評分最高</option>
+                <option value="students">學員最多</option>
+              </select>
+              
+              <!-- 视图切换 -->
+              <div class="flex border border-gray-300 rounded-lg">
+                <button id="grid-view" class="px-3 py-2 bg-primary text-white rounded-l-lg text-sm">
+                  <i class="fa fa-th"></i>
+                </button>
+                <button id="list-view" class="px-3 py-2 bg-white text-gray-600 rounded-r-lg text-sm hover:bg-gray-50">
+                  <i class="fa fa-list"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 課程卡片容器 -->
+        <div id="courses-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- 課程卡片将通过JavaScript动态生成 -->
+        </div>
+        
+        <div class="text-center mt-12">
+          <a href="#" class="inline-flex items-center gap-2 bg-white hover:bg-gray-50 text-primary border border-primary px-8 py-3 rounded-full font-semibold transition-colors shadow-sm">
+            查看全部課程
+            <i class="fa fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 聯盟行銷分潤區 -->
+    <section id="affiliate" class="py-20 bg-gradient-to-br from-secondary/10 to-primary/10">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <span class="inline-block px-4 py-2 bg-secondary/10 text-secondary rounded-full text-sm font-medium mb-4">
+            聯盟行銷分潤區
+          </span>
+          <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold mb-6">成為合作夥伴，實現被動收入</h2>
+          <p class="text-gray-600 text-lg">
+            加入我們的聯盟行銷計劃，推廣優質課程，獲得豐厚佣金，與我們共同成長。
+          </p>
+        </div>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
+          <div>
+            <h3 class="text-2xl font-bold mb-6">為什麼選擇我們的聯盟計劃？</h3>
+            <div class="space-y-6">
+              <div class="flex gap-4">
+                <div class="w-12 h-12 bg-secondary/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <i class="fa fa-percentage text-secondary text-xl"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-lg mb-2">高額佣金比例</h4>
+                  <p class="text-gray-600">享受高達30%的銷售佣金，推廣越多，收入越高</p>
+                </div>
+              </div>
+              
+              <div class="flex gap-4">
+                <div class="w-12 h-12 bg-primary/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <i class="fa fa-chart-line text-primary text-xl"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-lg mb-2">實時數據追蹤</h4>
+                  <p class="text-gray-600">完整的數據分析儀表板，隨時查看推廣效果和收益情況</p>
+                </div>
+              </div>
+              
+              <div class="flex gap-4">
+                <div class="w-12 h-12 bg-accent/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <i class="fa fa-clock-o text-accent text-xl"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-lg mb-2">長期追蹤收益</h4>
+                  <p class="text-gray-600">推薦用戶的終身購買都能獲得佣金，建立穩定的被動收入</p>
+                </div>
+              </div>
+              
+              <div class="flex gap-4">
+                <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <i class="fa fa-gift text-purple-600 text-xl"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-lg mb-2">專屬推廣素材</h4>
+                  <p class="text-gray-600">提供豐富的市場推廣素材，讓您的推廣更加高效</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="mt-8 flex flex-col sm:flex-row gap-4">
+              <button onclick="showAffiliateSignup()" class="bg-secondary hover:bg-secondary/90 text-white px-8 py-3 rounded-lg font-semibold transition-colors shadow-md hover:shadow-lg">
+                立即加入聯盟
+              </button>
+              <button onclick="showAffiliateDetails()" class="bg-white hover:bg-gray-50 text-secondary border border-secondary px-8 py-3 rounded-lg font-semibold transition-colors">
+                了解詳情
+              </button>
+            </div>
+          </div>
+          
+          <div class="bg-white rounded-2xl p-8 shadow-xl">
+            <div class="text-center mb-6">
+              <h4 class="text-xl font-bold mb-2">收益計算器</h4>
+              <p class="text-gray-600 text-sm">估算您的聯盟行銷收益</p>
+            </div>
+            
+            <div class="space-y-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">每月推薦學員數</label>
+                <input type="range" id="monthly-referrals" min="1" max="100" value="10" class="w-full" oninput="updateAffiliateEarnings()">
+                <div class="flex justify-between text-sm text-gray-500">
+                  <span>1</span>
+                  <span id="referrals-value" class="font-medium text-primary">10</span>
+                  <span>100</span>
+                </div>
+              </div>
+              
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">平均課程價格</label>
+                <select id="avg-course-price" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" oninput="updateAffiliateEarnings()">
+                  <option value="299">¥299 (基礎課程)</option>
+                  <option value="599">¥599 (進階課程)</option>
+                  <option value="999">¥999 (專業課程)</option>
+                </select>
+              </div>
+              
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">佣金比例</label>
+                <select id="commission-rate" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" oninput="updateAffiliateEarnings()">
+                  <option value="0.2">20%</option>
+                  <option value="0.25">25%</option>
+                  <option value="0.3" selected>30%</option>
+                </select>
+              </div>
+              
+              <div class="bg-gray-50 rounded-lg p-4">
+                <div class="flex justify-between items-center mb-2">
+                  <span class="text-gray-600">月銷售額</span>
+                  <span id="monthly-sales" class="font-bold">¥2,990</span>
+                </div>
+                <div class="flex justify-between items-center mb-2">
+                  <span class="text-gray-600">月佣金收入</span>
+                  <span id="monthly-commission" class="font-bold text-secondary text-xl">¥897</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-gray-600">年收入預估</span>
+                  <span id="yearly-income" class="font-bold text-primary text-2xl">¥10,764</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 成功案例 -->
+        <div class="mb-16">
+          <h3 class="text-2xl font-bold text-center mb-8">成功案例</h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-white p-6 rounded-xl shadow-md">
+              <div class="flex items-center gap-4 mb-4">
+                <img src="https://picsum.photos/id/201/60/60" alt="合作夥伴" class="w-16 h-16 rounded-full">
+                <div>
+                  <h4 class="font-bold">陳先生</h4>
+                  <p class="text-gray-500 text-sm">全職媽媽轉型</p>
+                </div>
+              </div>
+              <p class="text-gray-600 mb-4">"通過聯盟行銷，我成功實現了月入5位數的被動收入，讓我能夠更好地平衡家庭和工作。"</p>
+              <div class="text-center">
+                <span class="text-2xl font-bold text-secondary">¥15,000+</span>
+                <p class="text-gray-500 text-sm">月收入</p>
+              </div>
+            </div>
+            
+            <div class="bg-white p-6 rounded-xl shadow-md">
+              <div class="flex items-center gap-4 mb-4">
+                <img src="https://picsum.photos/id/202/60/60" alt="合作夥伴" class="w-16 h-16 rounded-full">
+                <div>
+                  <h4 class="font-bold">林小姐</h4>
+                  <p class="text-gray-500 text-sm">大學生兼職</p>
+                </div>
+              </div>
+              <p class="text-gray-600 mb-4">"作為大學生，聯盟行銷讓我能夠在學習的同時賺取零花錢，還學習了寶貴的行銷技能。"</p>
+              <div class="text-center">
+                <span class="text-2xl font-bold text-secondary">¥8,000+</span>
+                <p class="text-gray-500 text-sm">月收入</p>
+              </div>
+            </div>
+            
+            <div class="bg-white p-6 rounded-xl shadow-md">
+              <div class="flex items-center gap-4 mb-4">
+                <img src="https://picsum.photos/id/203/60/60" alt="合作夥伴" class="w-16 h-16 rounded-full">
+                <div>
+                  <h4 class="font-bold">王先生</h4>
+                  <p class="text-gray-500 text-sm">IT工程師副業</p>
+                </div>
+              </div>
+              <p class="text-gray-600 mb-4">"聯盟行銷成為我的副業收入來源，現在每月都能穩定獲得額外收入。"</p>
+              <div class="text-center">
+                <span class="text-2xl font-bold text-secondary">¥12,000+</span>
+                <p class="text-gray-500 text-sm">月收入</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 聯盟統計數據 -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          <div class="bg-white p-6 rounded-xl shadow-md">
+            <div class="text-3xl font-bold text-secondary mb-2">5,000+</div>
+            <p class="text-gray-600">活躍合作夥伴</p>
+          </div>
+          <div class="bg-white p-6 rounded-xl shadow-md">
+            <div class="text-3xl font-bold text-primary mb-2">¥500萬+</div>
+            <p class="text-gray-600">已支付佣金</p>
+          </div>
+          <div class="bg-white p-6 rounded-xl shadow-md">
+            <div class="text-3xl font-bold text-accent mb-2">30%</div>
+            <p class="text-gray-600">最高佣金比例</p>
+          </div>
+          <div class="bg-white p-6 rounded-xl shadow-md">
+            <div class="text-3xl font-bold text-purple-600 mb-2">24小時</div>
+            <p class="text-gray-600">佣金結算週期</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 學習優勢 -->
+    <section id="features" class="py-20 bg-white">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <span class="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
+            為什麼選擇我們
+          </span>
+          <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold mb-6">專業學習體驗，高效提升技能</h2>
+          <p class="text-gray-600 text-lg">
+            我們提供全方位的學習支持和優質的課程內容，幫助你實現學習目標，獲得職業成長。
+          </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- 優勢1 -->
+          <div class="bg-gray-50 p-8 rounded-xl hover-lift">
+            <div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center text-primary text-2xl mb-6">
+              <i class="fa fa-laptop"></i>
+            </div>
+            <h3 class="font-bold text-xl mb-3">靈活學習，隨時隨地</h3>
+            <p class="text-gray-600">
+              不受時間和地點限制，通過電腦、平板或手機隨時學習，按照自己的節奏安排學習計劃。
+            </p>
+          </div>
+          
+          <!-- 優勢2 -->
+          <div class="bg-gray-50 p-8 rounded-xl hover-lift">
+            <div class="w-14 h-14 bg-secondary/10 rounded-xl flex items-center justify-center text-secondary text-2xl mb-6">
+              <i class="fa fa-users"></i>
+            </div>
+            <h3 class="font-bold text-xl mb-3">專業講師，實戰經驗</h3>
+            <p class="text-gray-600">
+              由行業資深專家授課，分享實戰經驗和實用技巧，讓你學到真正能應用的知識和技能。
+            </p>
+          </div>
+          
+          <!-- 優勢3 -->
+          <div class="bg-gray-50 p-8 rounded-xl hover-lift">
+            <div class="w-14 h-14 bg-accent/10 rounded-xl flex items-center justify-center text-accent text-2xl mb-6">
+              <i class="fa fa-comments"></i>
+            </div>
+            <h3 class="font-bold text-xl mb-3">社區互動，答疑解惑</h3>
+            <p class="text-gray-600">
+              加入學習社區，與同學和講師交流互動，及時解決學習中遇到的問題，共同進步。
+            </p>
+          </div>
+          
+          <!-- 優勢4 -->
+          <div class="bg-gray-50 p-8 rounded-xl hover-lift">
+            <div class="w-14 h-14 bg-purple-100 rounded-xl flex items-center justify-center text-purple-600 text-2xl mb-6">
+              <i class="fa fa-certificate"></i>
+            </div>
+            <h3 class="font-bold text-xl mb-3">完成課程，獲得證書</h3>
+            <p class="text-gray-600">
+              完成課程學習並通過考核後，將獲得權威證書，提升你的職業競爭力和簡歷含金量。
+            </p>
+          </div>
+          
+          <!-- 優勢5 -->
+          <div class="bg-gray-50 p-8 rounded-xl hover-lift">
+            <div class="w-14 h-14 bg-red-100 rounded-xl flex items-center justify-center text-red-600 text-2xl mb-6">
+              <i class="fa fa-code"></i>
+            </div>
+            <h3 class="font-bold text-xl mb-3">實戰項目，學以致用</h3>
+            <p class="text-gray-600">
+              每個課程都包含實戰項目，讓你將所學知識應用到實際中，積累寶貴的項目經驗。
+            </p>
+          </div>
+          
+          <!-- 優勢6 -->
+          <div class="bg-gray-50 p-8 rounded-xl hover-lift">
+            <div class="w-14 h-14 bg-teal-100 rounded-xl flex items-center justify-center text-teal-600 text-2xl mb-6">
+              <i class="fa fa-life-ring"></i>
+            </div>
+            <h3 class="font-bold text-xl mb-3">終身學習，持續更新</h3>
+            <p class="text-gray-600">
+              一次報名，終身學習，課程內容將持續更新，讓你始終掌握最新的知識和技能。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 學習數據 -->
+    <section class="py-20 bg-gradient-to-br from-primary to-blue-700 text-white">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold mb-6">我們的學習成果</h2>
+          <p class="text-blue-100 text-lg">
+            數千名學員通過我們的課程實現了職業突破，取得了顯著的學習成果。
+          </p>
+        </div>
+        
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          <div class="p-6">
+            <div class="text-4xl md:text-5xl font-bold mb-2 counter" data-target="10000">0</div>
+            <p class="text-blue-100">活躍學員</p>
+          </div>
+          <div class="p-6">
+            <div class="text-4xl md:text-5xl font-bold mb-2 counter" data-target="200">0</div>
+            <p class="text-blue-100">精品課程</p>
+          </div>
+          <div class="p-6">
+            <div class="text-4xl md:text-5xl font-bold mb-2 counter" data-target="96">0</div>
+            <p class="text-blue-100">就業率提升</p>
+          </div>
+          <div class="p-6">
+            <div class="text-4xl md:text-5xl font-bold mb-2 counter" data-target="50">0</div>
+            <p class="text-blue-100">合作企業</p>
+          </div>
+        </div>
+        
+        <div class="mt-16 bg-white/10 backdrop-blur-sm rounded-xl p-8">
+          <div class="flex flex-col md:flex-row gap-8 items-center">
+            <div class="md:w-1/2">
+              <h3 class="text-2xl font-bold mb-4">學員薪資提升情況</h3>
+              <p class="text-blue-100 mb-6">
+                完成課程學習後，學員平均薪資提升顯著，遠超行業平均水平。
+              </p>
+              <div class="flex items-center gap-4">
+                <div class="flex-1">
+                  <div class="flex justify-between mb-1">
+                    <span class="text-sm">初級職位</span>
+                    <span class="text-sm font-medium">+35%</span>
+                  </div>
+                  <div class="w-full bg-white/20 rounded-full h-2">
+                    <div class="bg-accent h-2 rounded-full" style="width: 35%"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="flex items-center gap-4 mt-4">
+                <div class="flex-1">
+                  <div class="flex justify-between mb-1">
+                    <span class="text-sm">中級職位</span>
+                    <span class="text-sm font-medium">+52%</span>
+                  </div>
+                  <div class="w-full bg-white/20 rounded-full h-2">
+                    <div class="bg-accent h-2 rounded-full" style="width: 52%"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="flex items-center gap-4 mt-4">
+                <div class="flex-1">
+                  <div class="flex justify-between mb-1">
+                    <span class="text-sm">高級職位</span>
+                    <span class="text-sm font-medium">+78%</span>
+                  </div>
+                  <div class="w-full bg-white/20 rounded-full h-2">
+                    <div class="bg-accent h-2 rounded-full" style="width: 78%"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="md:w-1/2 h-64">
+              <canvas id="salaryChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 學員評價 -->
+    <section id="testimonials" class="py-20 bg-gray-50">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <span class="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
+            學員心聲
+          </span>
+          <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold mb-6">聽聽他們怎麼說</h2>
+          <p class="text-gray-600 text-lg">
+            來自真實學員的學習體驗和收穫分享，了解他們如何通過我們的課程實現職業突破。
+          </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- 評價1 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover-lift">
+            <div class="flex text-yellow-500 mb-4">
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+            </div>
+            <p class="text-gray-600 mb-6 italic">
+              "通過Python全棧開發課程，我從零基礎成長為一名合格的開發工程師，現在在一家知名互聯網公司工作，薪資比之前翻了一倍。課程內容非常實用，講師講解清晰，社區氛圍也很好。"
+            </p>
+            <div class="flex items-center gap-4">
+              <img src="https://picsum.photos/id/1012/60/60" alt="學員頭像" class="w-12 h-12 rounded-full">
+              <div>
+                <p class="font-medium">陳小明</p>
+                <p class="text-gray-500 text-sm">全棧開發工程師</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 評價2 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover-lift">
+            <div class="flex text-yellow-500 mb-4">
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+            </div>
+            <p class="text-gray-600 mb-6 italic">
+              "數字行銷課程讓我對現代行銷有了全新的認識，學到的方法直接應用到了工作中，我們公司的線上銷售額在三個月內增長了40%。講師的實戰經驗分享非常有價值。"
+            </p>
+            <div class="flex items-center gap-4">
+              <img src="https://picsum.photos/id/1027/60/60" alt="學員頭像" class="w-12 h-12 rounded-full">
+              <div>
+                <p class="font-medium">林小雨</p>
+                <p class="text-gray-500 text-sm">市場部經理</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 評價3 -->
+          <div class="bg-white p-8 rounded-xl shadow-md hover-lift">
+            <div class="flex text-yellow-500 mb-4">
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star-half-o"></i>
+            </div>
+            <p class="text-gray-600 mb-6 italic">
+              "作為一名產品經理，UI/UX設計課程幫助我更好地理解設計思維，與設計團隊的溝通更加順暢。課程中的案例分析和實戰項目非常貼近實際工作場景。"
+            </p>
+            <div class="flex items-center gap-4">
+              <img src="https://picsum.photos/id/1074/60/60" alt="學員頭像" class="w-12 h-12 rounded-full">
+              <div>
+                <p class="font-medium">王大偉</p>
+                <p class="text-gray-500 text-sm">高級產品經理</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 常見問題 -->
+    <section id="faq" class="py-20 bg-white">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <span class="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
+            常見問題
+          </span>
+          <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold mb-6">你可能想知道</h2>
+          <p class="text-gray-600 text-lg">
+            我們收集了學員最常問的問題，如果您有其他疑問，歡迎聯繫我們的客服團隊。
+          </p>
+        </div>
+        
+        <div class="max-w-3xl mx-auto">
+          <!-- FAQ項目 -->
+          <div class="border-b border-gray-200 py-5">
+            <button class="faq-toggle flex justify-between items-center w-full text-left focus:outline-none">
+              <span class="font-semibold text-lg">課程有有效期嗎？</span>
+              <i class="fa fa-plus text-primary transition-transform"></i>
+            </button>
+            <div class="faq-content hidden mt-3 text-gray-600">
+              <p>我們的所有課程都是終身有效的，一旦購買，您可以隨時學習，不受時間限制。同時，我們會定期更新課程內容，確保您學到的是最新的知識和技能。</p>
+            </div>
+          </div>
+          
+          <div class="border-b border-gray-200 py-5">
+            <button class="faq-toggle flex justify-between items-center w-full text-left focus:outline-none">
+              <span class="font-semibold text-lg">如果對課程不滿意可以退款嗎？</span>
+              <i class="fa fa-plus text-primary transition-transform"></i>
+            </button>
+            <div class="faq-content hidden mt-3 text-gray-600">
+              <p>是的，我們提供30天無理由退款保證。如果您在購買課程後30天內發現課程不符合您的預期，可以申請全額退款，沒有任何條件限制。</p>
+            </div>
+          </div>
+          
+          <div class="border-b border-gray-200 py-5">
+            <button class="faq-toggle flex justify-between items-center w-full text-left focus:outline-none">
+              <span class="font-semibold text-lg">課程包含證書嗎？如何獲取？</span>
+              <i class="fa fa-plus text-primary transition-transform"></i>
+            </button>
+            <div class="faq-content hidden mt-3 text-gray-600">
+              <p>所有課程都包含結業證書。完成課程的所有學習內容並通過最終考核後，您可以在學習平台上下载電子版證書。部分專業課程還提供可驗證的技能證書，有助於您的職業發展。</p>
+            </div>
+          </div>
+          
+          <div class="border-b border-gray-200 py-5">
+            <button class="faq-toggle flex justify-between items-center w-full text-left focus:outline-none">
+              <span class="font-semibold text-lg">學習過程中遇到問題可以獲得幫助嗎？</span>
+              <i class="fa fa-plus text-primary transition-transform"></i>
+            </button>
+            <div class="faq-content hidden mt-3 text-gray-600">
+              <p>當然可以。我們提供多種支持渠道：您可以在課程討論區提問，講師和助教通常會在24小時內回復；加入學習社區，與其他學員交流；還可以通過客服郵箱獲取一對一的幫助。</p>
+            </div>
+          </div>
+          
+          <div class="border-b border-gray-200 py-5">
+            <button class="faq-toggle flex justify-between items-center w-full text-left focus:outline-none">
+              <span class="font-semibold text-lg">課程適合零基礎學員嗎？</span>
+              <i class="fa fa-plus text-primary transition-transform"></i>
+            </button>
+            <div class="faq-content hidden mt-3 text-gray-600">
+              <p>我們的課程覆蓋了從入門到高級的各個階段。大部分課程都明確標註了適合的技能水平，包括專為零基礎學員設計的入門課程。這些課程會從基礎知識開始，循序漸進地引導您掌握相關技能。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 報名區域 -->
+    <section id="enroll" class="py-20 bg-gradient-to-br from-primary to-blue-700 text-white">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-5xl mx-auto bg-white rounded-2xl shadow-2xl overflow-hidden">
+          <div class="flex flex-col lg:flex-row">
+            <div class="lg:w-1/2 p-8 md:p-12 bg-gray-50">
+              <span class="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-6">
+                立即加入
+              </span>
+              <h2 class="text-[clamp(1.5rem,3vw,2rem)] font-bold text-dark mb-6">
+                開始你的學習之旅
+              </h2>
+              <p class="text-gray-600 mb-8">
+                填寫以下信息，報名參加我們的課程，我們的顧問會儘快與您聯繫，為您提供個性化的學習建議。
+              </p>
+              
+              <form class="space-y-5">
+                <div>
+                  <label for="name" class="block text-sm font-medium text-gray-700 mb-1">姓名</label>
+                  <input type="text" id="name" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition-colors" placeholder="請輸入您的姓名">
+                </div>
+                
+                <div>
+                  <label for="email" class="block text-sm font-medium text-gray-700 mb-1">郵箱</label>
+                  <input type="email" id="email" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition-colors" placeholder="請輸入您的郵箱">
+                </div>
+                
+                <div>
+                  <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">電話</label>
+                  <input type="tel" id="phone" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition-colors" placeholder="請輸入您的電話">
+                </div>
+                
+                <div>
+                  <label for="course" class="block text-sm font-medium text-gray-700 mb-1">感興趣的課程</label>
+                  <select id="course" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition-colors">
+                    <option value="">請選擇課程</option>
+                    <option value="python">Python全棧開發從入門到精通</option>
+                    <option value="marketing">數字行銷與品牌建設實戰</option>
+                    <option value="design">UI/UX設計精品課程</option>
+                    <option value="other">其他課程</option>
+                  </select>
+                </div>
+                
+                <button type="submit" class="w-full bg-primary hover:bg-primary/90 text-white font-semibold py-3 px-6 rounded-lg transition-colors shadow-md hover:shadow-lg">
+                  提交報名
+                </button>
+              </form>
+              
+              <p class="text-gray-500 text-sm mt-6 text-center">
+                提交即表示您同意我們的<a href="#" class="text-primary hover:underline">服務條款</a>和<a href="#" class="text-primary hover:underline">隱私政策</a>
+              </p>
+            </div>
+            
+            <div class="lg:w-1/2 p-8 md:p-12 bg-primary text-white flex flex-col justify-between">
+              <div>
+                <h3 class="text-2xl font-bold mb-6">為什麼選擇我們的課程？</h3>
+                
+                <div class="space-y-6">
+                  <div class="flex gap-4">
+                    <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
+                      <i class="fa fa-check"></i>
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-lg mb-1">靈活的學習方式</h4>
+                      <p class="text-blue-100">按照自己的節奏學習，隨時隨地訪問課程內容</p>
+                    </div>
+                  </div>
+                  
+                  <div class="flex gap-4">
+                    <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
+                      <i class="fa fa-check"></i>
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-lg mb-1">實戰項目經驗</h4>
+                      <p class="text-blue-100">通過真實項目練習，積累可展示的作品集</p>
+                    </div>
+                  </div>
+                  
+                  <div class="flex gap-4">
+                    <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
+                      <i class="fa fa-check"></i>
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-lg mb-1">專業講師指導</h4>
+                      <p class="text-blue-100">行業專家親授，分享實戰經驗和技巧</p>
+                    </div>
+                  </div>
+                  
+                  <div class="flex gap-4">
+                    <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
+                      <i class="fa fa-check"></i>
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-lg mb-1">就業支持服務</h4>
+                      <p class="text-blue-100">簡歷優化、面試指導和就業推薦服務</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="mt-12 p-6 bg-white/10 rounded-xl backdrop-blur-sm">
+                <div class="flex items-center gap-4 mb-4">
+                  <div class="text-3xl text-accent">
+                    <i class="fa fa-lightbulb-o"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-lg">首月特惠</h4>
+                    <p class="text-blue-100 text-sm">新學員可享8折優惠</p>
+                  </div>
+                </div>
+                <p class="text-sm text-blue-100">
+                  輸入優惠碼 <span class="font-bold bg-white/20 px-2 py-1 rounded">NEW20</span> 即可享受首門課程8折優惠
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 課程演示 -->
+    <section id="demo" class="py-20 bg-gray-50">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <span class="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
+            課程演示
+          </span>
+          <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold mb-6">體驗我們的課程質量</h2>
+          <p class="text-gray-600 text-lg">
+            觀看課程片段，了解我們的教學風格和內容質量，幫助你做出更明智的選擇。
+          </p>
+        </div>
+        
+        <div class="max-w-4xl mx-auto relative rounded-2xl overflow-hidden shadow-2xl">
+          <img src="https://picsum.photos/id/1/1200/675" alt="課程演示視頻封面" class="w-full h-auto">
+          <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+            <button class="w-20 h-20 md:w-24 md:h-24 bg-primary rounded-full flex items-center justify-center text-white hover:bg-primary/90 transition-colors shadow-lg hover:scale-105">
+              <i class="fa fa-play text-3xl md:text-4xl ml-1"></i>
+            </button>
+          </div>
+          <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent">
+            <h3 class="text-white font-bold text-xl mb-2">AI流量變現-聯盟行銷實戰營</h3>
+            <p class="text-white/80 text-sm">免費預覽 · 12:45 分鐘</p>
+          </div>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+          <div class="bg-white p-4 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+            <div class="relative rounded-lg overflow-hidden mb-3">
+              <img src="https://picsum.photos/id/2/400/225" alt="課程視頻縮略圖" class="w-full h-40 object-cover">
+              <div class="absolute bottom-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded">15:30</div>
+            </div>
+            <h4 class="font-medium text-gray-800">不露臉行銷-IG漲粉營銷班</h4>
+          </div>
+          
+          <div class="bg-white p-4 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+            <div class="relative rounded-lg overflow-hidden mb-3">
+              <img src="https://picsum.photos/id/3/400/225" alt="課程視頻縮略圖" class="w-full h-40 object-cover">
+              <div class="absolute bottom-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded">10:15</div>
+            </div>
+            <h4 class="font-medium text-gray-800">行銷策略制定與執行</h4>
+          </div>
+          
+          <div class="bg-white p-4 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+            <div class="relative rounded-lg overflow-hidden mb-3">
+              <img src="https://picsum.photos/id/4/400/225" alt="課程視頻縮略圖" class="w-full h-40 object-cover">
+              <div class="absolute bottom-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded">20:45</div>
+            </div>
+            <h4 class="font-medium text-gray-800">CANVA大師班</h4>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 頁腳 -->
+  <footer class="bg-dark text-white pt-16 pb-8">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+        <div>
+          <div class="flex items-center space-x-2 mb-6">
+            <span class="text-primary text-2xl"><i class="fa fa-graduation-cap"></i></span>
+            <span class="font-bold text-xl">幸福商學院</span>
+          </div>
+          <p class="text-gray-400 mb-6">
+            提供高質量的線上課程，幫助學員掌握實用技能，實現職業發展目標。
+          </p>
+          <div class="flex space-x-4">
+            <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition-colors">
+              <i class="fa fa-facebook"></i>
+            </a>
+            <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition-colors">
+              <i class="fa fa-twitter"></i>
+            </a>
+            <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition-colors">
+              <i class="fa fa-instagram"></i>
+            </a>
+            <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition-colors">
+              <i class="fa fa-linkedin"></i>
+            </a>
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="font-bold text-lg mb-6">課程分類</h3>
+          <ul class="space-y-3">
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">AI流量變現</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">IG實戰</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors"></a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors"></a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors"></a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">查看全部</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="font-bold text-lg mb-6">關於我們</h3>
+          <ul class="space-y-3">
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">公司簡介</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">講師團隊</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">合作夥伴</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">招賢納士</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">聯繫我們</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="font-bold text-lg mb-6">聯繫我們</h3>
+          <ul class="space-y-3">
+            <li class="flex items-start gap-3">
+              <i class="fa fa-map-marker text-primary mt-1"></i>
+              <span class="text-gray-400">台北市忠孝東路四段169號9樓</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <i class="fa fa-phone text-primary"></i>
+              <span class="text-gray-400">886-954-014-591</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <i class="fa fa-envelope text-primary"></i>
+              <span class="text-gray-400">coachsonia1314 @gmail.com</span>
+            </li>
+          </ul>
+          
+          <div class="mt-6">
+            <h4 class="font-medium mb-3">訂閱我們的 newsletter</h4>
+            <div class="flex">
+              <input type="email" placeholder="您的郵箱地址" class="px-4 py-2 rounded-l-lg bg-gray-800 text-white border-0 focus:outline-none focus:ring-1 focus:ring-primary flex-1">
+              <button class="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-r-lg transition-colors">
+                <i class="fa fa-paper-plane"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-800 pt-8">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <p class="text-gray-500 text-sm mb-4 md:mb-0">© 2025 @幸福創業家. 保留所有權利.</p>
+          <div class="flex space-x-6">
+            <a href="#" class="text-gray-500 hover:text-primary text-sm transition-colors">服務條款</a>
+            <a href="#" class="text-gray-500 hover:text-primary text-sm transition-colors">隱私政策</a>
+            <a href="#" class="text-gray-500 hover:text-primary text-sm transition-colors">Cookie政策</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 返回頂部按鈕 -->
+  <button id="back-to-top" class="fixed bottom-8 right-8 bg-primary hover:bg-primary/90 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-all opacity-0 invisible">
+    <i class="fa fa-arrow-up"></i>
+  </button>
+
+  <!-- 搜索结果下拉框 -->
+  <div id="search-results" class="hidden fixed top-16 left-1/2 transform -translate-x-1/2 w-96 max-w-90vw bg-white rounded-lg shadow-xl border border-gray-200 z-50 max-h-96 overflow-y-auto">
+    <div class="p-4">
+      <h3 class="text-sm font-medium text-gray-500 mb-3">搜尋結果</h3>
+      <div id="search-results-list" class="space-y-2">
+        <!-- 搜索结果将在这里显示 -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 登录模态框 -->
+  <div id="login-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-xl max-w-md w-full p-6">
+      <div class="flex justify-between items-center mb-6">
+        <h2 class="text-2xl font-bold">會員登入</h2>
+        <button onclick="closeLoginModal()" class="text-gray-400 hover:text-gray-600">
+          <i class="fa fa-times text-xl"></i>
+        </button>
+      </div>
+      
+      <form id="login-form" class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">電子郵件</label>
+          <input type="email" id="login-email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="請輸入電子郵件" required>
+        </div>
+        
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">密碼</label>
+          <input type="password" id="login-password" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="請輸入密碼" required>
+        </div>
+        
+        <div class="flex items-center justify-between">
+          <label class="flex items-center">
+            <input type="checkbox" class="mr-2">
+            <span class="text-sm text-gray-600">記住我</span>
+          </label>
+          <a href="#" class="text-sm text-primary hover:underline">忘記密碼？</a>
+        </div>
+        
+        <button type="submit" class="w-full bg-primary hover:bg-primary/90 text-white py-2 rounded-lg font-medium transition-colors">
+          登入
+        </button>
+      </form>
+      
+      <div class="mt-6 text-center">
+        <p class="text-sm text-gray-600">
+          還沒有帳號？ 
+          <a href="#" onclick="switchToRegister()" class="text-primary hover:underline font-medium">立即註冊</a>
+        </p>
+      </div>
+      
+      <div class="mt-6">
+        <div class="relative">
+          <div class="absolute inset-0 flex items-center">
+            <div class="w-full border-t border-gray-300"></div>
+          </div>
+          <div class="relative flex justify-center text-sm">
+            <span class="px-2 bg-white text-gray-500">或使用以下方式登入</span>
+          </div>
+        </div>
+        
+        <div class="mt-6 grid grid-cols-3 gap-3">
+          <button type="button" class="flex justify-center py-2 px-4 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+            <i class="fa fa-google text-red-500"></i>
+          </button>
+          <button type="button" class="flex justify-center py-2 px-4 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+            <i class="fa fa-facebook text-blue-600"></i>
+          </button>
+          <button type="button" class="flex justify-center py-2 px-4 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+            <i class="fa fa-line text-green-500"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 注册模态框 -->
+  <div id="register-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-xl max-w-md w-full p-6">
+      <div class="flex justify-between items-center mb-6">
+        <h2 class="text-2xl font-bold">會員註冊</h2>
+        <button onclick="closeRegisterModal()" class="text-gray-400 hover:text-gray-600">
+          <i class="fa fa-times text-xl"></i>
+        </button>
+      </div>
+      
+      <form id="register-form" class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">姓名</label>
+          <input type="text" id="register-name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="請輸入姓名" required>
+        </div>
+        
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">電子郵件</label>
+          <input type="email" id="register-email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="請輸入電子郵件" required>
+        </div>
+        
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">密碼</label>
+          <input type="password" id="register-password" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="請輸入密碼" required>
+        </div>
+        
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">確認密碼</label>
+          <input type="password" id="register-confirm-password" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="請再次輸入密碼" required>
+        </div>
+        
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">手機號碼</label>
+          <input type="tel" id="register-phone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="請輸入手機號碼">
+        </div>
+        
+        <div class="flex items-center">
+          <input type="checkbox" id="agree-terms" class="mr-2" required>
+          <label for="agree-terms" class="text-sm text-gray-600">
+            我同意 <a href="#" class="text-primary hover:underline">服務條款</a> 和 <a href="#" class="text-primary hover:underline">隱私政策</a>
+          </label>
+        </div>
+        
+        <button type="submit" class="w-full bg-primary hover:bg-primary/90 text-white py-2 rounded-lg font-medium transition-colors">
+          註冊
+        </button>
+      </form>
+      
+      <div class="mt-6 text-center">
+        <p class="text-sm text-gray-600">
+          已有帳號？ 
+          <a href="#" onclick="switchToLogin()" class="text-primary hover:underline font-medium">立即登入</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 课程比较模态框 -->
+  <div id="compare-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-xl max-w-6xl w-full p-6 max-h-[90vh] overflow-y-auto">
+      <div class="flex justify-between items-center mb-6">
+        <h2 class="text-2xl font-bold">課程比較</h2>
+        <button onclick="closeCompareModal()" class="text-gray-400 hover:text-gray-600">
+          <i class="fa fa-times text-xl"></i>
+        </button>
+      </div>
+      
+      <div id="compare-content" class="overflow-x-auto">
+        <!-- 比较内容将通过JavaScript动态生成 -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 购物车侧边栏 -->
+  <div id="cart-sidebar" class="fixed right-0 top-0 h-full w-96 bg-white shadow-xl transform translate-x-full transition-transform duration-300 z-50">
+    <div class="flex flex-col h-full">
+      <div class="flex items-center justify-between p-4 border-b">
+        <h2 class="text-xl font-bold">購物車</h2>
+        <button onclick="closeCartSidebar()" class="text-gray-400 hover:text-gray-600">
+          <i class="fa fa-times text-xl"></i>
+        </button>
+      </div>
+      
+      <div id="cart-items" class="flex-1 overflow-y-auto p-4">
+        <!-- 购物车项目将通过JavaScript动态生成 -->
+      </div>
+      
+      <div class="border-t p-4">
+        <div class="flex justify-between mb-4">
+          <span class="font-medium">總計:</span>
+          <span id="cart-total" class="text-xl font-bold text-primary">¥0</span>
+        </div>
+        <button onclick="checkout()" class="w-full bg-primary hover:bg-primary/90 text-white py-2 rounded-lg font-medium transition-colors">
+          結帳
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 会员登录模态框 -->
+  <div id="login-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-xl max-w-md w-full p-6 relative">
+      <button id="close-login-modal" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+        <i class="fa fa-times text-xl"></i>
+      </button>
+      
+      <div class="text-center mb-6">
+        <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+          <i class="fa fa-user text-primary text-2xl"></i>
+        </div>
+        <h2 class="text-2xl font-bold text-dark mb-2">會員登入</h2>
+        <p class="text-gray-600 text-sm">登入您的帳戶以獲得最佳體驗</p>
+      </div>
+      
+      <form id="login-form" class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">電子郵件</label>
+          <input type="email" id="login-email" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="your@email.com" required>
+        </div>
+        
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">密碼</label>
+          <input type="password" id="login-password" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="••••••••" required>
+        </div>
+        
+        <div class="flex items-center justify-between">
+          <label class="flex items-center">
+            <input type="checkbox" class="mr-2">
+            <span class="text-sm text-gray-600">記住我</span>
+          </label>
+          <a href="#" class="text-sm text-primary hover:underline">忘記密碼？</a>
+        </div>
+        
+        <button type="submit" class="w-full bg-primary hover:bg-primary/90 text-white py-3 rounded-lg font-medium transition-colors">
+          登入
+        </button>
+        
+        <div class="text-center text-sm text-gray-600">
+          還沒有帳戶？ <a href="#" id="show-register" class="text-primary hover:underline">立即註冊</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 会员注册模态框 -->
+  <div id="register-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-xl max-w-md w-full p-6 relative">
+      <button id="close-register-modal" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+        <i class="fa fa-times text-xl"></i>
+      </button>
+      
+      <div class="text-center mb-6">
+        <div class="w-16 h-16 bg-secondary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+          <i class="fa fa-user-plus text-secondary text-2xl"></i>
+        </div>
+        <h2 class="text-2xl font-bold text-dark mb-2">創建帳戶</h2>
+        <p class="text-gray-600 text-sm">加入我們，開始學習之旅</p>
+      </div>
+      
+      <form id="register-form" class="space-y-4">
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">姓氏</label>
+            <input type="text" id="register-lastname" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="張" required>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">名字</label>
+            <input type="text" id="register-firstname" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="小明" required>
+          </div>
+        </div>
+        
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">電子郵件</label>
+          <input type="email" id="register-email" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="your@email.com" required>
+        </div>
+        
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">密碼</label>
+          <input type="password" id="register-password" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="至少8個字符" required>
+        </div>
+        
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">確認密碼</label>
+          <input type="password" id="register-confirm-password" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="再次輸入密碼" required>
+        </div>
+        
+        <div class="flex items-center">
+          <input type="checkbox" id="agree-terms" class="mr-2" required>
+          <label for="agree-terms" class="text-sm text-gray-600">
+            我同意 <a href="#" class="text-primary hover:underline">服務條款</a> 和 <a href="#" class="text-primary hover:underline">隱私政策</a>
+          </label>
+        </div>
+        
+        <button type="submit" class="w-full bg-secondary hover:bg-secondary/90 text-white py-3 rounded-lg font-medium transition-colors">
+          創建帳戶
+        </button>
+        
+        <div class="text-center text-sm text-gray-600">
+          已有帳戶？ <a href="#" id="show-login" class="text-primary hover:underline">立即登入</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 购物车侧边栏 -->
+  <div id="cart-sidebar" class="fixed right-0 top-0 h-full w-96 bg-white shadow-2xl transform translate-x-full transition-transform duration-300 z-50">
+    <div class="flex flex-col h-full">
+      <div class="flex items-center justify-between p-4 border-b">
+        <h3 class="text-lg font-semibold">購物車 (<span id="cart-count">0</span>)</h3>
+        <button id="close-cart" class="text-gray-400 hover:text-gray-600">
+          <i class="fa fa-times text-xl"></i>
+        </button>
+      </div>
+      
+      <div id="cart-items" class="flex-1 overflow-y-auto p-4">
+        <!-- 购物车项目将在这里显示 -->
+        <p class="text-gray-500 text-center py-8">購物車是空的</p>
+      </div>
+      
+      <div class="border-t p-4">
+        <div class="flex justify-between mb-4">
+          <span class="font-semibold">總計:</span>
+          <span class="font-bold text-xl text-primary" id="cart-total">¥0</span>
+        </div>
+        <button id="checkout-btn" class="w-full bg-primary hover:bg-primary/90 text-white py-3 rounded-lg font-medium transition-colors disabled:opacity-50" disabled>
+          結帳
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 课程比较模态框 -->
+  <div id="compare-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-xl max-w-6xl w-full p-6 relative max-h-[90vh] overflow-y-auto">
+      <button id="close-compare-modal" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+        <i class="fa fa-times text-xl"></i>
+      </button>
+      
+      <div class="text-center mb-6">
+        <h2 class="text-2xl font-bold text-dark mb-2">課程比較</h2>
+        <p class="text-gray-600 text-sm">比較不同課程的特點和價格</p>
+      </div>
+      
+      <div id="compare-content" class="overflow-x-auto">
+        <!-- 比较内容将在这里显示 -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 客服系統 -->
+  <div class="fixed bottom-8 right-8 z-40">
+    <button id="consultant-btn" class="bg-accent hover:bg-accent/90 text-white w-14 h-14 rounded-full shadow-lg transition-all hover:scale-110 flex items-center justify-center">
+      <i class="fa fa-headset text-xl"></i>
+    </button>
+    
+    <!-- 智能客服菜单 -->
+    <div id="consultant-menu" class="hidden absolute bottom-16 right-0 bg-white rounded-xl shadow-2xl p-4 w-80">
+      <div class="flex items-center justify-between mb-4">
+        <h4 class="font-semibold">智能客服</h4>
+        <div class="flex gap-2">
+          <button id="mood-detection-btn" class="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs hover:bg-blue-200 transition-colors">
+            <i class="fa fa-smile"></i> 情緒識別
+          </button>
+          <button id="mood-positive-btn" class="px-3 py-1 bg-green-100 text-green-600 rounded-full text-xs hover:bg-green-200 transition-colors">
+            <i class="fa fa-heart"></i> 正能量
+          </button>
+        </div>
+      </div>
+      
+      <!-- 情緒識別狀態 -->
+      <div id="mood-detection" class="hidden">
+        <p class="text-sm text-gray-600 mb-3">正在分析您的情緒...</p>
+        <div class="flex justify-center space-x-2 mb-4">
+          <div class="w-3 h-3 bg-gray-300 rounded-full animate-pulse"></div>
+          <div class="w-3 h-3 bg-gray-300 rounded-full animate-pulse" style="animation-delay: 0.1s"></div>
+          <div class="w-3 h-3 bg-gray-300 rounded-full animate-pulse" style="animation-delay: 0.2s"></div>
+        </div>
+      </div>
+      
+      <!-- 情緒結果 -->
+      <div id="mood-result" class="hidden">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-sm font-medium" id="mood-title">情緒分析結果</span>
+          <span id="mood-emoji" class="text-2xl"></span>
+        </div>
+        <p class="text-xs text-gray-600 mb-3" id="mood-description"></p>
+        <div class="bg-gray-50 rounded-lg p-3">
+          <p class="text-sm text-gray-700" id="mood-suggestion"></p>
+        </div>
+      </div>
+      
+      <!-- 正能量鼓勵 -->
+      <div id="positive-encouragement" class="hidden">
+        <p class="text-sm font-medium text-gray-700 mb-3">正能量鼓勵</p>
+        <div class="bg-gradient-to-r from-green-50 to-blue-50 rounded-lg p-4">
+          <p class="text-sm text-gray-700" id="encouragement-text"></p>
+          <div class="flex justify-between items-center mt-3">
+            <button id="next-encouragement" class="text-xs bg-white hover:bg-gray-100 text-gray-700 px-3 py-1 rounded-full transition-colors">
+              下一句
+            </button>
+            <button id="speak-encouragement" class="text-xs bg-primary hover:bg-primary/90 text-white px-3 py-1 rounded-full transition-colors">
+              <i class="fa fa-volume-up mr-1"></i>朗讀
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 快速咨询选项 -->
+      <div id="quick-consult" class="space-y-2">
+        <button class="w-full text-left px-3 py-2 hover:bg-gray-100 rounded-lg transition-colors flex items-center gap-2">
+          <i class="fa fa-phone text-primary"></i>
+          <span class="text-sm">電話諮詢</span>
+        </button>
+        <button class="w-full text-left px-3 py-2 hover:bg-gray-100 rounded-lg transition-colors flex items-center gap-2">
+          <i class="fa fa-wechat text-green-500"></i>
+          <span class="text-sm">微信諮詢</span>
+        </button>
+        <button class="w-full text-left px-3 py-2 hover:bg-gray-100 rounded-lg transition-colors flex items-center gap-2">
+          <i class="fa fa-envelope text-blue-500"></i>
+          <span class="text-sm">郵件諮詢</span>
+        </button>
+        <button class="w-full text-left px-3 py-2 hover:bg-gray-100 rounded-lg transition-colors flex items-center gap-2">
+          <i class="fa fa-comments text-purple-500"></i>
+          <span class="text-sm">在線客服</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- 語音播放提示 -->
+  <div id="speech-bubble" class="hidden fixed bottom-24 right-8 bg-gray-800 text-white p-3 rounded-lg shadow-xl max-w-xs">
+    <div class="flex items-center gap-2">
+      <div class="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+      <span class="text-sm">正在朗讀...</span>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    // 導航欄滾動效果
+    const navbar = document.getElementById('navbar');
+    const backToTop = document.getElementById('back-to-top');
+    
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 50) {
+        navbar.classList.add('py-2', 'shadow');
+        navbar.classList.remove('py-4');
+        
+        backToTop.classList.remove('opacity-0', 'invisible');
+        backToTop.classList.add('opacity-100', 'visible');
+      } else {
+        navbar.classList.add('py-4');
+        navbar.classList.remove('py-2', 'shadow');
+        
+        backToTop.classList.add('opacity-0', 'invisible');
+        backToTop.classList.remove('opacity-100', 'visible');
+      }
+    });
+    
+    // 行動端菜單
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    menuToggle.addEventListener('click', function() {
+      mobileMenu.classList.toggle('hidden');
+      const icon = menuToggle.querySelector('i');
+      if (icon.classList.contains('fa-bars')) {
+        icon.classList.replace('fa-bars', 'fa-times');
+      } else {
+        icon.classList.replace('fa-times', 'fa-bars');
+      }
+    });
+    
+    // 平滑滾動
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
+          });
+          
+          // 關閉行動端菜單
+          if (!mobileMenu.classList.contains('hidden')) {
+            mobileMenu.classList.add('hidden');
+            const icon = menuToggle.querySelector('i');
+            icon.classList.replace('fa-times', 'fa-bars');
+          }
+        }
+      });
+    });
+    
+    // 返回頂部
+    backToTop.addEventListener('click', function() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+    
+    // FAQ 折疊效果
+    const faqToggles = document.querySelectorAll('.faq-toggle');
+    
+    faqToggles.forEach(toggle => {
+      toggle.addEventListener('click', function() {
+        const content = this.nextElementSibling;
+        const icon = this.querySelector('i');
+        
+        content.classList.toggle('hidden');
+        icon.classList.toggle('rotate-45');
+        
+        // 關閉其他打開的FAQ
+        faqToggles.forEach(otherToggle => {
+          if (otherToggle !== toggle) {
+            const otherContent = otherToggle.nextElementSibling;
+            const otherIcon = otherToggle.querySelector('i');
+            
+            if (!otherContent.classList.contains('hidden')) {
+              otherContent.classList.add('hidden');
+              otherIcon.classList.remove('rotate-45');
+            }
+          }
+        });
+      });
+    });
+    
+    // 數字計數器動畫
+    const counters = document.querySelectorAll('.counter');
+    const speed = 200;
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const counter = entry.target;
+          const target = +counter.getAttribute('data-target');
+          const count = +counter.innerText;
+          const increment = target / speed;
+          
+          if (count < target) {
+            counter.innerText = Math.ceil(count + increment);
+            setTimeout(() => {
+              counter.innerText = Math.ceil(count + increment);
+            }, 1);
+          } else {
+            counter.innerText = target + (target === 10000 ? '+' : '%');
+            observer.unobserve(counter);
+          }
+        }
+      });
+    }, { threshold: 0.5 });
+    
+    counters.forEach(counter => {
+      observer.observe(counter);
+    });
+    
+    // 薪資圖表
+    const ctx = document.getElementById('salaryChart').getContext('2d');
+    const salaryChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['學習前', '學習後6個月', '學習後1年', '學習後2年'],
+        datasets: [{
+          label: '平均月薪(千元)',
+          data: [8, 12, 15, 18],
+          backgroundColor: [
+            'rgba(255, 255, 255, 0.4)',
+            'rgba(255, 255, 255, 0.6)',
+            'rgba(255, 255, 255, 0.8)',
+            'rgba(255, 255, 255, 1)'
+          ],
+          borderColor: [
+            'rgba(255, 255, 255, 1)',
+            'rgba(255, 255, 255, 1)',
+            'rgba(255, 255, 255, 1)',
+            'rgba(255, 255, 255, 1)'
+          ],
+          borderWidth: 1,
+          borderRadius: 6
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            beginAtZero: true,
+            grid: {
+              color: 'rgba(255, 255, 255, 0.1)'
+            },
+            ticks: {
+              color: 'rgba(255, 255, 255, 0.7)'
+            }
+          },
+          x: {
+            grid: {
+              color: 'rgba(255, 255, 255, 0.1)'
+            },
+            ticks: {
+              color: 'rgba(255, 255, 255, 0.7)'
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            labels: {
+              color: 'rgba(255, 255, 255, 0.9)'
+            }
+          }
+        }
+      }
+    });
+
+    // 搜索功能
+    const searchInput = document.getElementById('search-input');
+    const mobileSearchInput = document.getElementById('mobile-search-input');
+    const searchResults = document.getElementById('search-results');
+    const searchResultsList = document.getElementById('search-results-list');
+    
+    // 课程比较功能
+    const compareModal = document.getElementById('compare-modal');
+    const compareContent = document.getElementById('compare-content');
+    let compareCourses = [];
+    
+    // 购物车功能
+    const cartSidebar = document.getElementById('cart-sidebar');
+    const cartItems = document.getElementById('cart-items');
+    const cartTotal = document.getElementById('cart-total');
+    const cartCount = document.getElementById('cart-count');
+    let cart = [];
+    
+    // 会员功能
+    const loginModal = document.getElementById('login-modal');
+    const registerModal = document.getElementById('register-modal');
+    let currentUser = null;
+    
+    // 课程数据
+    const courses = [
+      {
+        title: 'Python全棧開發從入門到精通',
+        category: '程式開發',
+        price: '¥299',
+        rating: '4.9',
+        students: '1,245',
+        image: 'https://picsum.photos/id/0/600/400',
+        instructor: '李明教授',
+        description: '掌握Python程式基礎，深入學習Web開發、數據分析和人工智能應用'
+      },
+      {
+        title: '數字行銷與品牌建設實戰',
+        category: '商業管理',
+        price: '¥249',
+        rating: '4.7',
+        students: '876',
+        image: 'https://picsum.photos/id/180/600/400',
+        instructor: '張雨晴',
+        description: '學習現代行銷策略，掌握社交媒體運營、內容行銷和數據分析'
+      },
+      {
+        title: 'UI/UX設計精品課程',
+        category: '設計創意',
+        price: '¥349',
+        rating: '4.8',
+        students: '532',
+        image: 'https://picsum.photos/id/96/600/400',
+        instructor: '王建國',
+        description: '從設計原理到工具應用，掌握用戶體驗設計全流程'
+      }
+    ];
+
+    function performSearch(query) {
+      const results = courses.filter(course => 
+        course.title.toLowerCase().includes(query.toLowerCase()) ||
+        course.category.toLowerCase().includes(query.toLowerCase()) ||
+        course.instructor.toLowerCase().includes(query.toLowerCase())
+      );
+      
+      displaySearchResults(results);
+    }
+
+    function displaySearchResults(results) {
+      if (results.length === 0) {
+        searchResultsList.innerHTML = '<p class="text-gray-500 text-sm">沒有找到相關課程</p>';
+      } else {
+        searchResultsList.innerHTML = results.map(course => `
+          <div class="flex items-center space-x-3 p-3 hover:bg-gray-50 rounded-lg cursor-pointer transition-colors" onclick="scrollToCourse('${course.title}')">
+            <img src="${course.image}" alt="${course.title}" class="w-12 h-12 rounded-lg object-cover">
+            <div class="flex-1">
+              <h4 class="font-medium text-sm text-gray-900">${course.title}</h4>
+              <p class="text-xs text-gray-500">${course.category} · ${course.instructor}</p>
+            </div>
+            <div class="text-right">
+              <p class="font-bold text-primary">${course.price}</p>
+              <div class="flex items-center text-xs text-yellow-500">
+                <i class="fa fa-star"></i>
+                <span class="ml-1 text-gray-600">${course.rating}</span>
+              </div>
+            </div>
+          </div>
+        `).join('');
+      }
+      
+      searchResults.classList.remove('hidden');
+    }
+
+    function scrollToCourse(courseTitle) {
+      searchResults.classList.add('hidden');
+      searchInput.value = '';
+      mobileSearchInput.value = '';
+      
+      // 这里可以添加滚动到具体课程的逻辑
+      document.getElementById('courses').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // 搜索事件监听
+    searchInput.addEventListener('input', (e) => {
+      const query = e.target.value;
+      if (query.length > 0) {
+        performSearch(query);
+      } else {
+        searchResults.classList.add('hidden');
+      }
+    });
+
+    mobileSearchInput.addEventListener('input', (e) => {
+      const query = e.target.value;
+      if (query.length > 0) {
+        performSearch(query);
+      } else {
+        searchResults.classList.add('hidden');
+      }
+    });
+
+    // 点击外部关闭搜索结果
+    document.addEventListener('click', (e) => {
+      if (!searchInput.contains(e.target) && !searchResults.contains(e.target) && 
+          !mobileSearchInput.contains(e.target)) {
+        searchResults.classList.add('hidden');
+      }
+    });
+
+    // 课程数据
+    const coursesData = [
+      {
+        id: 1,
+        title: 'Python全棧開發從入門到精通',
+        category: '程式開發',
+        price: 299,
+        originalPrice: 599,
+        rating: 4.9,
+        students: 1245,
+        duration: '42小時',
+        level: '初級到高級',
+        image: 'https://picsum.photos/id/0/600/400',
+        instructor: '李明教授',
+        instructorTitle: '前谷歌高級工程師',
+        description: '掌握Python程式基礎，深入學習Web開發、數據分析和人工智能應用，成為全能型開發人才。',
+        features: ['實戰項目', '終身學習', '證書認證', '就業指導'],
+        hot: true
+      },
+      {
+        id: 2,
+        title: '數字行銷與品牌建設實戰',
+        category: '商業管理',
+        price: 249,
+        originalPrice: 499,
+        rating: 4.7,
+        students: 876,
+        duration: '36小時',
+        level: '中級',
+        image: 'https://picsum.photos/id/180/600/400',
+        instructor: '張雨晴',
+        instructorTitle: '資深行銷總監',
+        description: '學習現代行銷策略，掌握社交媒體運營、內容行銷和數據分析，提升品牌影響力和銷售業績。',
+        features: ['案例分析', '實戰演練', '行銷工具', '效果評估']
+      },
+      {
+        id: 3,
+        title: 'UI/UX設計精品課程',
+        category: '設計創意',
+        price: 349,
+        originalPrice: 699,
+        rating: 4.8,
+        students: 532,
+        duration: '48小時',
+        level: '初級到中級',
+        image: 'https://picsum.photos/id/96/600/400',
+        instructor: '王建國',
+        instructorTitle: '知名設計工作室創始人',
+        description: '從設計原理到工具應用，掌握用戶體驗設計全流程，打造令人驚豔的產品界面和用戶體驗。',
+        features: ['設計工具', '作品集指導', '實戰項目', '行業實戰'],
+        new: true
+      }
+    ];
+
+    // 渲染课程卡片
+    function renderCourses(courses = coursesData) {
+      const container = document.getElementById('courses-container');
+      container.innerHTML = courses.map(course => `
+        <div class="course-card bg-white rounded-xl overflow-hidden shadow-md hover-lift" data-id="${course.id}">
+          <div class="relative">
+            <img src="${course.image}" alt="${course.title}" class="w-full h-52 object-cover">
+            ${course.hot ? '<div class="absolute top-4 left-4 bg-accent text-white text-xs font-bold px-3 py-1 rounded-full">熱門</div>' : ''}
+            ${course.new ? '<div class="absolute top-4 left-4 bg-secondary text-white text-xs font-bold px-3 py-1 rounded-full">新課</div>' : ''}
+            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm text-dark text-xs font-bold px-3 py-1 rounded-full">
+              ${course.duration}課程
+            </div>
+            <button onclick="toggleCompare(${course.id})" class="compare-btn absolute bottom-4 right-4 bg-white/90 backdrop-blur-sm p-2 rounded-full hover:bg-white transition-colors">
+              <i class="fa fa-balance-scale text-gray-600"></i>
+            </button>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full">${course.category}</span>
+              <div class="flex items-center text-yellow-500 text-sm">
+                <i class="fa fa-star"></i>
+                <span class="ml-1 text-gray-700">${course.rating}</span>
+                <span class="ml-1 text-gray-500">(${course.students})</span>
+              </div>
+            </div>
+            <h3 class="font-bold text-xl mb-2">${course.title}</h3>
+            <p class="text-gray-600 text-sm mb-4 line-clamp-2">${course.description}</p>
+            <div class="flex items-center gap-3 mb-5">
+              <img src="https://picsum.photos/id/101${course.id}/40/40" alt="${course.instructor}" class="w-10 h-10 rounded-full">
+              <div>
+                <p class="font-medium text-sm">${course.instructor}</p>
+                <p class="text-gray-500 text-xs">${course.instructorTitle}</p>
+              </div>
+            </div>
+            <div class="flex justify-between items-center mb-4">
+              <div>
+                <span class="text-primary font-bold text-xl">¥${course.price}</span>
+                <span class="text-gray-400 text-sm line-through ml-2">¥${course.originalPrice}</span>
+              </div>
+            </div>
+            <div class="flex gap-2">
+              <a href="#enroll" class="flex-1 bg-primary/10 hover:bg-primary/20 text-primary px-4 py-2 rounded-lg font-medium text-sm transition-colors text-center">
+                立即報名
+              </a>
+              <button onclick="addToCart(${course.id})" class="bg-accent/10 hover:bg-accent/20 text-accent px-3 py-2 rounded-lg transition-colors">
+                <i class="fa fa-cart-plus"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+      
+      document.getElementById('course-count').textContent = courses.length;
+    }
+
+    // 课程筛选功能
+    document.querySelectorAll('.category-filter').forEach(button => {
+      button.addEventListener('click', function() {
+        const category = this.dataset.category;
+        
+        // 更新按钮样式
+        document.querySelectorAll('.category-filter').forEach(btn => {
+          btn.classList.remove('bg-primary', 'text-white');
+          btn.classList.add('bg-white', 'text-gray-700');
+        });
+        this.classList.remove('bg-white', 'text-gray-700');
+        this.classList.add('bg-primary', 'text-white');
+        
+        // 筛选课程
+        if (category === 'all') {
+          renderCourses(coursesData);
+        } else {
+          const filtered = coursesData.filter(course => course.category === category);
+          renderCourses(filtered);
+        }
+      });
+    });
+
+    // 课程排序功能
+    document.getElementById('sort-select').addEventListener('change', function() {
+      const sortBy = this.value;
+      let sorted = [...coursesData];
+      
+      switch(sortBy) {
+        case 'price-low':
+          sorted.sort((a, b) => a.price - b.price);
+          break;
+        case 'price-high':
+          sorted.sort((a, b) => b.price - a.price);
+          break;
+        case 'rating':
+          sorted.sort((a, b) => b.rating - a.rating);
+          break;
+        case 'students':
+          sorted.sort((a, b) => b.students - a.students);
+          break;
+      }
+      
+      renderCourses(sorted);
+    });
+
+    // 课程比较功能
+    function toggleCompare(courseId) {
+      const course = coursesData.find(c => c.id === courseId);
+      const index = compareCourses.findIndex(c => c.id === courseId);
+      
+      if (index > -1) {
+        compareCourses.splice(index, 1);
+      } else if (compareCourses.length < 3) {
+        compareCourses.push(course);
+      } else {
+        alert('最多只能比較3門課程');
+        return;
+      }
+      
+      updateCompareButton(courseId);
+      
+      if (compareCourses.length > 0) {
+        showCompareModal();
+      }
+    }
+
+    function updateCompareButton(courseId) {
+      const button = document.querySelector(`.course-card[data-id="${courseId}"] .compare-btn i`);
+      const isInCompare = compareCourses.some(c => c.id === courseId);
+      
+      if (isInCompare) {
+        button.classList.remove('text-gray-600');
+        button.classList.add('text-accent');
+      } else {
+        button.classList.remove('text-accent');
+        button.classList.add('text-gray-600');
+      }
+    }
+
+    function showCompareModal() {
+      compareModal.classList.remove('hidden');
+      
+      if (compareCourses.length === 0) {
+        compareContent.innerHTML = '<p class="text-center text-gray-500 py-8">請選擇要比較的課程</p>';
+        return;
+      }
+      
+      const features = ['價格', '課程時長', '難度等級', '評分', '學員數量', '講師', '課程特色'];
+      
+      let html = `
+        <div class="overflow-x-auto">
+          <table class="w-full">
+            <thead>
+              <tr>
+                <th class="text-left p-3 border-b">比較項目</th>
+                ${compareCourses.map(course => `
+                  <th class="text-center p-3 border-b">
+                    <img src="${course.image}" alt="${course.title}" class="w-20 h-20 object-cover rounded-lg mx-auto mb-2">
+                    <div class="font-medium">${course.title}</div>
+                  </th>
+                `).join('')}
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="p-3 border-b font-medium">價格</td>
+                ${compareCourses.map(course => `
+                  <td class="text-center p-3 border-b">
+                    <div class="text-primary font-bold">¥${course.price}</div>
+                    <div class="text-gray-400 text-sm line-through">¥${course.originalPrice}</div>
+                  </td>
+                `).join('')}
+              </tr>
+              <tr>
+                <td class="p-3 border-b font-medium">課程時長</td>
+                ${compareCourses.map(course => `
+                  <td class="text-center p-3 border-b">${course.duration}</td>
+                `).join('')}
+              </tr>
+              <tr>
+                <td class="p-3 border-b font-medium">難度等級</td>
+                ${compareCourses.map(course => `
+                  <td class="text-center p-3 border-b">${course.level}</td>
+                `).join('')}
+              </tr>
+              <tr>
+                <td class="p-3 border-b font-medium">評分</td>
+                ${compareCourses.map(course => `
+                  <td class="text-center p-3 border-b">
+                    <div class="flex items-center justify-center text-yellow-500">
+                      <i class="fa fa-star"></i>
+                      <span class="ml-1">${course.rating}</span>
+                    </div>
+                  </td>
+                `).join('')}
+              </tr>
+              <tr>
+                <td class="p-3 border-b font-medium">學員數量</td>
+                ${compareCourses.map(course => `
+                  <td class="text-center p-3 border-b">${course.students}人</td>
+                `).join('')}
+              </tr>
+              <tr>
+                <td class="p-3 border-b font-medium">講師</td>
+                ${compareCourses.map(course => `
+                  <td class="text-center p-3 border-b">
+                    <div>${course.instructor}</div>
+                    <div class="text-sm text-gray-500">${course.instructorTitle}</div>
+                  </td>
+                `).join('')}
+              </tr>
+              <tr>
+                <td class="p-3 border-b font-medium">課程特色</td>
+                ${compareCourses.map(course => `
+                  <td class="text-center p-3 border-b">
+                    ${course.features.map(feature => `
+                      <span class="inline-block bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded-full m-1">${feature}</span>
+                    `).join('')}
+                  </td>
+                `).join('')}
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="mt-6 flex justify-center gap-4">
+          <button onclick="clearCompare()" class="px-6 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg transition-colors">
+            清空比較
+          </button>
+        </div>
+      `;
+      
+      compareContent.innerHTML = html;
+    }
+
+    function clearCompare() {
+      compareCourses = [];
+      document.querySelectorAll('.compare-btn i').forEach(button => {
+        button.classList.remove('text-accent');
+        button.classList.add('text-gray-600');
+      });
+      closeCompareModal();
+    }
+
+    function closeCompareModal() {
+      compareModal.classList.add('hidden');
+    }
+
+    // 购物车功能
+    function addToCart(courseId) {
+      const course = coursesData.find(c => c.id === courseId);
+      const existingItem = cart.find(item => item.id === courseId);
+      
+      if (existingItem) {
+        existingItem.quantity++;
+      } else {
+        cart.push({ ...course, quantity: 1 });
+      }
+      
+      updateCart();
+      showCartSidebar();
+    }
+
+    function updateCart() {
+      const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+      const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+      
+      cartCount.textContent = totalItems;
+      cartTotal.textContent = `¥${totalPrice}`;
+      
+      if (cart.length === 0) {
+        cartItems.innerHTML = '<p class="text-gray-500 text-center py-8">購物車是空的</p>';
+      } else {
+        cartItems.innerHTML = cart.map(item => `
+          <div class="flex gap-4 mb-4 p-3 bg-gray-50 rounded-lg">
+            <img src="${item.image}" alt="${item.title}" class="w-20 h-20 object-cover rounded-lg">
+            <div class="flex-1">
+              <h4 class="font-medium text-sm">${item.title}</h4>
+              <p class="text-gray-500 text-xs">${item.instructor}</p>
+              <div class="flex items-center justify-between mt-2">
+                <div class="flex items-center gap-2">
+                  <button onclick="updateQuantity(${item.id}, -1)" class="w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center">
+                    <i class="fa fa-minus text-xs"></i>
+                  </button>
+                  <span class="text-sm">${item.quantity}</span>
+                  <button onclick="updateQuantity(${item.id}, 1)" class="w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center">
+                    <i class="fa fa-plus text-xs"></i>
+                  </button>
+                </div>
+                <span class="font-medium text-primary">¥${item.price * item.quantity}</span>
+              </div>
+            </div>
+            <button onclick="removeFromCart(${item.id})" class="text-gray-400 hover:text-red-500">
+              <i class="fa fa-trash"></i>
+            </button>
+          </div>
+        `).join('');
+      }
+    }
+
+    function updateQuantity(courseId, change) {
+      const item = cart.find(item => item.id === courseId);
+      if (item) {
+        item.quantity += change;
+        if (item.quantity <= 0) {
+          removeFromCart(courseId);
+        } else {
+          updateCart();
+        }
+      }
+    }
+
+    function removeFromCart(courseId) {
+      cart = cart.filter(item => item.id !== courseId);
+      updateCart();
+    }
+
+    function showCartSidebar() {
+      cartSidebar.classList.remove('translate-x-full');
+    }
+
+    function closeCartSidebar() {
+      cartSidebar.classList.add('translate-x-full');
+    }
+
+    function checkout() {
+      if (cart.length === 0) {
+        alert('購物車是空的');
+        return;
+      }
+      
+      if (!currentUser) {
+        showLoginModal();
+        return;
+      }
+      
+      // 这里可以添加结账逻辑
+      alert('結帳功能開發中...');
+    }
+
+    // 会员功能
+    function showLoginModal() {
+      loginModal.classList.remove('hidden');
+      registerModal.classList.add('hidden');
+    }
+
+    function closeLoginModal() {
+      loginModal.classList.add('hidden');
+    }
+
+    function showRegisterModal() {
+      registerModal.classList.remove('hidden');
+      loginModal.classList.add('hidden');
+    }
+
+    function closeRegisterModal() {
+      registerModal.classList.add('hidden');
+    }
+
+    function switchToRegister() {
+      closeLoginModal();
+      showRegisterModal();
+    }
+
+    function switchToLogin() {
+      closeRegisterModal();
+      showLoginModal();
+    }
+
+    // 登录表单提交
+    document.getElementById('login-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = document.getElementById('login-email').value;
+      const password = document.getElementById('login-password').value;
+      
+      // 这里可以添加登录逻辑
+      currentUser = { email, name: email.split('@')[0] };
+      updateUserUI();
+      closeLoginModal();
+    });
+
+    // 注册表单提交
+    document.getElementById('register-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('register-name').value;
+      const email = document.getElementById('register-email').value;
+      const password = document.getElementById('register-password').value;
+      
+      // 这里可以添加注册逻辑
+      currentUser = { email, name };
+      updateUserUI();
+      closeRegisterModal();
+    });
+
+    function updateUserUI() {
+      document.getElementById('user-name').textContent = currentUser.name;
+      document.getElementById('guest-menu').classList.add('hidden');
+      document.getElementById('member-menu').classList.remove('hidden');
+    }
+
+    function logout() {
+      currentUser = null;
+      document.getElementById('user-name').textContent = '登入';
+      document.getElementById('guest-menu').classList.remove('hidden');
+      document.getElementById('member-menu').classList.add('hidden');
+    }
+
+    // 联盟行销功能
+    function showAffiliateSignup() {
+      if (!currentUser) {
+        alert('請先登入帳戶');
+        showLoginModal();
+        return;
+      }
+      alert('聯盟行銷申請功能開發中...');
+    }
+
+    function showAffiliateDetails() {
+      alert('聯盟行銷詳情頁面開發中...');
+    }
+
+    function updateAffiliateEarnings() {
+      const referrals = document.getElementById('monthly-referrals').value;
+      const avgPrice = parseInt(document.getElementById('avg-course-price').value);
+      const commissionRate = parseFloat(document.getElementById('commission-rate').value);
+      
+      const monthlySales = referrals * avgPrice;
+      const monthlyCommission = monthlySales * commissionRate;
+      const yearlyIncome = monthlyCommission * 12;
+      
+      document.getElementById('referrals-value').textContent = referrals;
+      document.getElementById('monthly-sales').textContent = `¥${monthlySales.toLocaleString()}`;
+      document.getElementById('monthly-commission').textContent = `¥${Math.round(monthlyCommission).toLocaleString()}`;
+      document.getElementById('yearly-income').textContent = `¥${Math.round(yearlyIncome).toLocaleString()}`;
+    }
+
+    // 会员中心功能
+    function showMemberModal() {
+      if (!currentUser) {
+        alert('請先登入帳戶');
+        return;
+      }
+      
+      document.getElementById('member-modal').classList.remove('hidden');
+      document.getElementById('member-name').textContent = currentUser.name;
+      document.getElementById('member-email').textContent = currentUser.email;
+      
+      // 默认显示个人资料
+      showMemberSection('profile');
+    }
+
+    function closeMemberModal() {
+      document.getElementById('member-modal').classList.add('hidden');
+    }
+
+    function showMemberSection(section) {
+      const content = document.getElementById('member-content');
+      
+      // 更新菜单样式
+      document.querySelectorAll('.member-menu-btn').forEach(btn => {
+        btn.classList.remove('bg-primary', 'text-white');
+        btn.classList.add('hover:bg-gray-200');
+      });
+      
+      event.target.classList.remove('hover:bg-gray-200');
+      event.target.classList.add('bg-primary', 'text-white');
+      
+      switch(section) {
+        case 'profile':
+          content.innerHTML = `
+            <div class="bg-white rounded-lg p-6 shadow-sm">
+              <h3 class="text-xl font-bold mb-6">個人資料</h3>
+              <form class="space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">姓名</label>
+                    <input type="text" value="${currentUser.name}" class="w-full px-4 py-2 border border-gray-300 rounded-lg">
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">電子郵件</label>
+                    <input type="email" value="${currentUser.email}" class="w-full px-4 py-2 border border-gray-300 rounded-lg">
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">手機號碼</label>
+                    <input type="tel" placeholder="請輸入手機號碼" class="w-full px-4 py-2 border border-gray-300 rounded-lg">
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">生日</label>
+                    <input type="date" class="w-full px-4 py-2 border border-gray-300 rounded-lg">
+                  </div>
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">個人簡介</label>
+                  <textarea rows="4" placeholder="請輸入個人簡介" class="w-full px-4 py-2 border border-gray-300 rounded-lg"></textarea>
+                </div>
+                <div class="flex gap-4">
+                  <button type="button" class="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-lg font-medium transition-colors">
+                    儲存更改
+                  </button>
+                  <button type="button" class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-6 py-2 rounded-lg font-medium transition-colors">
+                    取消
+                  </button>
+                </div>
+              </form>
+            </div>
+          `;
+          break;
+          
+        case 'courses':
+          content.innerHTML = `
+            <div class="bg-white rounded-lg p-6 shadow-sm">
+              <h3 class="text-xl font-bold mb-6">我的課程</h3>
+              <div class="space-y-4">
+                ${coursesData.slice(0, 2).map(course => `
+                  <div class="border rounded-lg p-4 hover:shadow-md transition-shadow">
+                    <div class="flex gap-4">
+                      <img src="${course.image}" alt="${course.title}" class="w-20 h-20 object-cover rounded-lg">
+                      <div class="flex-1">
+                        <h4 class="font-medium">${course.title}</h4>
+                        <p class="text-gray-500 text-sm">${course.instructor}</p>
+                        <div class="flex items-center gap-4 mt-2">
+                          <span class="text-primary font-bold">${course.price}</span>
+                          <span class="bg-green-100 text-green-600 text-xs px-2 py-1 rounded-full">已購買</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="mt-4 flex gap-2">
+                      <button class="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg text-sm transition-colors">
+                        繼續學習
+                      </button>
+                      <button class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-lg text-sm transition-colors">
+                        下載證書
+                      </button>
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          `;
+          break;
+          
+        case 'orders':
+          content.innerHTML = `
+            <div class="bg-white rounded-lg p-6 shadow-sm">
+              <h3 class="text-xl font-bold mb-6">購買記錄</h3>
+              <div class="space-y-4">
+                <div class="border rounded-lg p-4">
+                  <div class="flex justify-between items-start mb-4">
+                    <div>
+                      <h4 class="font-medium">訂單 #2024001</h4>
+                      <p class="text-gray-500 text-sm">2024年1月15日</p>
+                    </div>
+                    <span class="bg-green-100 text-green-600 text-xs px-2 py-1 rounded-full">已完成</span>
+                  </div>
+                  <div class="space-y-2">
+                    ${coursesData.slice(0, 2).map(course => `
+                      <div class="flex justify-between items-center">
+                        <div class="flex items-center gap-2">
+                          <img src="${course.image}" alt="${course.title}" class="w-10 h-10 object-cover rounded">
+                          <span class="text-sm">${course.title}</span>
+                        </div>
+                        <span class="font-medium">${course.price}</span>
+                      </div>
+                    `).join('')}
+                  </div>
+                  <div class="border-t pt-4 flex justify-between">
+                    <span class="font-medium">總計:</span>
+                    <span class="font-bold text-lg">¥598</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          `;
+          break;
+          
+        case 'certificates':
+          content.innerHTML = `
+            <div class="bg-white rounded-lg p-6 shadow-sm">
+              <h3 class="text-xl font-bold mb-6">我的證書</h3>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                ${coursesData.slice(0, 2).map(course => `
+                  <div class="border rounded-lg p-4 hover:shadow-md transition-shadow">
+                    <div class="flex justify-between items-start mb-4">
+                      <div>
+                        <h4 class="font-medium">${course.title}</h4>
+                        <p class="text-gray-500 text-sm">完成日期: 2024年1月10日</p>
+                      </div>
+                      <span class="bg-blue-100 text-blue-600 text-xs px-2 py-1 rounded-full">已發放</span>
+                    </div>
+                    <div class="flex items-center justify-center">
+                      <div class="w-16 h-20 bg-gray-100 border-2 border-dashed border-gray-300 rounded flex items-center justify-center">
+                        <i class="fa fa-certificate text-gray-400 text-2xl"></i>
+                      </div>
+                    </div>
+                    <div class="mt-4 flex gap-2">
+                      <button class="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg text-sm transition-colors">
+                        下載證書
+                      </button>
+                      <button class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-lg text-sm transition-colors">
+                        分享證書
+                      </button>
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          `;
+          break;
+          
+        case 'favorites':
+          content.innerHTML = `
+            <div class="bg-white rounded-lg p-6 shadow-sm">
+              <h3 class="text-xl font-bold mb-6">收藏課程</h3>
+              <div class="space-y-4">
+                ${coursesData.slice(1, 3).map(course => `
+                  <div class="border rounded-lg p-4 hover:shadow-md transition-shadow">
+                    <div class="flex gap-4">
+                      <img src="${course.image}" alt="${course.title}" class="w-20 h-20 object-cover rounded-lg">
+                      <div class="flex-1">
+                        <h4 class="font-medium">${course.title}</h4>
+                        <p class="text-gray-500 text-sm">${course.instructor}</p>
+                        <div class="flex items-center gap-4 mt-2">
+                          <span class="text-primary font-bold">${course.price}</span>
+                          <button onclick="addToCart(${course.id})" class="bg-accent hover:bg-accent/90 text-white px-3 py-1 rounded text-sm transition-colors">
+                            加入購物車
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          `;
+          break;
+          
+        case 'affiliate':
+          content.innerHTML = `
+            <div class="bg-white rounded-lg p-6 shadow-sm">
+              <h3 class="text-xl font-bold mb-6">聯盟行銷統計</h3>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                <div class="text-center p-4 bg-gray-50 rounded-lg">
+                  <div class="text-3xl font-bold text-secondary mb-2">¥2,450</div>
+                  <p class="text-gray-600 text-sm">本月佣金</p>
+                </div>
+                <div class="text-center p-4 bg-gray-50 rounded-lg">
+                  <div class="text-3xl font-bold text-primary mb-2">15</div>
+                  <p class="text-gray-600 text-sm">推薦學員</p>
+                </div>
+                <div class="text-center p-4 bg-gray-50 rounded-lg">
+                  <div class="text-3xl font-bold text-accent mb-2">30%</div>
+                  <p class="text-gray-600 text-sm">佣金比例</p>
+                </div>
+              </div>
+              
+              <div class="space-y-4">
+                <h4 class="font-medium">推廣連結</h4>
+                <div class="flex items-center gap-2">
+                  <input type="text" value="https://your-site.com/?ref=${currentUser.id}" readonly class="flex-1 px-4 py-2 border border-gray-300 rounded-lg bg-gray-50">
+                  <button onclick="copyReferralLink()" class="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg transition-colors">
+                    複製連結
+                  </button>
+                </div>
+                
+                <h4 class="font-medium mt-6">推廣素材</h4>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  <div class="border rounded-lg p-2">
+                    <img src="https://picsum.photos/id/301/200/150" alt="推廣圖" class="w-full h-24 object-cover rounded">
+                  </div>
+                  <div class="border rounded-lg p-2">
+                    <img src="https://picsum.photos/id/302/200/150" alt="推廣圖" class="w-full h-24 object-cover rounded">
+                  </div>
+                  <div class="border rounded-lg p-2">
+                    <img src="https://picsum.photos/id/303/200/150" alt="推廣圖" class="w-full h-24 object-cover rounded">
+                  </div>
+                  <div class="border rounded-lg p-2">
+                    <img src="https://picsum.photos/id/304/200/150" alt="推廣圖" class="w-full h-24 object-cover rounded">
+                  </div>
+                </div>
+              </div>
+            </div>
+          `;
+          break;
+          
+        case 'settings':
+          content.innerHTML = `
+            <div class="bg-white rounded-lg p-6 shadow-sm">
+              <h3 class="text-xl font-bold mb-6">帳戶設定</h3>
+              <div class="space-y-6">
+                <div>
+                  <h4 class="font-medium mb-4">通知設定</h4>
+                  <div class="space-y-2">
+                    <label class="flex items-center">
+                      <input type="checkbox" checked class="mr-2">
+                      <span class="text-sm">接收課程更新通知</span>
+                    </label>
+                    <label class="flex items-center">
+                      <input type="checkbox" checked class="mr-2">
+                      <span class="text-sm">接收促銷活動通知</span>
+                    </label>
+                    <label class="flex items-center">
+                      <input type="checkbox" class="mr-2">
+                      <span class="text-sm">接收新課程發布通知</span>
+                    </label>
+                  </div>
+                </div>
+                
+                <div>
+                  <h4 class="font-medium mb-4">隱私設定</h4>
+                  <div class="space-y-2">
+                    <label class="flex items-center">
+                      <input type="checkbox" checked class="mr-2">
+                      <span class="text-sm">允許其他會員查看我的學習進度</span>
+                    </label>
+                    <label class="flex items-center">
+                      <input type="checkbox" class="mr-2">
+                      <span class="text-sm">在課程評價中顯示我的真實姓名</span>
+                    </label>
+                  </div>
+                </div>
+                
+                <div>
+                  <h4 class="font-medium mb-4">帳戶安全</h4>
+                  <div class="space-y-3">
+                    <button class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-lg transition-colors">
+                      修改密碼
+                    </button>
+                    <button class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-lg transition-colors">
+                      啟用兩步驗證
+                    </button>
+                    <button class="bg-red-100 hover:bg-red-200 text-red-600 px-4 py-2 rounded-lg transition-colors">
+                      刪除帳戶
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          `;
+          break;
+      }
+    }
+
+    function copyReferralLink() {
+      const input = document.querySelector('input[value*="referral-link"]');
+      input.select();
+      document.execCommand('copy');
+      alert('推廣連結已複製到剪貼板！');
+    }
+
+    // 客服系統功能
+    const consultantBtn = document.getElementById('consultant-btn');
+    const consultantMenu = document.getElementById('consultant-menu');
+    const moodDetectionBtn = document.getElementById('mood-detection-btn');
+    const moodPositiveBtn = document('mood-positive-btn');
+    const moodDetection = document.getElementById('mood-detection');
+    const moodResult = document.getElementById('mood-result');
+    const positiveEncouragement = document.getElementById('positive-encouragement');
+    const quickConsult = document.getElementById('quick-consult');
+    const speechBubble = document.getElementById('speech-bubble');
+    
+    // 正能量鼓勵語句庫
+    const encouragements = [
+      "每一次挑戰都是成長的機會，你已經很棒了！",
+      "相信自己的能力，你比想像中更強大！",
+      "今天的努力，是明天成功的基石！",
+      "生活給我們的每一個挑戰都是成長的機會！",
+      "保持微笑，好運會跟隨著你！",
+      "你的堅持和努力，終將會看到美好的結果！",
+      "困難只是暫時的，堅持下去就是勝利！",
+      "每一步都在向著目標前進，你做得很棒！",
+      "你的潛力無限，不要讓任何人告訴你！",
+      "相信自己，你已經擁有克服一切的能力！"
+    ];
+    
+    let currentEncouragement = 0;
+    let isSpeaking = false;
+    
+    // 客服按鈕點擊事件
+    consultantBtn.addEventListener('click', () => {
+      consultantMenu.classList.toggle('hidden');
+      if (!consultantMenu.classList.contains('hidden')) {
+        // 初始顯示快速諮詢選項
+        moodDetection.classList.add('hidden');
+        moodResult.classList.add('hidden');
+        positiveEncouragement.classList.add('hidden');
+        quickConsult.classList.remove('hidden');
+      }
+    });
+    
+    // 點擊外部關閉菜單
+    document.addEventListener('click', (e) => {
+      if (!consultantBtn.contains(e.target) && !consultantMenu.contains(e.target)) {
+        consultantMenu.classList.add('hidden');
+      }
+    });
+    
+    // 情緒識別功能
+    moodDetectionBtn.addEventListener('click', () => {
+      quickConsult.classList.add('hidden');
+      moodResult.classList.add('hidden');
+      positiveEncouragement.classList.add('hidden');
+      moodDetection.classList.remove('hidden');
+      
+      // 模擬情緒分析過程
+      setTimeout(() => {
+        moodDetection.classList.add('hidden');
+        analyzeMood();
+      }, 3000);
+    });
+    
+    // 分析情緒
+    function analyzeMood() {
+      // 隨機情緒狀態
+      const moodStates = [
+        { emoji: '😔', title: '有些低落', description: '看起來你今天心情不太好', suggestion: '試著深呼吸，聽點輕鬆的音樂' },
+        { emoji: '😕', title: '心情不佳', description: '你似乎感到有些沮喪', suggestion: '記住，這只是暫時的情緒' },
+        { emoji: '😐', title: '需要支持', description: '你正在尋求一些鼓勵', suggestion: '讓我來幫你找到正能量吧' },
+        { emoji: '😊', title: '心情不錯', description: '你的狀態正在好轉', suggestion: '保持這個積極的狀態' },
+        { emoji: '😄', title: '心情很好', description: '你今天心情很棒！', suggestion: '繼續保持這份美好的心情' }
+      ];
+      
+      const mood = moodStates[Math.floor(Math.random() * moodStates.length)];
+      
+      document.getElementById('mood-emoji').textContent = mood.emoji;
+      document.getElementById('mood-title').textContent = mood.title;
+      document.getElementById('mood-description').textContent = mood.description;
+      document.getElementById('mood-suggestion').textContent = mood.suggestion;
+      
+      moodResult.classList.remove('hidden');
+      
+      // 如果情緒不佳，自動開啟正能量鼓勵
+      if (mood.emoji === '😔' || mood.emoji === '😕' || mood.emoji === '😐') {
+        setTimeout(() => {
+          moodResult.classList.add('hidden');
+          startPositiveEncouragement();
+        }, 3000);
+      }
+      
+      // 如果情緒很好，顯示鼓勵選項
+      if (mood.emoji === '😄' || mood.emoji === '😁') {
+        setTimeout(() => {
+          moodResult.classList.add('hidden');
+          quickConsult.classList.remove('hidden');
+        }, 3000);
+      }
+    }
+    
+    // 正能量鼓勵功能
+    moodPositiveBtn.addEventListener('click', () => {
+      moodDetection.classList.add('hidden');
+      moodResult.classList.add('hidden');
+      quickConsult.classList.add('hidden');
+      startPositiveEncouragement();
+    });
+    
+    function startPositiveEncouragement() {
+      quickConsult.classList.add('hidden');
+      positiveEncouragement.classList.remove('hidden');
+      showNextEncouragement();
+    }
+    
+    function showNextEncouragement() {
+      currentEncouragement = 0;
+      document.getElementById('encouragement-text').textContent = encouragements[currentEncouragement];
+      
+      // 自動朗讀下一句
+      setTimeout(() => {
+        speakText(encouragements[currentEncouragement]);
+      }, 500);
+    }
+    
+    // 下一句鼓勵
+    document.getElementById('next-encouragement').addEventListener('click', () => {
+      currentEncouragement = (currentEncouragement + 1) % encouragements.length;
+      document.getElementById('encouragement-text').textContent = encouragements[currentEncouragement];
+      
+      // 停止當前朗讀並開始新的
+      if (isSpeaking) {
+        speechSynthesis.cancel();
+        isSpeaking = false;
+      }
+      
+      setTimeout(() => {
+        speakText(encouragements[currentEncouragement]);
+      }, 200);
+    });
+    
+    // 朗讀功能
+    document.getElementById('speak-encouragement').addEventListener('click', () => {
+      const text = document.getElementById('text').textContent;
+      speakText(text);
+    });
+    
+    // 語音合成功能
+    function speakText(text) {
+      if ('speechSynthesis' in window) {
+        // 取消當前朗讀
+        if (isSpeaking) {
+          speechSynthesis.cancel();
+          isSpeaking = false;
+          speechBubble.classList.add('hidden');
+        }
+        
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'zh-TW';
+        utterance.rate = 0.9;
+        utterance.pitch = 1.1;
+        
+        utterance.onstart = () => {
+          isSpeaking = true;
+          speechBubble.classList.remove('hidden');
+        };
+        
+        utterance.onend = () => {
+          isSpeaking = false;
+          speechBubble.classList.add('hidden');
+        };
+        
+        speechSynthesis.speak(utterance);
+      }
+    }
+    
+    // 快速諮詢選項
+    document.querySelectorAll('#quick-consult button').forEach(button => {
+      button.addEventListener('click', () => {
+        const action = button.textContent.trim();
+        showQuickConsultMessage(action);
+      });
+    });
+    
+    function showQuickConsultMessage(action) {
+      const messages = {
+        '電話諮詢': '客服專線：886-954-014-591，營業時間：週一至週五 9:00-18:00',
+        '微信諮詢': '掃描二維碼添加微信客服：@coachsonia1314',
+        '郵件諮詢': '客服郵箱：coachsonia1314@gmail.com',
+        '在線客服': '正在為您轉接線上客服，請稍候...'
+      };
+      
+      // 顯示提示信息
+      const toast = document.createElement('div');
+      toast.className = 'fixed top-4 right-4 bg-gray-800 text-white px-6 py-3 rounded-lg shadow-xl z-50 max-w-xs';
+      toast.innerHTML = `
+        <div class="flex items-center gap-2">
+          <i class="fa fa-info-circle"></i>
+          <span class="text-sm">${messages[action]}</span>
+        </div>
+      `;
+      document.body.appendChild(toast);
+      
+      setTimeout(() => {
+        toast.remove();
+      }, 5000);
+    }
+    
+    // 初始化
+    renderCourses();
+    updateAffiliateEarnings();
+
+    // 会员管理系统
+    let currentUser = null;
+    let cart = [];
+    
+    // 用户菜单下拉
+    const userMenuBtn = document.getElementById('user-menu-btn');
+    const userDropdown = document.getElementById('user-dropdown');
+    const guestMenu = document.getElementById('guest-menu');
+    const memberMenu = document.getElementById('member-menu');
+    
+    userMenuBtn.addEventListener('click', () => {
+      userDropdown.classList.toggle('hidden');
+    });
+
+    // 点击外部关闭用户菜单
+    document.addEventListener('click', (e) => {
+      if (!userMenuBtn.contains(e.target) && !userDropdown.contains(e.target)) {
+        userDropdown.classList.add('hidden');
+      }
+    });
+
+    // 登录模态框
+    function showLoginModal() {
+      document.getElementById('login-modal').classList.remove('hidden');
+      userDropdown.classList.add('hidden');
+    }
+
+    // 注册模态框
+    function showRegisterModal() {
+      document.getElementById('register-modal').classList.remove('hidden');
+      userDropdown.classList.add('hidden');
+    }
+
+    // 关闭模态框
+    document.getElementById('close-login-modal').addEventListener('click', () => {
+      document.getElementById('login-modal').classList.add('hidden');
+    });
+
+    document.getElementById('close-register-modal').addEventListener('click', () => {
+      document.getElementById('register-modal').classList.add('hidden');
+    });
+
+    document.getElementById('show-register').addEventListener('click', (e) => {
+      e.preventDefault();
+      document.getElementById('login-modal').classList.add('hidden');
+      showRegisterModal();
+    });
+
+    document.getElementById('show-login').addEventListener('click', (e) => {
+      e.preventDefault();
+      document.getElementById('register-modal').classList.add('hidden');
+      showLoginModal();
+    });
+
+    // 登录表单提交
+    document.getElementById('login-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = document.getElementById('login-email').value;
+      const password = document.getElementById('login-password').value;
+      
+      // 模拟登录验证
+      currentUser = {
+        name: email.split('@')[0],
+        email: email,
+        id: Date.now()
+      };
+      
+      updateUserUI();
+      document.getElementById('login-modal').classList.add('hidden');
+      alert('登入成功！');
+    });
+
+    // 注册表单提交
+    document.getElementById('register-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const password = document.getElementById('register-password').value;
+      const confirmPassword = document.getElementById('register-confirm-password').value;
+      
+      if (password !== confirmPassword) {
+        alert('密碼不匹配！');
+        return;
+      }
+      
+      const email = document.getElementById('register-email').value;
+      const firstName = document.getElementById('register-firstname').value;
+      const lastName = document.getElementById('register-lastname').value;
+      
+      currentUser = {
+        name: `${lastName}${firstName}`,
+        email: email,
+        id: Date.now()
+      };
+      
+      updateUserUI();
+      document.getElementById('register-modal').classList.add('hidden');
+      alert('註冊成功！');
+    });
+
+    // 更新用户界面
+    function updateUserUI() {
+      const userName = document.getElementById('user-name');
+      const cartBtn = document.getElementById('cart-btn');
+      
+      if (currentUser) {
+        userName.textContent = currentUser.name;
+        guestMenu.classList.add('hidden');
+        memberMenu.classList.remove('hidden');
+        cartBtn.classList.remove('hidden');
+      } else {
+        userName.textContent = '登入';
+        guestMenu.classList.remove('hidden');
+        memberMenu.classList.add('hidden');
+        cartBtn.classList.add('hidden');
+      }
+    }
+
+    // 登出功能
+    function logout() {
+      currentUser = null;
+      cart = [];
+      updateUserUI();
+      updateCartUI();
+      alert('已成功登出！');
+    }
+
+    // 购物车功能
+    const cartBtn = document.getElementById('cart-btn');
+    const cartSidebar = document.getElementById('cart-sidebar');
+    const closeCart = document.getElementById('close-cart');
+    
+    cartBtn.addEventListener('click', () => {
+      if (currentUser) {
+        cartSidebar.classList.toggle('translate-x-full');
+      } else {
+        showLoginModal();
+      }
+    });
+
+    closeCart.addEventListener('click', () => {
+      cartSidebar.classList.add('translate-x-full');
+    });
+
+    // 添加到购物车
+    function addToCart(course) {
+      if (!currentUser) {
+        showLoginModal();
+        return;
+      }
+      
+      const existingItem = cart.find(item => item.id === course.id);
+      
+      if (existingItem) {
+        alert('此課程已在購物車中！');
+        return;
+      }
+      
+      cart.push({
+        ...course,
+        quantity: 1
+      });
+      
+      updateCartUI();
+      alert('課程已添加到購物車！');
+    }
+
+    // 更新购物车界面
+    function updateCartUI() {
+      const cartCount = document.getElementById('cart-count');
+      const cartItems = document.getElementById('cart-items');
+      const cartTotal = document.getElementById('cart-total');
+      const checkoutBtn = document.getElementById('checkout-btn');
+      
+      cartCount.textContent = cart.length;
+      
+      if (cart.length === 0) {
+        cartItems.innerHTML = '<p class="text-gray-500 text-center py-8">購物車是空的</p>';
+        cartTotal.textContent = '¥0';
+        checkoutBtn.disabled = true;
+      } else {
+        cartItems.innerHTML = cart.map(item => `
+          <div class="flex gap-4 mb-4 p-3 border rounded-lg">
+            <img src="${item.image}" alt="${item.title}" class="w-20 h-20 object-cover rounded-lg">
+            <div class="flex-1">
+              <h4 class="font-medium text-sm">${item.title}</h4>
+              <p class="text-xs text-gray-500">${item.instructor}</p>
+              <div class="flex justify-between items-center mt-2">
+                <span class="font-bold text-primary">${item.price}</span>
+                <button onclick="removeFromCart(${item.id})" class="text-red-500 hover:text-red-700">
+                  <i class="fa fa-trash"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        `).join('');
+        
+        const total = cart.reduce((sum, item) => sum + parseInt(item.price.replace('¥', '')), 0);
+        cartTotal.textContent = `¥${total}`;
+        checkoutBtn.disabled = false;
+      }
+    }
+
+    // 从购物车移除
+    function removeFromCart(courseId) {
+      cart = cart.filter(item => item.id !== courseId);
+      updateCartUI();
+    }
+
+    // 结账功能
+    document.getElementById('checkout-btn').addEventListener('click', () => {
+      if (cart.length > 0) {
+        alert('正在跳轉到結账頁面...');
+        // 这里可以添加结账逻辑
+      }
+    });
+
+    // 课程比较功能
+    let compareList = [];
+    
+    function addToCompare(course) {
+      if (compareList.length >= 3) {
+        alert('最多只能比較3個課程！');
+        return;
+      }
+      
+      const existingItem = compareList.find(item => item.id === course.id);
+      if (existingItem) {
+        alert('此課程已在比較列表中！');
+        return;
+      }
+      
+      compareList.push(course);
+      updateCompareUI();
+      alert('課程已添加到比較列表！');
+    }
+
+    function updateCompareUI() {
+      const compareModal = document.getElementById('compare-modal');
+      const compareContent = document.getElementById('compare-content');
+      
+      if (compareList.length === 0) {
+        compareContent.innerHTML = '<p class="text-gray-500 text-center py-8">請選擇課程進行比較</p>';
+      } else {
+        let html = '<table class="w-full">';
+        
+        // 表头
+        html += '<thead><tr><th class="text-left p-2">特性</th>';
+        compareList.forEach(course => {
+          html += `<th class="p-2">
+            <img src="${course.image}" alt="${course.title}" class="w-20 h-20 object-cover rounded-lg mb-2">
+            <div class="text-sm font-medium">${course.title}</div>
+          </th>`;
+        });
+        html += '</tr></thead><tbody>';
+        
+        // 课程信息
+        const features = ['category', 'instructor', 'rating', 'students', 'price'];
+        const featureNames = {
+          category: '分類',
+          instructor: '講師',
+          rating: '評分',
+          students: '學員數',
+          price: '價格'
+        };
+        
+        features.forEach(feature => {
+          html += `<tr><td class="font-medium p-2">${featureNames[feature]}</td>`;
+          compareList.forEach(course => {
+            html += `<td class="p-2 text-center">${course[feature]}</td>`;
+          });
+          html += '</tr>';
+        });
+        
+        html += '</tbody></table>';
+        html += '<div class="mt-4 text-center">';
+        html += '<button onclick="clearCompare()" class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-lg mr-2">清空比較</button>';
+        html += '<button onclick="document.getElementById(\'compare-modal\').classList.add(\'hidden\')" class="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg">關閉</button>';
+        html += '</div>';
+        
+        compareContent.innerHTML = html;
+      }
+    }
+
+    function clearCompare() {
+      compareList = [];
+      updateCompareUI();
+    }
+
+    // 比较模态框
+    document.getElementById('close-compare-modal').addEventListener('click', () => {
+      document.getElementById('compare-modal').classList.add('hidden');
+    });
+
+    // 浮动咨询按钮
+    const consultantBtn = document.getElementById('consultant-btn');
+    const consultantMenu = document.getElementById('consultant-menu');
+    
+    consultantBtn.addEventListener('click', () => {
+      consultantMenu.classList.toggle('hidden');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!consultantBtn.contains(e.target) && !consultantMenu.contains(e.target)) {
+        consultantMenu.classList.add('hidden');
+      }
+    });
+
+    // 动态生成课程卡片
+    function renderCourses(filteredCourses = courses) {
+      const container = document.getElementById('courses-container');
+      container.innerHTML = filteredCourses.map(course => `
+        <div class="bg-white rounded-xl overflow-hidden shadow-md hover-lift course-card" data-category="${course.category}">
+          <div class="relative">
+            <img src="${course.image}" alt="${course.title}" class="w-full h-52 object-cover">
+            <div class="absolute top-4 left-4 ${course.hot ? 'bg-accent text-white' : 'bg-secondary text-white'} text-xs font-bold px-3 py-1 rounded-full">
+              ${course.hot ? '熱門' : '新課'}
+            </div>
+            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm text-dark text-xs font-bold px-3 py-1 rounded-full">
+              ${course.hours}小時課程
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="bg-${getCategoryColor(course.category)}-100 text-${getCategoryColor(course.category)}-800 text-xs px-3 py-1 rounded-full">${course.category}</span>
+              <div class="flex items-center text-yellow-500 text-sm">
+                <i class="fa fa-star"></i>
+                <span class="ml-1 text-gray-700">${course.rating}</span>
+                <span class="ml-1 text-gray-500">(${course.students})</span>
+              </div>
+            </div>
+            <h3 class="font-bold text-xl mb-2">${course.title}</h3>
+            <p class="text-gray-600 text-sm mb-4 line-clamp-2">${course.description}</p>
+            <div class="flex items-center gap-3 mb-5">
+              <img src="${course.instructorImage}" alt="${course.instructor}" class="w-10 h-10 rounded-full">
+              <div>
+                <p class="font-medium text-sm">${course.instructor}</p>
+                <p class="text-gray-500 text-xs">${course.instructorTitle}</p>
+              </div>
+            </div>
+            <div class="flex justify-between items-center mb-4">
+              <div>
+                <span class="text-primary font-bold text-xl">${course.price}</span>
+                <span class="text-gray-400 text-sm line-through ml-2">${course.originalPrice}</span>
+              </div>
+              <div class="flex gap-2">
+                <button onclick="addToCompare(courses[${courses.findIndex(c => c.id === course.id)}])" class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-2 rounded-lg text-sm transition-colors">
+                  <i class="fa fa-balance-scale"></i> 比較
+                </button>
+                <button onclick="addToCart(courses[${courses.findIndex(c => c.id === course.id)}])" class="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg font-medium text-sm transition-colors">
+                  加入購物車
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+      
+      document.getElementById('course-count').textContent = filteredCourses.length;
+    }
+
+    function getCategoryColor(category) {
+      const colors = {
+        '程式開發': 'blue',
+        '商業管理': 'green',
+        '設計創意': 'purple',
+        '職業技能': 'yellow'
+      };
+      return colors[category] || 'gray';
+    }
+
+    // 初始化课程数据
+    const extendedCourses = [
+      {
+        id: 1,
+        title: 'Python全棧開發從入門到精通',
+        category: '程式開發',
+        price: '¥299',
+        originalPrice: '¥599',
+        rating: '4.9',
+        students: '1,245',
+        hours: '42',
+        hot: true,
+        image: 'https://picsum.photos/id/0/600/400',
+        instructor: '李明教授',
+        instructorTitle: '前谷歌高級工程師',
+        instructorImage: 'https://picsum.photos/id/1012/40/40',
+        description: '掌握Python程式基礎，深入學習Web開發、數據分析和人工智能應用，成為全能型開發人才。'
+      },
+      {
+        id: 2,
+        title: '數字行銷與品牌建設實戰',
+        category: '商業管理',
+        price: '¥249',
+        originalPrice: '¥499',
+        rating: '4.7',
+        students: '876',
+        hours: '36',
+        hot: false,
+        image: 'https://picsum.photos/id/180/600/400',
+        instructor: '張雨晴',
+        instructorTitle: '資深行銷總監',
+        instructorImage: 'https://picsum.photos/id/1027/40/40',
+        description: '學習現代行銷策略，掌握社交媒體運營、內容行銷和數據分析，提升品牌影響力和銷售業績。'
+      },
+      {
+        id: 3,
+        title: 'UI/UX設計精品課程',
+        category: '設計創意',
+        price: '¥349',
+        originalPrice: '¥699',
+        rating: '4.8',
+        students: '532',
+        hours: '48',
+        hot: false,
+        image: 'https://picsum.photos/id/96/600/400',
+        instructor: '王建國',
+        instructorTitle: '知名設計工作室創始人',
+        instructorImage: 'https://picsum.photos/id/1025/40/40',
+        description: '從設計原理到工具應用，掌握用戶體驗設計全流程，打造令人驚豔的產品界面和用戶體驗。'
+      },
+      {
+        id: 4,
+        title: 'AI流量變現實戰營',
+        category: '程式開發',
+        price: '¥399',
+        originalPrice: '¥799',
+        rating: '4.9',
+        students: '1,567',
+        hours: '56',
+        hot: true,
+        image: 'https://picsum.photos/id/1/600/400',
+        instructor: '陳博士',
+        instructorTitle: 'AI專家',
+        instructorImage: 'https://picsum.photos/id/1015/40/40',
+        description: '學習AI技術在流量變現中的應用，掌握自動化行銷和智能推薦系統的構建方法。'
+      },
+      {
+        id: 5,
+        title: '聯盟行銷大師班',
+        category: '商業管理',
+        price: '¥199',
+        originalPrice: '¥399',
+        rating: '4.6',
+        students: '2,103',
+        hours: '24',
+        hot: true,
+        image: 'https://picsum.photos/id/2/600/400',
+        instructor: '林美玲',
+        instructorTitle: '聯盟行銷專家',
+        instructorImage: 'https://picsum.photos/id/1028/40/40',
+        description: '從零基礎到聯盟行銷專家，學習如何建立被動收入管道，實現財務自由。'
+      },
+      {
+        id: 6,
+        title: 'CANVA設計速成班',
+        category: '設計創意',
+        price: '¥149',
+        originalPrice: '¥299',
+        rating: '4.5',
+        students: '3,421',
+        hours: '12',
+        hot: false,
+        image: 'https://picsum.photos/id/3/600/400',
+        instructor: '黃小雅',
+        instructorTitle: '設計講師',
+        instructorImage: 'https://picsum.photos/id/1029/40/40',
+        description: '快速掌握CANVA設計技巧，創建專業級的社交媒體圖文、海報和品牌視覺設計。'
+      }
+    ];
+
+    // 更新全局课程数据
+    courses.length = 0;
+    courses.push(...extendedCourses);
+
+    // 课程筛选功能
+    const categoryFilters = document.querySelectorAll('.category-filter');
+    categoryFilters.forEach(filter => {
+      filter.addEventListener('click', () => {
+        const category = filter.dataset.category;
+        
+        // 更新按钮样式
+        categoryFilters.forEach(f => {
+          f.classList.remove('bg-primary', 'text-white');
+          f.classList.add('bg-white', 'text-gray-700');
+        });
+        filter.classList.remove('bg-white', 'text-gray-700');
+        filter.classList.add('bg-primary', 'text-white');
+        
+        // 筛选课程
+        if (category === 'all') {
+          renderCourses(courses);
+        } else {
+          const filtered = courses.filter(course => course.category === category);
+          renderCourses(filtered);
+        }
+      });
+    });
+
+    // 课程排序功能
+    const sortSelect = document.getElementById('sort-select');
+    sortSelect.addEventListener('change', () => {
+      const sortBy = sortSelect.value;
+      let sorted = [...courses];
+      
+      switch(sortBy) {
+        case 'price-low':
+          sorted.sort((a, b) => parseInt(a.price.replace('¥', '')) - parseInt(b.price.replace('¥', '')));
+          break;
+        case 'price-high':
+          sorted.sort((a, b) => parseInt(b.price.replace('¥', '')) - parseInt(a.price.replace('¥', '')));
+          break;
+        case 'rating':
+          sorted.sort((a, b) => parseFloat(b.rating) - parseFloat(a.rating));
+          break;
+        case 'students':
+          sorted.sort((a, b) => parseInt(b.students.replace(',', '')) - parseInt(a.students.replace(',', '')));
+          break;
+        default:
+          sorted = courses;
+      }
+      
+      renderCourses(sorted);
+    });
+
+    // 初始化页面
+    renderCourses(courses);
+    updateUserUI();
+  </script>
+</body>
+</html>
